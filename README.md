@@ -20,6 +20,7 @@ Before you get started, make sure you have the following software installed on y
 ## Create database and table
 
 Create a new database called `prime_app` and create a `user` table:
+db: `share-itage_app`
 
 ```SQL
 CREATE TABLE "user" (
@@ -75,7 +76,7 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
 
 - Start postgres if not running already by using `brew services start postgresql`
 - Run `npm start`
-- Navigate to `localhost:5000`
+- Navigate to `localhost:5001`
 
 ## Lay of the Land
 
