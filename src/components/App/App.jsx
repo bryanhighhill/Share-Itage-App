@@ -23,6 +23,8 @@ import AddRecipePage from '../AddRecipePage/AddRecipePage';
 import MyFavoritesPage from '../MyFavoritesPage/MyFavoritesPage';
 import FindRecipePage from '../FindRecipePage/FindRecipePage';
 import RandomRecipePage from '../RandomRecipePage/RandomRecipePage';
+import CreateFamilyPage from '../CreateFamilyPage/CreateFamilyPage';
+import JoinFamilyPage from '../JoinFamilyPage/JoinFamilyPage';
 
 import './App.css';
 
@@ -71,6 +73,21 @@ function App() {
           >
             <InfoPage />
           </ProtectedRoute>
+
+          {/* protected route for CREATE FAMILY (located in sidePanel) */}
+          <ProtectedRoute
+            exact
+            path="/createfamily">
+            <CreateFamilyPage />
+          </ProtectedRoute>
+
+           {/* protected route for JOIN FAMILY (located in sidePanel) */}
+          <ProtectedRoute
+            exact
+            path="/joinfamily">
+            <JoinFamilyPage />
+          </ProtectedRoute>
+
 
           {/* protected route for ADD RECIPE (located in sidePanel) */}
           <ProtectedRoute
