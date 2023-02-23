@@ -19,6 +19,10 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import AddRecipePage from '../AddRecipePage/AddRecipePage';
+import MyFavoritesPage from '../MyFavoritesPage/MyFavoritesPage';
+import FindRecipePage from '../FindRecipePage/FindRecipePage';
+import RandomRecipePage from '../RandomRecipePage/RandomRecipePage';
 
 import './App.css';
 
@@ -66,6 +70,34 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          {/* protected route for ADD RECIPE (located in sidePanel) */}
+          <ProtectedRoute
+            exact
+            path="/addrecipe">
+            <AddRecipePage />
+          </ProtectedRoute>
+
+          {/* protected route for MY FAVORITES (located in sidePanel) */}
+          <ProtectedRoute
+            exact
+            path="/myfavorites">
+            <MyFavoritesPage />
+          </ProtectedRoute>
+
+           {/* protected route for FIND NEW RECIPE (located in sidePanel) */}
+           <ProtectedRoute
+            exact
+            path="/findrecipe">
+            <FindRecipePage />
+          </ProtectedRoute>
+
+           {/* protected route for RANDOM RECIPE (located in sidePanel) */}
+           <ProtectedRoute
+            exact
+            path="/randomrecipe">
+            <RandomRecipePage />
           </ProtectedRoute>
 
           <Route
