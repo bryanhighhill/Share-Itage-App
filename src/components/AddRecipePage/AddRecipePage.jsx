@@ -1,6 +1,15 @@
+import UserPage from '../UserPage/UserPage';
+
 const AddRecipePage = () => {
     return (
-        <h3>on add recipe page</h3>
+        <div>
+            <div className="user-nav">
+                <UserPage />
+            </div>
+            <div className="page-content-div">
+                <h3>add recipe page</h3>
+            </div>
+        </div>
     )
 }
 
