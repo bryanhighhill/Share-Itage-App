@@ -11,7 +11,12 @@ const AddRecipePage = () => {
 
     const onSubmit = (event) => {
         event.preventDefault();
+        const newRecipe = {
+            
+        }
+
         return console.log(`in recipe onSubmit with title: ${recipeTitle}, ingredients: ${ingredients}, and instructions: ${instructions}`);
+
     }
 
     const addIngredientInput = () => {
