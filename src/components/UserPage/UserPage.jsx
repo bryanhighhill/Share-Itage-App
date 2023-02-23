@@ -1,15 +1,19 @@
 import React from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector} from 'react-redux';
+import LogOutButton from '../LogOutButton/LogOutButton';
+import SidePanel from '../SidePanel/SidePanel';
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   return (
-    <div className="container">
-      <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
-      <LogOutButton className="btn" />
+    <div className="user-panel">
+      <div className="container">
+        <h4>Welcome, {user.username}!</h4>
+        {/* <p>Your ID is: {user.id}</p> */}
+        <SidePanel />
+        <LogOutButton className="logout-btn" />
+      </div>
     </div>
   );
 }
