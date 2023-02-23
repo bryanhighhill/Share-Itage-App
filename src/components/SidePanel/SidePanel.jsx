@@ -1,8 +1,13 @@
+import { useHistory } from 'react-router-dom';
+
 const SidePanel = () => {
+    const history = useHistory();
+
     return (
         <div className="side-panel-container">
             <button
                 className="btn"
+                onClick={() => {history.push(`/addrecipe`)}}
             >
                 Add Recipe
             </button>
@@ -10,6 +15,7 @@ const SidePanel = () => {
             <br />
             <button
                 className="btn"
+                onClick={() => {history.push(`/myfavorites`)}}
             >
                 My Favorites
             </button>
@@ -18,6 +24,7 @@ const SidePanel = () => {
             {/* STRETCH:*/} 
             <button
                 className="btn"
+                onClick={() => {history.push(`/findrecipe`)}}
             >
                 Find New Recipe
             </button>
@@ -25,6 +32,7 @@ const SidePanel = () => {
             <br />
             <button
                 className="btn"
+                onClick={() => {history.push(`/randomrecipe`)}}
             >
                 Random Recipe
             </button>
