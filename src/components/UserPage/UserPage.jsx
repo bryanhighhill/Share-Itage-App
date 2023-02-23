@@ -6,6 +6,7 @@ import SidePanel from '../SidePanel/SidePanel';
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
+
   return (
     <div className="user-panel">
       <div className="container">
