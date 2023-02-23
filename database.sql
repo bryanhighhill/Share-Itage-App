@@ -18,6 +18,7 @@ CREATE TABLE "user" (
     "family_id" INT REFERENCES "family" NOT NULL,
     "registration_date" DATE DEFAULT CURRENT_DATE,
     "admin" BOOLEAN DEFAULT FALSE,
+    -- STRETCH
     "icon" VARCHAR(120)
 );
 
@@ -27,6 +28,7 @@ CREATE TABLE "recipes" (
     "recipe_name" VARCHAR (1000) UNIQUE NOT NULL,
     "ingredients" VARCHAR (10000) NOT NULL,
     "instructions" VARCHAR (10000) NOT NULL,
+    -- STRETCH
     "original_image" VARCHAR(120),
     "family_id" INT REFERENCES "family" NOT NULL
 );
@@ -38,7 +40,7 @@ CREATE TABLE "favorites" (
     "recipes_id" INT REFERENCES "recipes" NOT NULL
 );
 
--- USER REMARKS TABLE
+-- USER REMARKS TABLE - STRETCH
 CREATE TABLE "user_remarks" (
     "id" SERIAL PRIMARY KEY,
     "comment" VARCHAR (1000) NOT NULL,
@@ -48,7 +50,7 @@ CREATE TABLE "user_remarks" (
     "image" VARCHAR(120)
 );
 
--- IMAGES TABLE
+-- IMAGES TABLE - STRETCH
 CREATE TABLE "images" (
     "id" SERIAL PRIMARY KEY,
     "recipes_id" INT REFERENCES "recipes" NOT NULL,
