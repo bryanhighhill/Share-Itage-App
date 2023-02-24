@@ -7,15 +7,24 @@ const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
 const router = express.Router();
 
-/**
- * GET route template
- */
-router.get('/', (req, res) => {
+// GET request to retrieve family data from db - family table
+router.get('/:id', (req, res) => {
+  console.log('in recipes GET request with: ', req.params.id);
   // GET route code here
+  const queryText = 'SELECT * FROM "recipes" WHERE "family_id" = $1;';
+  pool.query(queryText, [req.params.id])
+  .then(result => {
+    console.log('recipes get results: ', result.rows)
+    res.send(result.rows);
+  })
+  .catch(err => {
+    console.log('ERROR with getting Recipes data: ', err);
+    res.sendStatus(500);
+  });
 });
 
 /**
- * POST route template
+ * POST route for new recipes
  */
 router.post('/', (req, res) => {
     const queryText = `INSERT INTO "recipes" (title, ingredients, instructions, family_id)
