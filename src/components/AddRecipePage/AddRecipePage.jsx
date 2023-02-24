@@ -6,7 +6,6 @@ const AddRecipePage = () => {
     const [title, setTitle] = useState('');
     const [ingredients, setIngredients] = useState([{ingredient:'', amount:''}]);
     const [instructions, setInstructions] = useState(['']);
-    const [instructionInputs, setInstructionInputs] = useState([]);
     const dispatch = useDispatch();
 
     const onSubmit = (event) => {
@@ -21,30 +20,34 @@ const AddRecipePage = () => {
             payload: newRecipe,
         })
 
-        return console.log(`in recipe onSubmit with title: ${recipeTitle}, ingredients: ${ingredients}, and instructions: ${instructions}`);
+        // return console.log(`in recipe onSubmit with title: ${recipeTitle}, ingredients: ${ingredients}, and instructions: ${instructions}`);
 
     }
 
+    //variable to add new fields for ingredient/amount on button click
     const addIngredientInput = () => {
-        const ingredientField = [...ingredients, {ingredient:'', amount:''}]
-        setIngredients(ingredientField)
+        const ingredientField = [...ingredients, {ingredient:'', amount:''}];
+        setIngredients(ingredientField);
     }
 
+    //variable to remove previously added ingredient/amount fields if unused
     const removeIngredientInput = (index) => {
         const ingredientFields = [...ingredients];
         ingredientFields.splice(index, 1);
         setIngredients(ingredientFields);
     }
 
+    //variable to add new fields for instructions on button click
     const addInstructionInput = () => {
-        const instructionField = [...instructionInputs, []]
-        setInstructionInputs(instructionField)
+        const instructionField = [...instructions, ''];
+        setInstructions(instructionField);
     }
 
+    //variable to remove previously added instruction fields if unused
     const removeInstructionInput = (index) => {
-        const instructionFields = [...instructionInputs];
+        const instructionFields = [...instructions];
         instructionFields.splice(index, 1);
-        setInstructionInputs(instructionFields);
+        setInstructions(instructionFields);
     }
 
     return (
@@ -54,10 +57,7 @@ const AddRecipePage = () => {
             </div> {/*end "user-nav" div */}
 
             <div className="page-content">
-                <h3>add recipe page</h3>
-
                 <form onSubmit={onSubmit}>
-
                     {/* input for RECIPE TITLE */}
                     <div className="title">
                         <label htmlFor="title"><b>Recipe Title</b></label>
@@ -70,15 +70,16 @@ const AddRecipePage = () => {
                             onChange={(event) => setTitle(event.target.value)}
                         />
                     </div> {/* end "recipe-title" div */}
-
                     <br />
                     <br />
 
+                    {/* INGREDIENTS HERE */}
+                    <label htmlFor="ingredients"><b>Ingredients</b></label>
                     <div className="ingredient-list">
                             {ingredients.map((ingredient, index) => {
                                 return (
                                     <>
-                                        <br />
+                                        {/* input field for ingredient */}
                                         <input
                                             id="ingredients"
                                             name="ingredients"
@@ -104,6 +105,7 @@ const AddRecipePage = () => {
                                                 return newIngredients;
                                             })}
                                         />
+                                        {/* conditional to prevent first ingredient field from being deleted */}
                                         {index !== 0 && (
                                             <button 
                                                 onClick={() => removeIngredientInput(index)}
@@ -112,55 +114,66 @@ const AddRecipePage = () => {
                                                 X
                                             </button>
                                         )}
+                                        <br />
                                     </>
                                 )
                             })}
-                        <br />
-                        <button onClick={addIngredientInput}>+ Ingredient</button>
+                        <button 
+                            onClick={addIngredientInput}
+                            className="add-btn"
+                        >
+                            + Ingredient
+                        </button>
                     </div> {/* end "ingredient-list" div */}
-
                     <br />
                     <br />
 
-                    {/* input field for INSTRUCTIONS */}
-                    <div className="instructions">
-                        <label htmlFor="instructions"><b>Instructions</b></label>
-                        <br />
-                        <input
-                            id="instructions"
-                            name="instructions"
-                            // value={ingredient}
-                            placeholder="Instruction"
-                            onChange={(event) => setInstructions([...instructions, event.target.value])}
-                        />
-                            {instructionInputs.map((instruction, i) => {
+                    {/* INSTRUCTIONS HERE */}
+                    <label htmlFor="instructions"><b>Instructions</b></label>
+                    <div className="instructions-list">
+                            {instructions.map((instruction, index) => {
                                 return (
                                     <>
-                                        <br />
+                                        {/* input field for instruction */}
                                         <input
                                             id="instructions"
                                             name="instructions"
-                                            // value={ingredient}
+                                            value={instruction.instruction}
                                             placeholder="Instruction"
-                                            onChange={(event) => setInstructions([...instructions, event.target.value])}
+                                            onChange={(event) => setInstructions(instructions => {
+                                                const newInstructions = [ ...instructions ];
+                                                newInstructions[index] = event.target.value;
+                                                return newInstructions;
+                                            })}
                                         />
-                                        <button 
-                                            onClick={removeInstructionInput}
-                                            className="remove-btn"    
-                                        >
-                                            X
-                                        </button>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        
+                                        {/* conditional to prevent first instruction field from being deleted */}
+                                        {index !== 0 && (
+                                            <button 
+                                                onClick={() => removeInstructionInput(index)}
+                                                className="remove-btn"
+                                            >
+                                                X
+                                            </button>
+                                        )}
+                                        <br />
                                     </>
                                 )
                             })}
-                        <br />
                         <button 
                             onClick={addInstructionInput}
                             className="add-btn"
                         >
                             + Instruction
                         </button>
-                    </div> {/* end "instructions" div */}
+                    </div> {/* end "ingredient-list" div */}
+
+
+
+
+                    <br />
+                    <br />
                     <br />
                     <button
                         type="submit"
