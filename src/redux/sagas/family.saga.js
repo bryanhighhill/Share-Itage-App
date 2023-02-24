@@ -20,4 +20,20 @@ function* familySaga() {
   yield takeEvery('POST_FAMILY_NAME', createFamily);
 }
 
-export default familySaga;
+
+// Fetch Family Details from db - family table
+function* fetchFamily(action) {
+  const id = action.payload;
+  try {
+    const family = yield axios.get(`/api/family/${id}`);
+    yield put({ type: 'SET_FAMILY', payload: family.data });
+  } catch (error) {
+    console.log('User get request failed', error);
+  }
+}
+
+function* fetchFamilySaga() {
+  yield takeEvery('FETCH_FAMILY', fetchFamily);
+}
+
+export { familySaga, fetchFamilySaga };

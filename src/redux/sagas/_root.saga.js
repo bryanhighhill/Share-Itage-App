@@ -2,7 +2,7 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
-import familySaga from './family.saga';
+import { familySaga, fetchFamilySaga } from './family.saga';
 import recipeSaga from './recipe.saga';
 
 // rootSaga is the primary saga.
@@ -19,5 +19,6 @@ export default function* rootSaga() {
     userSaga(),
     familySaga(),
     recipeSaga(),
+    fetchFamilySaga(),
   ]);
 }
