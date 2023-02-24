@@ -25,7 +25,8 @@ import FindRecipePage from '../FindRecipePage/FindRecipePage';
 import RandomRecipePage from '../RandomRecipePage/RandomRecipePage';
 import CreateFamilyPage from '../CreateFamilyPage/CreateFamilyPage';
 import JoinFamilyPage from '../JoinFamilyPage/JoinFamilyPage';
-import FamilyInvitationPage from '../FamilyInvitationPage/FamilyInvitationPage';
+// import FamilyInvitationPage from '../FamilyInvitationPage/FamilyInvitationPage';
+import FamilyConfirmationPage from '../FamilyConfirmationPage/FamilyConfirmationPage';
 
 import './App.css';
 
@@ -82,12 +83,19 @@ function App() {
             <CreateFamilyPage />
           </ProtectedRoute>
 
-          {/* protected route for FAMILY INVITATION */}
+          {/* protected route for FAMILY CONFIRMATION */}
           <ProtectedRoute
+            exact
+            path="/familyconfirmation">
+            <FamilyConfirmationPage />
+          </ProtectedRoute>
+
+          {/* protected route for FAMILY INVITATION */}
+          {/* <ProtectedRoute
             exact
             path="/familyinvitation">
             <FamilyInvitationPage />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
 
            {/* protected route for JOIN FAMILY (located in sidePanel) */}
           <ProtectedRoute

@@ -26,7 +26,7 @@ const CreateFamilyPage = () => {
         //clear name
         setName('');
         //send user to UserPage
-        history.push('/user');
+        history.push('/familyconfirmation');
     };
 
     return (
