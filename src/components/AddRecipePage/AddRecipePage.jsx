@@ -12,7 +12,6 @@ const AddRecipePage = () => {
     const onSubmit = (event) => {
         event.preventDefault();
         //TODO: add conditional to check that values are not blank and that it is a unique title in db <---------------------------
-        
         //include user.family_id in new recipe object so that it can be added to recipe table in db
         const newRecipe = {
             title,
@@ -23,17 +22,15 @@ const AddRecipePage = () => {
         dispatch({
             type: 'POST_NEW_RECIPE', 
             payload: newRecipe,
-        })
+        });
         //TODO: fetch recipes data here recipes <--------------------------------
-        
         //clear values
         setTitle('');
         setIngredients([{ingredient:'', amount:''}]);
         setInstructions(['']);
-
         //send user to CONFIRMATION PAGE/NEW RECIPE PAGE? instead of user page <----------------------------------------
-        history.push('/user');
-    }
+        // history.push('/user');
+    };
 
     //variable to add new fields for ingredient/amount on button click
     const addIngredientInput = () => {
@@ -120,6 +117,7 @@ const AddRecipePage = () => {
                                         {index !== 0 && (
                                             <button 
                                                 onClick={() => removeIngredientInput(index)}
+                                                type="button"
                                                 className="remove-btn"
                                             >
                                                 X
@@ -131,6 +129,7 @@ const AddRecipePage = () => {
                             })}
                         <button 
                             onClick={addIngredientInput}
+                            type="button"
                             className="add-btn"
                         >
                             + Ingredient
@@ -163,6 +162,7 @@ const AddRecipePage = () => {
                                         {index !== 0 && (
                                             <button 
                                                 onClick={() => removeInstructionInput(index)}
+                                                type="button"
                                                 className="remove-btn"
                                             >
                                                 X
@@ -174,16 +174,12 @@ const AddRecipePage = () => {
                             })}
                         <button 
                             onClick={addInstructionInput}
+                            type="button"
                             className="add-btn"
                         >
                             + Instruction
                         </button>
                     </div> {/* end "ingredient-list" div */}
-
-
-
-
-                    <br />
                     <br />
                     <br />
                     <button
