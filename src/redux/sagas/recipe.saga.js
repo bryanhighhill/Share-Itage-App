@@ -1,29 +1,23 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
-// worker Saga: will be fired on "REGISTER" actions
-function* postRecipe(action) {
+// Family Saga: will be fired on "POST_FAMILY_NAME" actions (CreateFamilyPage.jsx)
+function* createRecipe(action) {
   try {
-    // clear any existing error on the registration page
-    yield put({ type: 'CLEAR_REGISTRATION_ERROR' });
-
-    // passes the username and password from the payload to the server
-    yield axios.post('/api/user/register', action.payload);
-
-    // automatically log a user in after registration
-    yield put({ type: 'LOGIN', payload: action.payload });
+    // passes the family name and user.id from the payload to the server
+    yield axios.post('/api/recipe', action.payload); //sends to family.router.js
 
     // set to 'login' mode so they see the login screen
     // after registration or after they log out
-    yield put({ type: 'SET_TO_LOGIN_MODE' });
+    // yield put({ type: 'SET_TO_LOGIN_MODE' });
   } catch (error) {
-    console.log('Error with user registration:', error);
-    yield put({ type: 'REGISTRATION_FAILED' });
+    console.log('Error with creating family:', error);
+    yield put({ type: 'FAMILY_FAILED' });
   }
 }
 
 function* recipeSaga() {
-  yield takeEvery('POST_NEW_RECIPE', postRecipe);
+  yield takeEvery('POST_NEW_RECIPE', createRecipe); //dispatched from AddRecipePage
 }
 
 export default recipeSaga;

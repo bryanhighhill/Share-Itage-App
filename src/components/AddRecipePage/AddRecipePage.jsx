@@ -12,6 +12,8 @@ const AddRecipePage = () => {
     const onSubmit = (event) => {
         event.preventDefault();
         //TODO: add conditional to check that values are not blank and that it is a unique title in db <---------------------------
+        
+        //include user.family_id in new recipe object so that it can be added to recipe table in db
         const newRecipe = {
             title,
             ingredients,

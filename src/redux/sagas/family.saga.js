@@ -12,7 +12,7 @@ function* createFamily(action) {
     // yield put({ type: 'SET_TO_LOGIN_MODE' });
   } catch (error) {
     console.log('Error with creating family:', error);
-    yield put({ type: 'REGISTRATION_FAILED' });
+    yield put({ type: 'FAMILY_FAILED' });
   }
 }
 
