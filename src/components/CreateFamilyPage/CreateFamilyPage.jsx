@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import UserPage from '../UserPage/UserPage';
 
 const CreateFamilyPage = () => {
     const [name, setName] = useState('');
@@ -12,9 +11,8 @@ const CreateFamilyPage = () => {
 
     const onSubmit = (event) => {
         event.preventDefault();
-                
-        //add conditional to check that family name is not blank and that it is a unique family name in db
-
+        //TODO: add conditional to check that family name is not blank and that it is a unique family name in db <---------------------------
+        //dispatch new family name to redux saga along with user id so that user_family_id can be updated
         dispatch({
             type: 'POST_FAMILY_NAME',
             payload: {
@@ -22,10 +20,14 @@ const CreateFamilyPage = () => {
                 user_id: user.id,
             },
         });
+
+        //fetch user data here so that conditional is met in UserPage when rendering page content
         dispatch({type: 'FETCH_USER'});
+        //clear name
         setName('');
+        //send user to UserPage
         history.push('/user');
-    }
+    };
 
     return (
         <div>
@@ -33,7 +35,6 @@ const CreateFamilyPage = () => {
                 {/* <UserPage /> */}
             </div>
             <div className="page-content-div">
-                <h3>create family page</h3>
                 <form onSubmit={onSubmit}>
                 <label htmlFor="name"><b>Family Name</b></label>
                         <br />
@@ -44,7 +45,6 @@ const CreateFamilyPage = () => {
                             placeholder="What's your family name?"
                             onChange={(event) => setName(event.target.value)}
                         />
-
                         <button
                             type="submit"
                             className="submit-family-btn"
@@ -54,7 +54,7 @@ const CreateFamilyPage = () => {
                 </form>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default CreateFamilyPage;
