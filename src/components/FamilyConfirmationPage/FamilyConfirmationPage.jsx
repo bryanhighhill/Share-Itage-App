@@ -24,9 +24,9 @@ const FamilyConfirmationPage = () => {
             </h2>
             <br />
             <p>What would you like to do next?</p>
-            <button className="btn" onClick={() => history.push('/user')}>View my family portal</button>
+            <button className="btn" onClick={() => history.push('/user')}>View family portal</button>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button className="btn">Invite others to join my family</button>
+            <button className="btn">Invite others to join family</button>
         </div>
     );
 };

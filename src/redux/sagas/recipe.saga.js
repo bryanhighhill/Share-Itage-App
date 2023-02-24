@@ -16,8 +16,21 @@ function* createRecipe(action) {
   }
 }
 
+// Fetch Family Details from db - family table
+function* fetchRecipes(action) {
+  console.log('in fetch recipes saga with: ', action);
+  const id = action.payload;
+  try {
+    const recipes = yield axios.get(`/api/recipe/${id}`);
+    yield put({ type: 'SET_RECIPES', payload: recipes.data });
+  } catch (error) {
+    console.log('Fetch Recipes failed with error: ', error);
+  }
+}
+
 function* recipeSaga() {
   yield takeEvery('POST_NEW_RECIPE', createRecipe); //dispatched from AddRecipePage
+  yield takeEvery('FETCH_RECIPES', fetchRecipes); //dispatched from FindRecipePage
 }
 
 export default recipeSaga;
