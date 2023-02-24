@@ -27,6 +27,8 @@ const registrationMessage = (state = '', action) => {
       return 'Choose a username and password!';
     case 'REGISTRATION_FAILED':
       return "Oops! That didn't work. The username might already be taken. Try again!";
+    case 'FAMILY_FAILED':
+      return 'Family could not be created. Please try again!';
     default:
       return state;
   }
