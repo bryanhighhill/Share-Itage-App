@@ -1,27 +1,36 @@
 import React, { useState } from 'react';
 import UserPage from '../UserPage/UserPage';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const AddRecipePage = () => {
     const [title, setTitle] = useState('');
     const [ingredients, setIngredients] = useState([{ingredient:'', amount:''}]);
     const [instructions, setInstructions] = useState(['']);
+    const user = useSelector((store) => store.user);
     const dispatch = useDispatch();
 
     const onSubmit = (event) => {
         event.preventDefault();
+        //TODO: add conditional to check that values are not blank and that it is a unique title in db <---------------------------
         const newRecipe = {
             title,
             ingredients,
-            instructions,            
+            instructions,
+            family_id: user.family_id,            
         }
         dispatch({
             type: 'POST_NEW_RECIPE', 
             payload: newRecipe,
         })
+        //TODO: fetch recipes data here recipes <--------------------------------
+        
+        //clear values
+        setTitle('');
+        setIngredients([{ingredient:'', amount:''}]);
+        setInstructions(['']);
 
-        // return console.log(`in recipe onSubmit with title: ${recipeTitle}, ingredients: ${ingredients}, and instructions: ${instructions}`);
-
+        //send user to CONFIRMATION PAGE/NEW RECIPE PAGE? instead of user page <----------------------------------------
+        history.push('/user');
     }
 
     //variable to add new fields for ingredient/amount on button click
