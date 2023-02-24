@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import UserPage from '../UserPage/UserPage';
 
 const CreateFamilyPage = () => {
-    const [familyName, setFamilyName] = useState('');
+    const [name, setName] = useState('');
     
     const dispatch = useDispatch();
     const history = useHistory();
@@ -12,18 +12,18 @@ const CreateFamilyPage = () => {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        const newFamily = {
-            name: familyName,
-            id: user.id,
-        }
-        
+                
         //add conditional to check that family name is not blank and that it is a unique family name in db
 
         dispatch({
             type: 'POST_FAMILY_NAME',
-            payload: newFamily,
+            payload: {
+                name,
+                user_id: user.id,
+            },
         });
-        setFamilyName('');
+        dispatch({type: 'FETCH_USER'});
+        setName('');
         history.push('/user');
     }
 
@@ -35,14 +35,14 @@ const CreateFamilyPage = () => {
             <div className="page-content-div">
                 <h3>create family page</h3>
                 <form onSubmit={onSubmit}>
-                <label htmlFor="family-name"><b>Family Name</b></label>
+                <label htmlFor="name"><b>Family Name</b></label>
                         <br />
                         <input
-                            id="family-name"
-                            name="family-name"
-                            value={familyName}
+                            id="name"
+                            name="name"
+                            value={name}
                             placeholder="What's your family name?"
-                            onChange={(event) => setFamilyName(event.target.value)}
+                            onChange={(event) => setName(event.target.value)}
                         />
 
                         <button

@@ -5,27 +5,6 @@ const SidePanel = () => {
 
     return (
         <div className="side-panel-container">
-            <div className="family-div">
-                In order to start adding your recipes, please create a family or join a family
-                <br />
-                <br />
-                <button
-                    className="btn"
-                    onClick={() => {history.push(`/createfamily`)}}
-                >
-                    Create a Family
-                </button>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button
-                    className="btn"
-                    onClick={() => {history.push(`/joinfamily`)}}
-                >
-                    Join a Family
-                </button>
-                <br />
-                <br />
-            </div>
-            - - - - - - - - - -
             <br />
             <br />
 

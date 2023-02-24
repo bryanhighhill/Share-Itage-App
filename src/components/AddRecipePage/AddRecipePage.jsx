@@ -1,33 +1,39 @@
 import React, { useState } from 'react';
 import UserPage from '../UserPage/UserPage';
+import { useDispatch } from 'react-redux';
 
 const AddRecipePage = () => {
-    const [recipeTitle, setRecipeTitle] = useState('');
-    const [ingredients, setIngredients] = useState([]);
-    const [amount, setAmount] = useState([]);
-    const [instructions, setInstructions] = useState([]);
-    const [ingredientInputs, setIngredientInputs] = useState([]);
+    const [title, setTitle] = useState('');
+    const [ingredients, setIngredients] = useState([{ingredient:'', amount:''}]);
+    const [instructions, setInstructions] = useState(['']);
     const [instructionInputs, setInstructionInputs] = useState([]);
+    const dispatch = useDispatch();
 
     const onSubmit = (event) => {
         event.preventDefault();
         const newRecipe = {
-            
+            title,
+            ingredients,
+            instructions,            
         }
+        dispatch({
+            type: 'POST_NEW_RECIPE', 
+            payload: newRecipe,
+        })
 
         return console.log(`in recipe onSubmit with title: ${recipeTitle}, ingredients: ${ingredients}, and instructions: ${instructions}`);
 
     }
 
     const addIngredientInput = () => {
-        const ingredientField = [...ingredientInputs, []]
-        setIngredientInputs(ingredientField)
+        const ingredientField = [...ingredients, {ingredient:'', amount:''}]
+        setIngredients(ingredientField)
     }
 
     const removeIngredientInput = (index) => {
-        const ingredientFields = [...ingredientInputs];
+        const ingredientFields = [...ingredients];
         ingredientFields.splice(index, 1);
-        setIngredientInputs(ingredientFields);
+        setIngredients(ingredientFields);
     }
 
     const addInstructionInput = () => {
@@ -53,52 +59,36 @@ const AddRecipePage = () => {
                 <form onSubmit={onSubmit}>
 
                     {/* input for RECIPE TITLE */}
-                    <div className="recipe-title">
-                        <label htmlFor="recipe-title"><b>Recipe Title</b></label>
+                    <div className="title">
+                        <label htmlFor="title"><b>Recipe Title</b></label>
                         <br />
                         <input
-                            id="recipe-title"
-                            name="recipe-title"
-                            value={recipeTitle}
-                            placeholder="Recipe Title"
-                            onChange={(event) => setRecipeTitle(event.target.value)}
+                            id="title"
+                            name="title"
+                            value={title}
+                            placeholder="title"
+                            onChange={(event) => setTitle(event.target.value)}
                         />
                     </div> {/* end "recipe-title" div */}
 
                     <br />
                     <br />
 
-                    {/* input field for INGREDIENTS */}
                     <div className="ingredient-list">
-                        <label htmlFor="ingredients"><b>Ingredients</b></label>
-                        <br />
-                        <input
-                            id="ingredients"
-                            name="ingredients"
-                            // value={ingredient}
-                            placeholder="Ingredient"
-                            onChange={(event) => setIngredients([...ingredients, event.target.value])}
-                        />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        
-                        {/* input field for INGREDIENT AMOUNTS */}
-                        <input
-                            id="ingredient-amount"
-                            name="ingredient-amount"
-                            // value={ingredient}
-                            placeholder="Amount"
-                            onChange={(event) => setAmount([...amount, event.target.value])}
-                        />
-                            {ingredientInputs.map((ingredient, i) => {
+                            {ingredients.map((ingredient, index) => {
                                 return (
                                     <>
                                         <br />
                                         <input
                                             id="ingredients"
                                             name="ingredients"
-                                            // value={ingredient}
+                                            value={ingredient.ingredient}
                                             placeholder="Ingredient"
-                                            onChange={(event) => setIngredients([...ingredients, event.target.value])}
+                                            onChange={(event) => setIngredients(ingredients => {
+                                                const newIngredients = [ ...ingredients ];
+                                                newIngredients[index].ingredient = event.target.value;
+                                                return newIngredients;
+                                            })}
                                         />
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         
@@ -106,16 +96,22 @@ const AddRecipePage = () => {
                                         <input
                                             id="ingredient-amount"
                                             name="ingredient-amount"
-                                            // value={ingredient}
+                                            value={ingredient.amount}
                                             placeholder="Amount"
-                                            onChange={(event) => setAmount([...amount, event.target.value])}
+                                            onChange={(event) => setIngredients(ingredients => {
+                                                const newIngredients = [ ...ingredients ];
+                                                newIngredients[index].amount = event.target.value;
+                                                return newIngredients;
+                                            })}
                                         />
-                                        <button 
-                                            onClick={removeIngredientInput}
-                                            className="remove-btn"
-                                        >
-                                            X
-                                        </button>
+                                        {index !== 0 && (
+                                            <button 
+                                                onClick={() => removeIngredientInput(index)}
+                                                className="remove-btn"
+                                            >
+                                                X
+                                            </button>
+                                        )}
                                     </>
                                 )
                             })}
