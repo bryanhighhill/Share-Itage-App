@@ -46,7 +46,7 @@ const SidePanel = () => {
             </button>
             <br />
             <br />
-            
+
             {/* if user is admin, show admin panel button */}
             {user.admin 
                 && 
@@ -61,10 +61,7 @@ const SidePanel = () => {
                         <br />
                     </>
             }
-
-
         </div>
-
     )
 }
 
