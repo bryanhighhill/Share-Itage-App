@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import UserPage from '../UserPage/UserPage';
-import RecipeCard from '../RecipeCard/RecipeCard';
+import RecipeGrid from '../RecipeGrid/RecipeGrid';
 import './FindRecipePage.css';
 
 const FindRecipePage = () => {
@@ -35,7 +35,7 @@ const FindRecipePage = () => {
                 <div className="user-nav">
                     <UserPage />
                 </div>
-                <RecipeCard />
+                <RecipeGrid />
             </div>
         )   
     }
