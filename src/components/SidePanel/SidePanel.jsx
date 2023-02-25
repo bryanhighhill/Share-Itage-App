@@ -1,7 +1,9 @@
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const SidePanel = () => {
     const history = useHistory();
+    const user = useSelector((store) => store.user);
 
     return (
         <div className="side-panel-container">
@@ -44,6 +46,23 @@ const SidePanel = () => {
             </button>
             <br />
             <br />
+            
+            {/* if user is admin, show admin panel button */}
+            {user.admin 
+                && 
+                    <>
+                        <button
+                            className="btn"
+                            onClick={() => {history.push(`/admin`)}}
+                        >
+                            Admin Panel
+                        </button>
+                        <br />
+                        <br />
+                    </>
+            }
+
+
         </div>
 
     )
