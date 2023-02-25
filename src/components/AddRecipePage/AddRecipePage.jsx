@@ -89,6 +89,7 @@ const AddRecipePage = () => {
                                     <>
                                         {/* input field for ingredient */}
                                         <input
+                                            key={`ingredient-${index}`}
                                             id="ingredients"
                                             name="ingredients"
                                             value={ingredient.ingredient}
@@ -104,6 +105,7 @@ const AddRecipePage = () => {
                         
                                         {/* input field for INGREDIENT AMOUNTS */}
                                         <input
+                                            key={`amount-${index}`}
                                             id="ingredient-amount"
                                             name="ingredient-amount"
                                             value={ingredient.amount}
@@ -116,7 +118,8 @@ const AddRecipePage = () => {
                                         />
                                         {/* conditional to prevent first ingredient field from being deleted */}
                                         {index !== 0 && (
-                                            <button 
+                                            <button
+                                                key={`remove-btn-${index}`} 
                                                 onClick={() => removeIngredientInput(index)}
                                                 type="button"
                                                 className="remove-btn"
@@ -128,7 +131,7 @@ const AddRecipePage = () => {
                                     </>
                                 )
                             })}
-                        <button 
+                        <button
                             onClick={addIngredientInput}
                             type="button"
                             className="add-btn"
@@ -147,6 +150,7 @@ const AddRecipePage = () => {
                                     <>
                                         {/* input field for instruction */}
                                         <input
+                                            key={`instruction-${index}`}
                                             id="instructions"
                                             name="instructions"
                                             value={instruction.instruction}
@@ -161,7 +165,8 @@ const AddRecipePage = () => {
                         
                                         {/* conditional to prevent first instruction field from being deleted */}
                                         {index !== 0 && (
-                                            <button 
+                                            <button
+                                                key={`remove-btn2-${index}`} 
                                                 onClick={() => removeInstructionInput(index)}
                                                 type="button"
                                                 className="remove-btn"
@@ -173,7 +178,7 @@ const AddRecipePage = () => {
                                     </>
                                 )
                             })}
-                        <button 
+                        <button
                             onClick={addInstructionInput}
                             type="button"
                             className="add-btn"
