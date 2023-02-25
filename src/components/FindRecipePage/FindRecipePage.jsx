@@ -57,6 +57,7 @@ const FindRecipePage = () => {
                                         <element><b>Instructions</b></element>
                                         <ul>
                                         {JSON.parse(recipe.instructions).map((instruction, index) => {
+                                        {/* {recipe.instructions.map((instruction, index) => { */}
                 
                                             //state = array that is length of instructions, filled with value = false
                                             // Array() creates a new array instance - array langth is argument passed in

@@ -27,6 +27,7 @@ import CreateFamilyPage from '../CreateFamilyPage/CreateFamilyPage';
 import JoinFamilyPage from '../JoinFamilyPage/JoinFamilyPage';
 // import FamilyInvitationPage from '../FamilyInvitationPage/FamilyInvitationPage';
 import FamilyConfirmationPage from '../FamilyConfirmationPage/FamilyConfirmationPage';
+import AdminPage from '../AdminPage/AdminPage';
 
 import './App.css';
 
@@ -131,6 +132,13 @@ function App() {
             exact
             path="/randomrecipe">
             <RandomRecipePage />
+          </ProtectedRoute>
+
+          {/* protected route for ADMIN (located in sidePanel) */}
+          <ProtectedRoute
+            exact
+            path="/admin">
+            <AdminPage />
           </ProtectedRoute>
 
           <Route
