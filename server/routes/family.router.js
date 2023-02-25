@@ -32,6 +32,7 @@ router.post('/', (req, res) => {
       VALUES ($1) RETURNING id`;
     pool.query(queryText, [req.body.name])
     .then((query) => {
+      //query to take family id returned from line 32 request and set user family_id ALSO make user an admin
       pool.query('UPDATE "user" SET "family_id" = $1, "admin" = true WHERE "id" = $2;', [query.rows[0].id, req.body.user_id])
       .then(() => {
         res.sendStatus(201)
