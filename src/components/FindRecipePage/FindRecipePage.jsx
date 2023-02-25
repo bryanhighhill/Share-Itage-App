@@ -7,6 +7,8 @@ const FindRecipePage = () => {
     const dispatch = useDispatch();
     const user = useSelector((store) => store.user);
     const recipes = useSelector((store) => store.recipes);
+    console.log('recipes: ', recipes);
+    
 
     useEffect(() => {
         dispatch({ type: 'FETCH_RECIPES', payload: user.family_id });
@@ -31,8 +33,8 @@ const FindRecipePage = () => {
                     <UserPage />
                 </div>
                 <div className="page-content-div">
-                    <h3>find recipe page</h3>
-                    {recipes.map(recipe => {
+                    {recipes.map((recipe, index) => {
+                        console.log('recipe ingredients in find recipe page: ', recipe.ingredients);
                         if (recipes.length < 1) {
                             return (
                                 <h2>You have no recipes yet!</h2>
@@ -41,26 +43,39 @@ const FindRecipePage = () => {
                         if (recipes.length > 0) {
                             return (
                                 <div className="recipe-card">
-                                    <h2>{recipe.title}</h2>
-                                    <br />
-                                    <h2>Ingredients:</h2>
-                                    <br />
-                                    <ul>
-                                    {recipe.ingredients.map(ingredient => {
-                                        return(
-                                        <li>{ingredient.ingredient} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amount: {ingredient.amount}</li>
-                                        )
-                                    })}
-                                    </ul>
-                                    <br />
-                                    <br />
-                                    <ul>
-                                    {recipe.instructions.map(instruction => {
-                                        return(
-                                        <li>{instruction.instruction}</li>
-                                        )
-                                    })}
-                                    </ul>
+                                    <div className="recipe-title">
+                                        <h2>{recipe.title}</h2>
+                                    </div>
+                                    <div className="ingredient-list">
+                                        <element><b>Ingredients</b></element>
+                                        <ul>
+                                            {JSON.parse(recipe.ingredients).map((ingredient, index) => {
+                                                return(
+                                                    <li key={index}>{ingredient.amount} of {ingredient.ingredient}</li>
+                                                )
+                                            })}
+                                        </ul>
+                                    </div>
+                                    <div className="ingredient-list">
+                                        <element><b>Instructions</b></element>
+                                        <ul>
+                                        {JSON.parse(recipe.instructions).map((instruction, index) => {
+                                            console.log('recipe instructions in find recipe page: ', recipe.instruction)
+                                            return(
+                                            // <li key={index}>{instruction}</li>
+                                            <div className="instruction">
+                                                <input
+                                                    type="checkbox"
+                                                    id={`custom-checkbox-${index}`}
+                                                    name={instruction}
+                                                    value={instruction}
+                                                />
+                                                <label htmlFor={`custom-checkbox-${index}`}>{instruction}</label>
+                                            </div>
+                                            )
+                                        })}
+                                        </ul>
+                                    </div>
                                 </div>
                             )
                         }

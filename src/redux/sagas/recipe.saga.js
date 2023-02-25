@@ -3,6 +3,7 @@ import axios from 'axios';
 
 // Family Saga: will be fired on "POST_FAMILY_NAME" actions (CreateFamilyPage.jsx)
 function* createRecipe(action) {
+  console.log('in create recipe with: ', action.payload);
   try {
     // passes the family name and user.id from the payload to the server
     yield axios.post('/api/recipe', action.payload); //sends to family.router.js

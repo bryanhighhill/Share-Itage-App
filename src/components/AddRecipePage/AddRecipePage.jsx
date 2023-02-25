@@ -96,6 +96,7 @@ const AddRecipePage = () => {
                                             onChange={(event) => setIngredients(ingredients => {
                                                 const newIngredients = [ ...ingredients ];
                                                 newIngredients[index].ingredient = event.target.value;
+                                                console.log('new ingredients: ', newIngredients);
                                                 return newIngredients;
                                             })}
                                         />
