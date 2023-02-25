@@ -1,14 +1,16 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import UserPage from '../UserPage/UserPage';
+import './FindRecipePage.css';
 
 const FindRecipePage = () => {
     const dispatch = useDispatch();
     const user = useSelector((store) => store.user);
     const recipes = useSelector((store) => store.recipes);
     console.log('recipes: ', recipes);
-    
+
+    const [checkedInstruction, setCheckedInstruction] = useState(false);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_RECIPES', payload: user.family_id });
@@ -35,12 +37,7 @@ const FindRecipePage = () => {
                 <div className="page-content-div">
                     {recipes.map((recipe, index) => {
                         console.log('recipe ingredients in find recipe page: ', recipe.ingredients);
-                        if (recipes.length < 1) {
-                            return (
-                                <h2>You have no recipes yet!</h2>
-                                )
-                            } else
-                        if (recipes.length > 0) {
+
                             return (
                                 <div className="recipe-card">
                                     <div className="recipe-title">
@@ -60,17 +57,46 @@ const FindRecipePage = () => {
                                         <element><b>Instructions</b></element>
                                         <ul>
                                         {JSON.parse(recipe.instructions).map((instruction, index) => {
-                                            console.log('recipe instructions in find recipe page: ', recipe.instruction)
+                
+                                            //state = array that is length of instructions, filled with value = false
+                                            // Array() creates a new array instance - array langth is argument passed in
+                                            // .fill() changes all elements array to static value from index 0 to array.length - returning modified array
+                                            // const [checkedInstruction, setCheckedInstruction] = useState(
+                                            //     new Array(JSON.parse(recipe.instructions).length).fill(false)
+                                            // );
+                                            // console.log('checked instruction: ', checkedInstruction);
+
+                                            //onChangeHandler to update checked state of instruction
+                                            // const handleOnChange = (instructionIndex, event) => {
+                                            //     selected = event.target.checked;
+                                            //     instructionArray.map((instruction, index) => {
+                                            //         if (index === instructionIndex) {
+                                            //             return (
+                                            //                 selected === !selected
+                                            //             );
+                                            //         }
+                                            //     } )
+                                               
+                                            // }
+
                                             return(
                                             // <li key={index}>{instruction}</li>
                                             <div className="instruction">
+                                                {/* <label htmlFor={instruction}></label> */}
                                                 <input
                                                     type="checkbox"
                                                     id={`custom-checkbox-${index}`}
                                                     name={instruction}
                                                     value={instruction}
+                                                    checked={checkedInstruction}
+                                                    onChange={() => setCheckedInstruction(!checkedInstruction)}
                                                 />
-                                                <label htmlFor={`custom-checkbox-${index}`}>{instruction}</label>
+                                                <label className="checked-instruction-false" htmlFor={`custom-checkbox-${index}`}>{instruction}</label>
+
+                                                {/* {!checkedStatus 
+                                                    ? <label className="checked-instruction-false" htmlFor={`custom-checkbox-${index}`}>{instruction}</label>
+                                                    : <label className="checked-instruction-true" htmlFor={`custom-checkbox-${index}`}>{instruction}</label>
+                                                } */}
                                             </div>
                                             )
                                         })}
@@ -78,7 +104,6 @@ const FindRecipePage = () => {
                                     </div>
                                 </div>
                             )
-                        }
                     })}
                 </div>
             </div>
