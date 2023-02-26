@@ -63,4 +63,22 @@ router.get('/edit/:id', (req, res) => {
     });
 });
 
+//PUT route for editing recipe
+router.put('/edit/:id', (req, res) => {
+  ingredients = JSON.stringify(req.body.ingredients);
+  instructions = JSON.stringify(req.body.instructions);
+  const id = req.params.id;
+  const queryText = 'UPDATE "recipes" SET "title"=$1, "ingredients"=$2, "instructions"=$3 WHERE "id"=$4;';
+
+  pool.query(queryText, [req.body.title, ingredients, instructions, req.body.id])
+    .then(result => {
+      res.sendStatus(201);
+    })
+    .catch(err => {
+      console.log('error with updating recipe: ', err);
+      res.sendStatus(500);
+    })
+});
+
+
 module.exports = router;
