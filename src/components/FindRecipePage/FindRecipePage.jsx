@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import UserPage from '../UserPage/UserPage';
 import RecipeGrid from '../RecipeGrid/RecipeGrid';
-import './FindRecipePage.css';
 
 const FindRecipePage = () => {
     const dispatch = useDispatch();

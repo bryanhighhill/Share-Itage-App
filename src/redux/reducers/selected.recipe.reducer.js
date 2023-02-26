@@ -1,5 +1,5 @@
-const selectedRecipeReducer = (state = [], action) => {
-    console.log('in selectedRecipe with: ', action);
+const selectedRecipeReducer = (state = {}, action) => {
+    console.log('in selectedRecipe reducer with: ', action);
 
     switch (action.type) {
         case 'SET_SELECTED_RECIPE':

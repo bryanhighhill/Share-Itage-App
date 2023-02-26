@@ -38,15 +38,15 @@ router.post('/', (req, res) => {
   });
 });
 
-//PUT route for editing recipe
+//GET route for editing recipe
 router.get('/edit/:id', (req, res) => {
   const id = req.params.id;
   console.log('id in get recipe data request: ', id);
   const queryText = 'SELECT * FROM "recipes" WHERE "id" = $1;';
   pool.query(queryText, [id])
     .then( result => {
-      res.send(result.rows);
-      console.log('result rows from edit recipe get request: ', result.rows);
+      res.send(result.rows[0]);
+      console.log('result rows from edit recipe get request: ', result.rows[0]);
     })
     .catch(err => {
       console.log('ERROR with getting requested recipe data: ', err);

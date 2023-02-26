@@ -145,7 +145,7 @@ function App() {
           {/* protected route for ADMIN - EDIT RECIPE (located in EditButton) */}
           <ProtectedRoute
             exact
-            path="/edit">
+            path="/edit/:id">
             <EditRecipePage />
           </ProtectedRoute>
 

@@ -35,6 +35,7 @@ function* fetchRecipeData(action) {
   const id = action.payload;
   try {
     const recipe = yield axios.get(`/api/recipe/edit/${id}`);
+    console.log('recipe.data: ', recipe.data);
     yield put({ type: 'SET_SELECTED_RECIPE', payload: recipe.data });
   } catch (error) {
     console.log('Fetch Recipe data failed with error: ', error);
