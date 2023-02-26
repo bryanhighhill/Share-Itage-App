@@ -23,20 +23,34 @@ router.get('/:id', (req, res) => {
   });
 });
 
-/**
- * POST route for new recipes
- */
+// POST route for new recipes
 router.post('/', (req, res) => {
-    ingredients = JSON.stringify(req.body.ingredients);
-    instructions = JSON.stringify(req.body.instructions);
-    console.log('in recipe post with ingredients: ', req.body.ingredients);
-    const queryText = `INSERT INTO "recipes" (title, ingredients, instructions, family_id)
-    VALUES ($1, $2, $3, $4)`;
-    pool.query(queryText, [req.body.title, ingredients, instructions, req.body.family_id])
-    .then(() => res.sendStatus(201))
-    .catch((err) => {
-        console.log('error with adding recipe: ', err);
-        res.sendStatus(500);
+  ingredients = JSON.stringify(req.body.ingredients);
+  instructions = JSON.stringify(req.body.instructions);
+  console.log('in recipe post with ingredients: ', req.body.ingredients);
+  const queryText = `INSERT INTO "recipes" (title, ingredients, instructions, family_id)
+  VALUES ($1, $2, $3, $4)`;
+  pool.query(queryText, [req.body.title, ingredients, instructions, req.body.family_id])
+  .then(() => res.sendStatus(201))
+  .catch((err) => {
+      console.log('error with adding recipe: ', err);
+      res.sendStatus(500);
+  });
+});
+
+//PUT route for editing recipe
+router.get('/edit/:id', (req, res) => {
+  const id = req.params.id;
+  console.log('id in get recipe data request: ', id);
+  const queryText = 'SELECT * FROM "recipes" WHERE "id" = $1;';
+  pool.query(queryText, [id])
+    .then( result => {
+      res.send(result.rows);
+      console.log('result rows from edit recipe get request: ', result.rows);
+    })
+    .catch(err => {
+      console.log('ERROR with getting requested recipe data: ', err);
+      res.sendStatus(500);
     });
 });
 

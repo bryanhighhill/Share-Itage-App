@@ -8,6 +8,4 @@ const recipesReducer = (state = [], action) => {
     }
   };
   
-  // family will be on the redux state at:
-  // state.family
   export default recipesReducer;

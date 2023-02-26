@@ -29,9 +29,23 @@ function* fetchRecipes(action) {
   }
 }
 
+// Fetch Recipe Details from db - recipes table
+function* fetchRecipeData(action) {
+  console.log('in fetch recipe data with: ', action.payload)
+  const id = action.payload;
+  try {
+    const recipe = yield axios.get(`/api/recipe/edit/${id}`);
+    yield put({ type: 'SET_SELECTED_RECIPE', payload: recipe.data });
+  } catch (error) {
+    console.log('Fetch Recipe data failed with error: ', error);
+  }
+}
+
+
 function* recipeSaga() {
   yield takeEvery('POST_NEW_RECIPE', createRecipe); //dispatched from AddRecipePage
   yield takeEvery('FETCH_RECIPES', fetchRecipes); //dispatched from FindRecipePage
+  yield takeEvery('FETCH_RECIPE_DATA', fetchRecipeData); //dispatched from EditRecipePage
 }
 
 export default recipeSaga;
