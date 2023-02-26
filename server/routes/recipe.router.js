@@ -70,7 +70,7 @@ router.put('/edit/:id', (req, res) => {
   const id = req.params.id;
   const queryText = 'UPDATE "recipes" SET "title"=$1, "ingredients"=$2, "instructions"=$3 WHERE "id"=$4;';
 
-  pool.query(queryText, [req.body.title, ingredients, instructions, req.body.id])
+  pool.query(queryText, [req.body.title, req.body.ingredients, req.body.instructions, req.body.id])
     .then(result => {
       res.sendStatus(201);
     })

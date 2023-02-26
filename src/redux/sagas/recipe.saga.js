@@ -1,6 +1,11 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
+import { useSelector, useDispatch } from 'react-redux';
+
+const user = useSelector((store) => store.user);
+const dispatch = useDispatch();
+
 // Family Saga: will be fired on "POST_FAMILY_NAME" actions (CreateFamilyPage.jsx)
 function* createRecipe(action) {
   console.log('in create recipe with: ', action.payload);

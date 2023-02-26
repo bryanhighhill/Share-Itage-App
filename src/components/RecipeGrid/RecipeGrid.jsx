@@ -18,7 +18,7 @@ const RecipeGrid = () => {
         <div className="recipe-grid">
             {recipes.map((recipe, index) => {
                 return (
-                    <RecipeCard recipe={recipe}/>
+                    <RecipeCard recipes={recipe}/>
                 );
             })}
         </div>
