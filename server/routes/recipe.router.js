@@ -45,7 +45,16 @@ router.get('/edit/:id', (req, res) => {
   const queryText = 'SELECT * FROM "recipes" WHERE "id" = $1;';
   pool.query(queryText, [id])
     .then( result => {
-      res.send(result.rows[0]);
+      const ingredients = JSON.parse(result.rows[0].ingredients);
+      const instructions = JSON.parse(result.rows[0].instructions);
+      
+      const results = {
+        title: result.rows[0].title,
+        ingredients,
+        instructions,
+      }
+
+      res.send(results);
       console.log('result rows from edit recipe get request: ', result.rows[0]);
     })
     .catch(err => {

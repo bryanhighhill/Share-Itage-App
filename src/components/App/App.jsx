@@ -28,7 +28,7 @@ import JoinFamilyPage from '../JoinFamilyPage/JoinFamilyPage';
 // import FamilyInvitationPage from '../FamilyInvitationPage/FamilyInvitationPage';
 import FamilyConfirmationPage from '../FamilyConfirmationPage/FamilyConfirmationPage';
 import AdminPage from '../AdminPage/AdminPage';
-import EditRecipePage from '../EditRecipePage/EditRecipePage';
+import NewEditRecipePage from '../EditRecipePage/NewEditRecipePage';
 
 import './App.css';
 
@@ -146,7 +146,7 @@ function App() {
           <ProtectedRoute
             exact
             path="/edit/:id">
-            <EditRecipePage />
+            <NewEditRecipePage />
           </ProtectedRoute>
 
           <Route

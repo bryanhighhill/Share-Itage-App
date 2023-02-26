@@ -36,7 +36,7 @@ const RecipeCard = ({recipe}) => {
                     })}
                 </ul>
             </div>
-            <div className="ingredient-list">
+            <div className="instruction-list">
                 <p><b>Instructions</b></p>
                     {JSON.parse(recipe.instructions).map((instruction, index) => {
                     {/* {recipe.instructions.map((instruction, index) => { */}
