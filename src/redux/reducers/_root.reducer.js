@@ -3,6 +3,7 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import family from './family.reducer';
 import recipes from './recipes.reducer';
+import selectedRecipe from './selected.recipe.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   family, //will have an id and name
   recipes, //will contain all recipes for specific family_id in db
+  selectedRecipe, //will contain recipe that is being edited
 });
 
 export default rootReducer;
