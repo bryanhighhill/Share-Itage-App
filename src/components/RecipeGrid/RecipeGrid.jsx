@@ -17,6 +17,7 @@ const RecipeGrid = () => {
     return(
         <div className="recipe-grid">
             {recipes.map((recipe, index) => {
+                console.log('recipe in map: ', recipe);
                 return (
                     <RecipeCard recipe={recipe}/>
                 );
