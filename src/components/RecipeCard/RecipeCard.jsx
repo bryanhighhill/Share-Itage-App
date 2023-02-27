@@ -42,15 +42,6 @@ const RecipeCard = ({recipe}) => {
                 {recipe.ingredients
                 ?   <div>
                         {JSON.parse(recipe.instructions).map((instruction, index) => {
-                        {/* {recipe.instructions.map((instruction, index) => { */}
-
-                            //state = array that is length of instructions, filled with value = false
-                            // Array() creates a new array instance - array langth is argument passed in
-                            // .fill() changes all elements array to static value from index 0 to array.length - returning modified array
-                            // const [checkedInstruction, setCheckedInstruction] = useState(
-                            //     new Array(JSON.parse(recipe.instructions).length).fill(false)
-                            // );
-                            // console.log('checked instruction: ', checkedInstruction);
 
                             return(
                             // <li key={index}>{instruction}</li>
@@ -62,25 +53,25 @@ const RecipeCard = ({recipe}) => {
                                     id={`custom-checkbox-${index}`}
                                     name={instruction}
                                     value={instruction}
-                                    // checked={updatedArray[index]}
                                     onChange={() => onChange(index)}
                                 />
                                 <label className={!checkedInstruction[index] ? "checked-instruction-false" : "checked-instruction-true"} htmlFor={`custom-checkbox-${index}`}>{instruction}</label>
 
-                                {/* {!checkedInstruction[index] 
-                                    ? <label className="checked-instruction-false" htmlFor={`custom-checkbox-${index}`}>{instruction}</label>
-                                    : <label className="checked-instruction-true" htmlFor={`custom-checkbox-${index}`}>{instruction}</label>
-                                } */}
                             </div>
                             )
                         })}
                     </div>
                 : null}
                 </div>
-                {user.admin 
+
+                {user.admin
                     &&
                     <EditButton recipe={recipe}/>
                 }
+                {/* {user.id === recipe.user_id
+                    &&
+                    <EditButton recipe={recipe}/>
+                }  */}
                 </div>
     )
 };
