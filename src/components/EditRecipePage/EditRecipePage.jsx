@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import UserPage from '../UserPage/UserPage';
 
 const EditRecipePage = () => {
     const { id } = useParams();
@@ -96,6 +97,9 @@ const EditRecipePage = () => {
 
     return(
         <>
+            <div className="user-nav">
+                <UserPage />
+            </div>
             {selectedRecipe.title
             ?   <h2>Edit Details for <b>{selectedRecipe.title}</b></h2>
             : null}

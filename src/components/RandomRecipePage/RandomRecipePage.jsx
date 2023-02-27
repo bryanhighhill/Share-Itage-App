@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import UserPage from '../UserPage/UserPage';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 
 
 const RandomRecipePage = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
     const randomRecipe = useSelector(store => store.randomRecipe);
     const user = useSelector(store => store.user);
     const id = user.family_id;
@@ -42,46 +41,51 @@ const RandomRecipePage = () => {
     }
 
     return (
-        <div className="random-recipe">
-            <h2><u>{title}</u></h2>
-            {ingredients
-            ?   <div className="ingredients">
-                    <h2>Ingredients</h2>
-                    <ul>
-                        {ingredients.map((ingredient, index) => {
-                            return(
-                                <li key={index}><i>{ingredient.amount}</i> of <b>{ingredient.ingredient}</b></li>
-                            )
-                        })}  
-                    </ul>
-                </div>
-            : null}
-            {instructions
-            ?   <div className="instructions">
-                    <h2>Instructions</h2>
-                    <ul>
-                        {instructions.map((instruction, index) => {
-                            return(
-                                <>
-                                <input
-                                    key={`checkbox-${index}`}
-                                    type="checkbox"
-                                    id={`custom-checkbox-${index}`}
-                                    name={instruction}
-                                    value={instruction}
-                                    onChange={() => onChange(index)}
-                                />
-                                {/* <label htmlFor={`custom-checkbox-${index}`}>{instruction}</label> */}
-                                <label className={!checkedInstruction[index] ? "checked-instruction-false" : "checked-instruction-true"} htmlFor={`custom-checkbox-${index}`}>{instruction}</label>
-                                <br />
-                                </>
-                            )
-                        })}  
-                    </ul>
-                </div>
-            : null}
-            <button className="btn" onClick={refreshPage}>Generate another random recipe</button>
-        </div>
+        <>
+            <div className="user-nav">
+                <UserPage />
+            </div>
+            <div className="random-recipe">
+                <h2><u>{title}</u></h2>
+                {ingredients
+                ?   <div className="ingredients">
+                        <h2>Ingredients</h2>
+                        <ul>
+                            {ingredients.map((ingredient, index) => {
+                                return(
+                                    <li key={index}><i>{ingredient.amount}</i> of <b>{ingredient.ingredient}</b></li>
+                                )
+                            })}  
+                        </ul>
+                    </div>
+                : null}
+                {instructions
+                ?   <div className="instructions">
+                        <h2>Instructions</h2>
+                        <ul>
+                            {instructions.map((instruction, index) => {
+                                return(
+                                    <>
+                                    <input
+                                        key={`checkbox-${index}`}
+                                        type="checkbox"
+                                        id={`custom-checkbox-${index}`}
+                                        name={instruction}
+                                        value={instruction}
+                                        onChange={() => onChange(index)}
+                                    />
+                                    {/* <label htmlFor={`custom-checkbox-${index}`}>{instruction}</label> */}
+                                    <label className={!checkedInstruction[index] ? "checked-instruction-false" : "checked-instruction-true"} htmlFor={`custom-checkbox-${index}`}>{instruction}</label>
+                                    <br />
+                                    </>
+                                )
+                            })}  
+                        </ul>
+                    </div>
+                : null}
+                <button className="btn" onClick={refreshPage}>Generate another random recipe</button>
+            </div>
+        </>
     )
 }
 
