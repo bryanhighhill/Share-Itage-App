@@ -1,6 +1,11 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
+import { useSelector, useDispatch } from 'react-redux';
+
+// const user = useSelector((store) => store.user);
+// const dispatch = useDispatch();
+
 // Family Saga: will be fired on "POST_FAMILY_NAME" actions (CreateFamilyPage.jsx)
 function* createRecipe(action) {
   console.log('in create recipe with: ', action.payload);
@@ -31,7 +36,7 @@ function* fetchRecipes(action) {
 
 // Fetch Recipe Details from db - recipes table
 function* fetchRecipeData(action) {
-  console.log('in fetch recipe data with: ', action.payload)
+  console.log('in fetch recipe data with: ', action.payload);
   const id = action.payload;
   try {
     const recipe = yield axios.get(`/api/recipe/edit/${id}`);
@@ -42,11 +47,24 @@ function* fetchRecipeData(action) {
   }
 }
 
+//update recipe details
+function* updateRecipe(action) {
+  console.log('in update recipe with: ', action.payload);
+  const id = action.payload.id;
+  try {
+    const updatedRecipe = yield axios.put(`api/recipe/edit/${id}`, action.payload);
+  } catch (error) {
+    console.log('Error with updating recipe:', error);
+  }
+}
+
+
 
 function* recipeSaga() {
   yield takeEvery('POST_NEW_RECIPE', createRecipe); //dispatched from AddRecipePage
   yield takeEvery('FETCH_RECIPES', fetchRecipes); //dispatched from FindRecipePage
   yield takeEvery('FETCH_RECIPE_DATA', fetchRecipeData); //dispatched from EditRecipePage
+  yield takeEvery('UPDATE_RECIPE', updateRecipe); //dispatched from EditRecipePage onSubmit
 }
 
 export default recipeSaga;

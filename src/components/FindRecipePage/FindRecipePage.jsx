@@ -10,12 +10,9 @@ const FindRecipePage = () => {
     const recipes = useSelector((store) => store.recipes);
     console.log('recipes: ', recipes);
 
-    const [checkedInstruction, setCheckedInstruction] = useState(false);
-
     useEffect(() => {
         dispatch({ type: 'FETCH_RECIPES', payload: user.family_id });
     }, []);
-
 
     if (recipes.length === 0) {
         return(

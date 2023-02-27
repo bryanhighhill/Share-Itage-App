@@ -10,10 +10,6 @@ const RecipeGrid = () => {
     const recipes = useSelector((store) => store.recipes);
     console.log('recipes: ', recipes);
 
-    useEffect(() => {
-        dispatch({ type: 'FETCH_RECIPES', payload: user.family_id });
-    }, []);
-
     return(
         <div className="recipe-grid">
             {recipes.map((recipe, index) => {
