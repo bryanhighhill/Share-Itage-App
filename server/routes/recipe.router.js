@@ -38,6 +38,19 @@ router.post('/', (req, res) => {
   });
 });
 
+// POST route for favorite recipes
+router.post('/favorite', (req, res) => {
+  console.log('in recipe favorites post with: ', req.body.title);
+  const queryText = `INSERT INTO "favorites" (user_id, recipe_id)
+  VALUES ($1, $2)`;
+  pool.query(queryText, [req.body.user_id, req.body.recipe_id])
+  .then(() => res.sendStatus(201))
+  .catch((err) => {
+      console.log('error with adding recipe to favorites: ', err);
+      res.sendStatus(500);
+  });
+});
+
 //GET route for editing recipe
 router.get('/edit/:id', (req, res) => {
   const id = req.params.id;
@@ -84,6 +97,27 @@ router.get('/random/:id', (req, res) => {
     })
     .catch(err => {
       console.log('ERROR with getting requested recipe data: ', err);
+      res.sendStatus(500);
+    });
+});
+
+//GET route for user's favorite recipe
+router.get('/favorite/:id', (req, res) => {
+  const id = req.params.id;
+  console.log('in get favorite recipes request: ', id);
+  const queryText = 
+    `SELECT "recipes"."title", "recipes"."ingredients", "recipes"."instructions" FROM "user"
+    JOIN "favorites" ON "favorites"."user_id" = "user"."id"
+    JOIN "recipes" ON "recipes"."id" = "favorites"."recipe_id"
+    WHERE "user"."id" = $1;`;
+
+  pool.query(queryText, [id])
+    .then( result => {
+      res.send(result.rows);
+      console.log('result rows from favorites request: ', result.rows);
+    })
+    .catch(err => {
+      console.log('ERROR with getting favorites data: ', err);
       res.sendStatus(500);
     });
 });

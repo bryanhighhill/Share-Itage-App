@@ -3,8 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import EditButton from '../EditButton/EditButton';
 import './RecipeCard.css';
  
-const RecipeCard = ({recipe}) => {
+const RecipeCard = ({recipe, favorite}) => {
     const user = useSelector((store) => store.user);
+    const dispatch = useDispatch();
     
     const initialCheckedArray = new Array(JSON.parse(recipe.instructions).length).fill(false);
 
@@ -18,6 +19,25 @@ const RecipeCard = ({recipe}) => {
         console.log('checked instruction in on chage', updatedArray);
         setCheckedInstruction(updatedArray);
     }
+
+    const addToFavorites = () => {
+        console.log('you want to add to favorites: ', recipe.title);
+
+        const favoriteRecipe = {
+            user_id: user.id,
+            recipe_id: recipe.id,
+        }
+        dispatch({
+            type: 'ADD_FAVORITE', 
+            payload: favoriteRecipe
+        })
+    }
+
+    const removeFavorites = () => {
+        return (
+            console.log('you want to remove from favorites')
+        )
+    };
 
     return (
         <div className="recipe-card">
@@ -63,6 +83,11 @@ const RecipeCard = ({recipe}) => {
                     </div>
                 : null}
                 </div>
+
+                {favorite 
+                ? <button onClick={removeFavorites}>Remove from favorites</button>
+                : <button onClick={addToFavorites}>Add to favorites</button>}
+                <br />
 
                 {(user.admin || user.id === recipe.user_id)
                     &&
