@@ -10,108 +10,151 @@ const EditRecipePage = () => {
     const [title, setTitle] = useState('');
     const [ingredients, setIngredients] = useState([{ingredient:'', amount:''}]);
     const [instructions, setInstructions] = useState(['']);
+
+    console.log('selectedRecipe on Edit Page: ', selectedRecipe);
     
-    
-    //fire off fetch selected recipe on page load
     useEffect(() => {
-        dispatch({
-            type: 'FETCH_RECIPE_DATA', 
-            payload: id
-        })
+        setIngredients([{ingredient:'', amount:''}]);
+        setInstructions(['']);
+        dispatch({ type: 'FETCH_RECIPE_DATA', payload: id });
     }, [id]);
+    
+    useEffect(() => {
+        setIngredients(selectedRecipe.ingredients);
+        setInstructions(selectedRecipe.instructions);
+        setTitle(selectedRecipe.title);
+    }, [selectedRecipe]);
 
-    const onSubmit = () => {
-        return (
-            console.log('on submit function called')
-        );
-    };
-
-    const editIngredientHandler = (position, newIngredient ) => {
-        return (
-            console.log('in ingredient handler')
-        )
-        // {ingredients.map(recipe, index => {
-        //     if (position === index) {
-        //         return (
-        //             recipe[index] = newIngredient
-        //         )
-        //     };
-        // })}
+    const ingredientOnChange = (value, index) => {
+        const updatedIngredient = [...ingredients]
+        updatedIngredient[index].ingredient = value;
+        setIngredients(updatedIngredient);
     }
 
-    return (
-        <div>
-            <div className="edit-recipe-div">
+    const amountOnChange = (value, index) => {
+        const updatedAmounts = [...ingredients];
+        updatedAmounts[index].amount = value;
+        setIngredients(updatedAmounts);
+    }
 
-                {setTitle(selectedRecipe.title)}
-                {/* {setIngredients(JSON.parse(selectedRecipe.ingredients))}
-                {setInstructions(JSON.parse(selectedRecipe.instructions))} */}
-                
-                <br />
-                <p>editing details for:
+    const instructionOnChange = (value, index) => {
+        const updatedInstructions = [...instructions];
+        updatedInstructions[index] = value;
+        console.log('instruction on change value: ', value, updatedInstructions)
+        setInstructions(updatedInstructions);
+    }
+
+    const onSubmit = (event) => {
+        event.preventDefault();
+        console.log('in on submit with: ', id, title, ingredients, instructions)
+        const updatedRecipe = {
+            id,
+            title,
+            ingredients,
+            instructions,
+        }
+        
+        dispatch({
+            type: "UPDATE_RECIPE",
+            payload: updatedRecipe
+        });
+
+        setTitle('');
+        setIngredients([{ingredient: '', amount: ''}]);
+        setInstructions(['']);
+        alert(`Oh yeah, that looks so much better now!`);
+        history.push(`/findrecipe`);
+    }
+
+
+    return(
+        <>
+            {selectedRecipe.title
+            ?   <h2>Edit Details for <b>{selectedRecipe.title}</b></h2>
+            : null}
+
+            <br />
+            <br />
+
+            <form onSubmit={onSubmit}>
+
+                {/* collect recipe title update here */}
+                <div className="title-container">
+                    <label htmlFor="title"><b>Edit Title:</b></label>
                     <br />
-                    <element className="recipe-title">
-                        <b>{title}</b>
-                    </element>
-                </p>
-    
-                <form onSubmit={onSubmit}>
-                    <br />
-                    <div className="edit-div">
-                        {/* collect recipe title update here */}
-                        <label htmlFor="title"><b>Edit Title:</b></label>
-                        <br />
-                        <input
+                    {selectedRecipe.title
+                        ? <input
                             id="title" 
                             name="title"
                             value={title} 
-                            placeholder={title}
                             onChange={(event) => setTitle(event.target.value)}
                         />
-                    </div>
-                    <br /> 
-                    <br />
-                        {/* {ingredients.map((ingredient, index) => {
-                           
+                        : null
+                    }
+                </div>
 
-                            return(
-                                <div className="edit-ingredients-div">
-                                    <label htmlFor="ingredients">
-                                        <b>Edit Ingredients:</b>
-                                    </label>
-                                    {/* <input
-                                        id={`ingredient-${index}`}
-                                        name="ingredients"
-                                        value={ingredient.ingredient} 
-                                        placeholder={ingredient.ingredient}
-                                        // onChange={(event) => editIngredientHandler(index, event.target.value)}
-                                    /> */}
-                                    {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
-                
-                                    {/* input field for INGREDIENT AMOUNTS
+                <br />
+                <br />
+        
+                <div className="ingredients-container">
+                    <p><b>Edit Ingredients:</b></p>
+                    {/* was having issue with ingredients array not being defined, but was showing up accurate in console. Added a conditional to check
+                    if the ingredients array exists, which has corrected the timing issue */}
+                    <div className="ingredient-list">
+                        {ingredients
+                            ? ingredients.map((ingredient, index) => {
+                                return (
+                                    <>
+                                        <input
+                                            id={`id-ingredient-${index}`}
+                                            key={`ingredient-${index}`}
+                                            value={ingredients[index].ingredient}
+                                            onChange={(event) => ingredientOnChange(event.target.value, index)}
+                                        />
+                                        <input
+                                            id={`id-amount-${index}`}
+                                            key={`amount-${index}`}
+                                            value={ingredients[index].amount}
+                                            onChange={(event) => amountOnChange(event.target.value, index)}
+                                        />
+                                        <br />
+                                        <br />
+                                    </>
+                                )
+                            })
+                            : null
+                        }
+                    </div>
+                </div>
+
+                <br /> 
+                <br />
+
+                <div className="instructions-container">
+                    <p><b>Edit Instructions:</b></p>
+                    {/* was having issue with ingredients array not being defined, but was showing up accurate in console. Added a conditional to check
+                    if the ingredients array exists, which has corrected the timing issue */}
+                    {instructions
+                        ? instructions.map((instruction, index) => {
+                            return (
+                                <div className="instruction-list">
                                     <input
-                                        key={`amount-${index}`}
-                                        id="ingredient-amount"
-                                        name="ingredient-amount"
-                                        value={ingredient.amount}
-                                        placeholder="Amount"
-                                        onChange={() => editAmountHandler(index)}
-                                    />    */}
-                                {/* </div>
+                                        id={`instruction-id-${index}`}
+                                        key={`instruction-${index}`}
+                                        value={instructions[index]}
+                                        onChange={(event) => instructionOnChange(event.target.value, index)}
+                                    />
+                                </div>
                             )
-                        })} */} 
-                    <br /> 
-                    <br />
-                    {/* collect recipe ingredients and amounts update here */}
-                    <label htmlFor="ingredients">
-                        <b>Edit Ingredients:</b>
-                    </label>
-                    <br />
-                    <br />
-                </form>
-            </div>
-        </div>
+                        })
+                        : null}
+                </div>
+                <br />
+                <br />
+                <button type="submit" className="btn">Update Recipe</button>
+            </form>
+        </>
     )
-}
+};
 
 export default EditRecipePage;
