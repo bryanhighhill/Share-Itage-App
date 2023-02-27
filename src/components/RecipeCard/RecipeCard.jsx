@@ -64,14 +64,10 @@ const RecipeCard = ({recipe}) => {
                 : null}
                 </div>
 
-                {user.admin
+                {(user.admin || user.id === recipe.user_id)
                     &&
                     <EditButton recipe={recipe}/>
                 }
-                {/* {user.id === recipe.user_id
-                    &&
-                    <EditButton recipe={recipe}/>
-                }  */}
                 </div>
     )
 };
