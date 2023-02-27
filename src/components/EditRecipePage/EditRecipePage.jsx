@@ -14,8 +14,6 @@ const EditRecipePage = () => {
     console.log('selectedRecipe on Edit Page: ', selectedRecipe);
     
     useEffect(() => {
-        setIngredients([{ingredient:'', amount:''}]);
-        setInstructions(['']);
         dispatch({ type: 'FETCH_RECIPE_DATA', payload: id });
     }, [id]);
     
@@ -25,23 +23,52 @@ const EditRecipePage = () => {
         setTitle(selectedRecipe.title);
     }, [selectedRecipe]);
 
+    //on change handler for updated ingredients
     const ingredientOnChange = (value, index) => {
         const updatedIngredient = [...ingredients]
         updatedIngredient[index].ingredient = value;
         setIngredients(updatedIngredient);
     }
 
+    //on change handler for updated amounts
     const amountOnChange = (value, index) => {
         const updatedAmounts = [...ingredients];
         updatedAmounts[index].amount = value;
         setIngredients(updatedAmounts);
     }
 
+    //on change handler for updated instructions
     const instructionOnChange = (value, index) => {
         const updatedInstructions = [...instructions];
         updatedInstructions[index] = value;
         console.log('instruction on change value: ', value, updatedInstructions)
         setInstructions(updatedInstructions);
+    }
+
+    //functino to add ingredient/amountfields
+    const addIngredientInput = () => {
+        const ingredientField = [...ingredients, {ingredient:'', amount:''}];
+        setIngredients(ingredientField);
+    }
+
+    //function to remove previously added ingredient/amount fields
+    const removeIngredientInput = (index) => {
+        const ingredientFields = [...ingredients];
+        ingredientFields.splice(index, 1);
+        setIngredients(ingredientFields);
+    }
+
+    //function to add new fields for instructions on button click
+    const addInstructionInput = () => {
+        const instructionField = [...instructions, ''];
+        setInstructions(instructionField);
+    }
+
+    //function to remove previously added instruction fields if unused
+    const removeInstructionInput = (index) => {
+        const instructionFields = [...instructions];
+        instructionFields.splice(index, 1);
+        setInstructions(instructionFields);
     }
 
     const onSubmit = (event) => {
@@ -86,7 +113,8 @@ const EditRecipePage = () => {
                         ? <input
                             id="title" 
                             name="title"
-                            value={title} 
+                            value={title}
+                            required 
                             onChange={(event) => setTitle(event.target.value)}
                         />
                         : null
@@ -109,14 +137,30 @@ const EditRecipePage = () => {
                                             id={`id-ingredient-${index}`}
                                             key={`ingredient-${index}`}
                                             value={ingredients[index].ingredient}
+                                            required
                                             onChange={(event) => ingredientOnChange(event.target.value, index)}
                                         />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
                                         <input
                                             id={`id-amount-${index}`}
                                             key={`amount-${index}`}
                                             value={ingredients[index].amount}
+                                            required
                                             onChange={(event) => amountOnChange(event.target.value, index)}
                                         />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        {/* conditional to prevent first ingredient field from being deleted */}
+                                        {index !== 0 && (
+                                            <button
+                                                key={`remove-btn-${index}`} 
+                                                onClick={() => removeIngredientInput(index)}
+                                                type="button"
+                                                className="remove-btn"
+                                            >
+                                                X
+                                            </button>
+                                        )}
                                         <br />
                                         <br />
                                     </>
@@ -124,6 +168,13 @@ const EditRecipePage = () => {
                             })
                             : null
                         }
+                            <button
+                                onClick={addIngredientInput}
+                                type="button"
+                                className="add-btn"
+                            >
+                                + Ingredient
+                            </button>
                     </div>
                 </div>
 
@@ -142,12 +193,33 @@ const EditRecipePage = () => {
                                         id={`instruction-id-${index}`}
                                         key={`instruction-${index}`}
                                         value={instructions[index]}
+                                        required
                                         onChange={(event) => instructionOnChange(event.target.value, index)}
                                     />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    {/* conditional to prevent first instruction field from being deleted */}
+                                    {index !== 0 && (
+                                        <button
+                                            key={`remove-btn-${index}`} 
+                                            onClick={() => removeInstructionInput(index)}
+                                            type="button"
+                                            className="remove-btn"
+                                        >
+                                            X
+                                        </button>
+                                    )}
                                 </div>
                             )
                         })
-                        : null}
+                        : null
+                    }
+                    <button
+                        onClick={addInstructionInput}
+                        type="button"
+                        className="add-btn"
+                    >
+                        + Instruction
+                    </button>
                 </div>
                 <br />
                 <br />

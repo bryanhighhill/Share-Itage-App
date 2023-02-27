@@ -34,10 +34,21 @@ const registrationMessage = (state = '', action) => {
   }
 };
 
+//error messages for empty inputs
+const emptyInputMessage = (state = '', action) => {
+  switch (action.type) {
+    case 'EMPTY_INPUT':
+      return 'Inputs cannot be blank';
+    default:
+      return state;
+  }
+};
+
 // make one object that has keys loginMessage, registrationMessage
 // these will be on the redux state at:
 // state.errors.loginMessage and state.errors.registrationMessage
 export default combineReducers({
   loginMessage,
   registrationMessage,
+  emptyInputMessage,
 });
