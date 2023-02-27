@@ -29,6 +29,9 @@ const RandomRecipePage = () => {
         setTitle(randomRecipe.title);
     }, [randomRecipe]);
 
+    const refreshPage = () => {
+        window.location.reload(false);
+      }
     
 
     // const onChange = (index) => {
@@ -65,7 +68,7 @@ const RandomRecipePage = () => {
                     </ul>
                 </div>
             : null}
-
+            <button className="btn" onClick={refreshPage}>Generate another random recipe</button>
         </div>
     )
 }
