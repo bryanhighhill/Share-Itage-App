@@ -4,6 +4,7 @@ import user from './user.reducer';
 import family from './family.reducer';
 import recipes from './recipes.reducer';
 import selectedRecipe from './selected.recipe.reducer';
+import randomRecipe from './random.recipe.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   family, //will have an id and name
   recipes, //will contain all recipes for specific family_id in db
   selectedRecipe, //will contain recipe that is being edited
+  randomRecipe, //will contain recipe picked at random at user's family_id
 });
 
 export default rootReducer;

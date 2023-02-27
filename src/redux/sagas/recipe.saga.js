@@ -1,10 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
-import { useSelector, useDispatch } from 'react-redux';
-
-// const user = useSelector((store) => store.user);
-// const dispatch = useDispatch();
 
 // Family Saga: will be fired on "POST_FAMILY_NAME" actions (CreateFamilyPage.jsx)
 function* createRecipe(action) {
@@ -22,7 +18,7 @@ function* createRecipe(action) {
   }
 }
 
-// Fetch Family Details from db - family table
+// Fetch Family recipe Details from db - family table
 function* fetchRecipes(action) {
   console.log('in fetch recipes saga with: ', action);
   const id = action.payload;
@@ -58,13 +54,24 @@ function* updateRecipe(action) {
   }
 }
 
-
+//fetch random recipe from user family's recipe table
+function* fetchRandomRecipe(action) {
+  console.log('in fetch random recipe with family id: ', action.payload);
+  const id = action.payload;
+  try {
+    const randomRecipe = yield axios.get(`api/recipe/random/${id}`);
+    yield put({ type: 'SET_RANDOM_RECIPE', payload: randomRecipe.data})
+  } catch (error) {
+    console.log('Fetch Recipe data failed with error: ', error);
+  }
+}
 
 function* recipeSaga() {
   yield takeEvery('POST_NEW_RECIPE', createRecipe); //dispatched from AddRecipePage
   yield takeEvery('FETCH_RECIPES', fetchRecipes); //dispatched from FindRecipePage
   yield takeEvery('FETCH_RECIPE_DATA', fetchRecipeData); //dispatched from EditRecipePage
   yield takeEvery('UPDATE_RECIPE', updateRecipe); //dispatched from EditRecipePage onSubmit
+  yield takeEvery('FETCH_RANDOM_RECIPE', fetchRandomRecipe); //dispatched from RandomRecipePage
 }
 
 export default recipeSaga;
