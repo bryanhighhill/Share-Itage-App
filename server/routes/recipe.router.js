@@ -63,6 +63,31 @@ router.get('/edit/:id', (req, res) => {
     });
 });
 
+//GET route for random recipe
+router.get('/random/:id', (req, res) => {
+  const id = req.params.id;
+  console.log('in get random recipe data request: ', id);
+  const queryText = 'SELECT * FROM "recipes" WHERE "family_id" = $1 ORDER BY RANDOM() LIMIT 1;';
+  pool.query(queryText, [id])
+    .then( result => {
+      const ingredients = JSON.parse(result.rows[0].ingredients);
+      const instructions = JSON.parse(result.rows[0].instructions);
+      
+      const results = {
+        title: result.rows[0].title,
+        ingredients,
+        instructions,
+      }
+
+      res.send(results);
+      console.log('result rows from random get request: ', results);
+    })
+    .catch(err => {
+      console.log('ERROR with getting requested recipe data: ', err);
+      res.sendStatus(500);
+    });
+});
+
 //PUT route for editing recipe
 router.put('/edit/:id', (req, res) => {
   ingredients = JSON.stringify(req.body.ingredients);
