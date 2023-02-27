@@ -19,7 +19,8 @@ const AddRecipePage = () => {
             title,
             ingredients,
             instructions,
-            family_id: user.family_id,            
+            family_id: user.family_id,
+            user_id: user.id,            
         }
         dispatch({
             type: 'POST_NEW_RECIPE', 
