@@ -5,6 +5,7 @@ import './RecipeCard.css';
  
 const RecipeCard = ({recipe}) => {
     const user = useSelector((store) => store.user);
+    const dispatch = useDispatch();
     
     const initialCheckedArray = new Array(JSON.parse(recipe.instructions).length).fill(false);
 
@@ -17,6 +18,19 @@ const RecipeCard = ({recipe}) => {
         updatedArray[index] = !checkedInstruction[index];
         console.log('checked instruction in on chage', updatedArray);
         setCheckedInstruction(updatedArray);
+    }
+
+    const addToFavorites = () => {
+        console.log('you want to add to favorites: ', recipe.title);
+
+        const favoriteRecipe = {
+            user_id: user.id,
+            recipe_id: recipe.id,
+        }
+        dispatch({
+            type: 'ADD_FAVORITE', 
+            payload: favoriteRecipe
+        })
     }
 
     return (
@@ -63,7 +77,8 @@ const RecipeCard = ({recipe}) => {
                     </div>
                 : null}
                 </div>
-
+                <button onClick={addToFavorites}>Add to favorites</button>
+                <br />
                 {(user.admin || user.id === recipe.user_id)
                     &&
                     <EditButton recipe={recipe}/>

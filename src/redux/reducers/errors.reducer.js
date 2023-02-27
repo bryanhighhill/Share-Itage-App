@@ -29,6 +29,8 @@ const registrationMessage = (state = '', action) => {
       return "Oops! That didn't work. The username might already be taken. Try again!";
     case 'FAMILY_FAILED':
       return 'Family could not be created. Please try again!';
+    case 'FAVORITE_FAILED':
+      return 'Recipe could not be added to your favorites. Please try again!';
     default:
       return state;
   }

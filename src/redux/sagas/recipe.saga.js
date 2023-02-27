@@ -66,12 +66,24 @@ function* fetchRandomRecipe(action) {
   }
 }
 
+//POST recipe to favorites table
+function* addFavorite(action) {
+  console.log('in add favorite saga with: ', action.payload);
+  try {
+    yield axios.post('/api/recipe/favorite', action.payload); //sends to recipe.router.js
+  } catch (error) {
+    console.log('Error with adding recipe to favorites:', error);
+    yield put({ type: 'FAVORITE_FAILED' });
+  }
+}
+
 function* recipeSaga() {
   yield takeEvery('POST_NEW_RECIPE', createRecipe); //dispatched from AddRecipePage
   yield takeEvery('FETCH_RECIPES', fetchRecipes); //dispatched from FindRecipePage
   yield takeEvery('FETCH_RECIPE_DATA', fetchRecipeData); //dispatched from EditRecipePage
   yield takeEvery('UPDATE_RECIPE', updateRecipe); //dispatched from EditRecipePage onSubmit
   yield takeEvery('FETCH_RANDOM_RECIPE', fetchRandomRecipe); //dispatched from RandomRecipePage
+  yield takeEvery('ADD_FAVORITE', addFavorite); //dispatched from recipeCard or RandomRecipePage
 }
 
 export default recipeSaga;

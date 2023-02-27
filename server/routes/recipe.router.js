@@ -38,6 +38,19 @@ router.post('/', (req, res) => {
   });
 });
 
+// POST route for favorite recipes
+router.post('/favorite', (req, res) => {
+  console.log('in recipe favorites post with: ', req.body.title);
+  const queryText = `INSERT INTO "favorites" (user_id, recipe_id)
+  VALUES ($1, $2)`;
+  pool.query(queryText, [req.body.user_id, req.body.recipe_id])
+  .then(() => res.sendStatus(201))
+  .catch((err) => {
+      console.log('error with adding recipe to favorites: ', err);
+      res.sendStatus(500);
+  });
+});
+
 //GET route for editing recipe
 router.get('/edit/:id', (req, res) => {
   const id = req.params.id;
