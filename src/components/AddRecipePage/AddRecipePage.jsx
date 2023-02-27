@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import UserPage from '../UserPage/UserPage';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const AddRecipePage = () => {
     const [title, setTitle] = useState('');
@@ -8,6 +9,7 @@ const AddRecipePage = () => {
     const [instructions, setInstructions] = useState(['']);
     const user = useSelector((store) => store.user);
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -29,7 +31,8 @@ const AddRecipePage = () => {
         setIngredients([{ingredient:'', amount:''}]);
         setInstructions(['']);
         //send user to CONFIRMATION PAGE/NEW RECIPE PAGE? instead of user page <----------------------------------------
-        // history.push('/user');
+        alert('Your recipe book is getting bigger!');
+        history.push('/user');
     };
 
     //variable to add new fields for ingredient/amount on button click
