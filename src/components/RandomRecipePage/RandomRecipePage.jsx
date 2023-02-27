@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
-import UserPage from '../UserPage/UserPage';
-import RecipeCard from '../RecipeCard/RecipeCard';
+import { useHistory } from 'react-router-dom';
+
 
 const RandomRecipePage = () => {
     const dispatch = useDispatch();
@@ -13,11 +12,12 @@ const RandomRecipePage = () => {
     const [title, setTitle] = useState('');
     const [ingredients, setIngredients] = useState([{ingredient:'', amount:''}]);
     const [instructions, setInstructions] = useState(['']);
-    console.log('in random recipe page with: ', randomRecipe);
-    // const [checkedInstruction, setCheckedInstruction] = useState(initialCheckedArray);
-    // console.log('random instruction length: ', instructions.length)
+    // const [instructionsLength, setInstructionsLength] = useState(0);
+    const [checkedInstruction, setCheckedInstruction] = useState(['']);
 
-    // const initialCheckedArray = new Array (randomRecipe.instructions.length).fill(false)
+    // const initialCheckedArray = new Array(instructionsLength).fill(false);
+
+
 
     useEffect(() => {
         dispatch({ type: 'FETCH_RANDOM_RECIPE', payload: id });
@@ -34,12 +34,12 @@ const RandomRecipePage = () => {
       }
     
 
-    // const onChange = (index) => {
-    //     const updatedArray = [...checkedInstruction];
-    //     updatedArray[index] = !checkedInstruction[index];
-    //     console.log('checked instruction in on chage', updatedArray);
-    //     setCheckedInstruction(updatedArray);
-    // }
+    const onChange = (index) => {
+        setCheckedInstruction(new Array(instructions.length).fill(false));
+        const updatedArray = [...checkedInstruction];
+        updatedArray[index] = !checkedInstruction[index];
+        setCheckedInstruction(updatedArray);
+    }
 
     return (
         <div className="random-recipe">
@@ -62,7 +62,19 @@ const RandomRecipePage = () => {
                     <ul>
                         {instructions.map((instruction, index) => {
                             return(
-                                <li>{instruction}</li>
+                                <>
+                                <input
+                                    key={`checkbox-${index}`}
+                                    type="checkbox"
+                                    id={`custom-checkbox-${index}`}
+                                    name={instruction}
+                                    value={instruction}
+                                    onChange={() => onChange(index)}
+                                />
+                                {/* <label htmlFor={`custom-checkbox-${index}`}>{instruction}</label> */}
+                                <label className={!checkedInstruction[index] ? "checked-instruction-false" : "checked-instruction-true"} htmlFor={`custom-checkbox-${index}`}>{instruction}</label>
+                                <br />
+                                </>
                             )
                         })}  
                     </ul>
