@@ -1,12 +1,7 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import UserPage from '../UserPage/UserPage';
+import { useSelector } from 'react-redux';
 import RecipeCard from '../RecipeCard/RecipeCard';
 
 const RecipeGrid = () => {
-    const dispatch = useDispatch();
-    const user = useSelector((store) => store.user);
     const recipes = useSelector((store) => store.recipes);
     console.log('recipes: ', recipes);
 

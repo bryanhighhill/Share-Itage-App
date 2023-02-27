@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import EditButton from '../EditButton/EditButton';
 import './RecipeCard.css';
  
-const RecipeCard = ({recipe}) => {
+const RecipeCard = ({recipe, favorite}) => {
     const user = useSelector((store) => store.user);
     const dispatch = useDispatch();
     
@@ -32,6 +32,12 @@ const RecipeCard = ({recipe}) => {
             payload: favoriteRecipe
         })
     }
+
+    const removeFavorites = () => {
+        return (
+            console.log('you want to remove from favorites')
+        )
+    };
 
     return (
         <div className="recipe-card">
@@ -77,8 +83,12 @@ const RecipeCard = ({recipe}) => {
                     </div>
                 : null}
                 </div>
-                <button onClick={addToFavorites}>Add to favorites</button>
+
+                {favorite 
+                ? <button onClick={removeFavorites}>Remove from favorites</button>
+                : <button onClick={addToFavorites}>Add to favorites</button>}
                 <br />
+
                 {(user.admin || user.id === recipe.user_id)
                     &&
                     <EditButton recipe={recipe}/>

@@ -101,6 +101,27 @@ router.get('/random/:id', (req, res) => {
     });
 });
 
+//GET route for user's favorite recipe
+router.get('/favorite/:id', (req, res) => {
+  const id = req.params.id;
+  console.log('in get favorite recipes request: ', id);
+  const queryText = 
+    `SELECT "recipes"."title", "recipes"."ingredients", "recipes"."instructions" FROM "user"
+    JOIN "favorites" ON "favorites"."user_id" = "user"."id"
+    JOIN "recipes" ON "recipes"."id" = "favorites"."recipe_id"
+    WHERE "user"."id" = $1;`;
+
+  pool.query(queryText, [id])
+    .then( result => {
+      res.send(result.rows);
+      console.log('result rows from favorites request: ', result.rows);
+    })
+    .catch(err => {
+      console.log('ERROR with getting favorites data: ', err);
+      res.sendStatus(500);
+    });
+});
+
 //PUT route for editing recipe
 router.put('/edit/:id', (req, res) => {
   ingredients = JSON.stringify(req.body.ingredients);
