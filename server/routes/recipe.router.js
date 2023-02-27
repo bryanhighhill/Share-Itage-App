@@ -7,11 +7,11 @@ const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
 const router = express.Router();
 
-// GET request to retrieve family data from db - family table
+// GET request to retrieve family's recipe data from db - family table
 router.get('/:id', (req, res) => {
   console.log('in recipes GET request with: ', req.params.id);
   // GET route code here
-  const queryText = 'SELECT * FROM "recipes" WHERE "family_id" = $1;';
+  const queryText = 'SELECT * FROM "recipes" WHERE "family_id" = $1 ORDER BY "title" ASC;';
   pool.query(queryText, [req.params.id])
   .then(result => {
     console.log('recipes get results: ', result.rows)
