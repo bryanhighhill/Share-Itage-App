@@ -35,26 +35,26 @@ const AddRecipePage = () => {
         history.push('/user');
     };
 
-    //variable to add new fields for ingredient/amount on button click
+    //function to add new fields for ingredient/amount on button click
     const addIngredientInput = () => {
         const ingredientField = [...ingredients, {ingredient:'', amount:''}];
         setIngredients(ingredientField);
     }
 
-    //variable to remove previously added ingredient/amount fields if unused
+    //function to remove previously added ingredient/amount fields if unused
     const removeIngredientInput = (index) => {
         const ingredientFields = [...ingredients];
         ingredientFields.splice(index, 1);
         setIngredients(ingredientFields);
     }
 
-    //variable to add new fields for instructions on button click
+    //function to add new fields for instructions on button click
     const addInstructionInput = () => {
         const instructionField = [...instructions, ''];
         setInstructions(instructionField);
     }
 
-    //variable to remove previously added instruction fields if unused
+    //function to remove previously added instruction fields if unused
     const removeInstructionInput = (index) => {
         const instructionFields = [...instructions];
         instructionFields.splice(index, 1);
@@ -78,6 +78,7 @@ const AddRecipePage = () => {
                             name="title"
                             value={title}
                             placeholder="title"
+                            required
                             onChange={(event) => setTitle(event.target.value)}
                         />
                     </div> {/* end "recipe-title" div */}
@@ -97,6 +98,7 @@ const AddRecipePage = () => {
                                             name="ingredients"
                                             value={ingredient.ingredient}
                                             placeholder="Ingredient"
+                                            required
                                             onChange={(event) => setIngredients(ingredients => {
                                                 const newIngredients = [ ...ingredients ];
                                                 newIngredients[index].ingredient = event.target.value;
@@ -113,6 +115,7 @@ const AddRecipePage = () => {
                                             name="ingredient-amount"
                                             value={ingredient.amount}
                                             placeholder="Amount"
+                                            required
                                             onChange={(event) => setIngredients(ingredients => {
                                                 const newIngredients = [ ...ingredients ];
                                                 newIngredients[index].amount = event.target.value;
@@ -158,6 +161,7 @@ const AddRecipePage = () => {
                                             name="instructions"
                                             value={instruction.instruction}
                                             placeholder="Instruction"
+                                            required
                                             onChange={(event) => setInstructions(instructions => {
                                                 const newInstructions = [ ...instructions ];
                                                 newInstructions[index] = event.target.value;
