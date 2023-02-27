@@ -28,9 +28,9 @@ router.post('/', (req, res) => {
   ingredients = JSON.stringify(req.body.ingredients);
   instructions = JSON.stringify(req.body.instructions);
   console.log('in recipe post with ingredients: ', req.body.ingredients);
-  const queryText = `INSERT INTO "recipes" (title, ingredients, instructions, family_id)
-  VALUES ($1, $2, $3, $4)`;
-  pool.query(queryText, [req.body.title, ingredients, instructions, req.body.family_id])
+  const queryText = `INSERT INTO "recipes" (title, ingredients, instructions, family_id, user_id)
+  VALUES ($1, $2, $3, $4, $5)`;
+  pool.query(queryText, [req.body.title, ingredients, instructions, req.body.family_id, req.body.user_id])
   .then(() => res.sendStatus(201))
   .catch((err) => {
       console.log('error with adding recipe: ', err);
