@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import UserPage from '../UserPage/UserPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import './AddRecipePage.css';
 
 const AddRecipePage = () => {
     const [title, setTitle] = useState('');
@@ -10,6 +11,7 @@ const AddRecipePage = () => {
     const user = useSelector((store) => store.user);
     const dispatch = useDispatch();
     const history = useHistory();
+    const page = 1;
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -65,10 +67,13 @@ const AddRecipePage = () => {
     return (
         <div className="content-container">
             <div className="user-nav">
-                <UserPage />
+                <UserPage page={page}/>
             </div> {/*end "user-nav" div */}
 
-            <div className="page-content">
+            <div className="form-container">
+                <h1>Add Recipe</h1>
+                <br />
+                <br />
                 <form onSubmit={onSubmit}>
                     {/* input for RECIPE TITLE */}
                     <div className="title">
@@ -80,6 +85,7 @@ const AddRecipePage = () => {
                             value={title}
                             placeholder="title"
                             required
+                            className="ingredient-input"
                             onChange={(event) => setTitle(event.target.value)}
                         />
                     </div> {/* end "recipe-title" div */}
@@ -87,7 +93,7 @@ const AddRecipePage = () => {
                     <br />
 
                     {/* INGREDIENTS HERE */}
-                    <label htmlFor="ingredients"><b>Ingredients</b></label>
+                    <label className="small-label" htmlFor="ingredients"><b>Ingredients</b></label>
                     <div className="ingredient-list">
                             {ingredients.map((ingredient, index) => {
                                 return (
@@ -95,10 +101,11 @@ const AddRecipePage = () => {
                                         {/* input field for ingredient */}
                                         <input
                                             key={`ingredient-${index}`}
+                                            className="ingredient-input"
                                             id="ingredients"
                                             name="ingredients"
                                             value={ingredient.ingredient}
-                                            placeholder="Ingredient"
+                                            placeholder="ingredient"
                                             required
                                             onChange={(event) => setIngredients(ingredients => {
                                                 const newIngredients = [ ...ingredients ];
@@ -112,10 +119,11 @@ const AddRecipePage = () => {
                                         {/* input field for INGREDIENT AMOUNTS */}
                                         <input
                                             key={`amount-${index}`}
+                                            className="ingredient-input"
                                             id="ingredient-amount"
                                             name="ingredient-amount"
                                             value={ingredient.amount}
-                                            placeholder="Amount"
+                                            placeholder="amount"
                                             required
                                             onChange={(event) => setIngredients(ingredients => {
                                                 const newIngredients = [ ...ingredients ];
@@ -129,7 +137,7 @@ const AddRecipePage = () => {
                                                 key={`remove-btn-${index}`} 
                                                 onClick={() => removeIngredientInput(index)}
                                                 type="button"
-                                                className="remove-btn"
+                                                className="btn_sizeMin"
                                             >
                                                 X
                                             </button>
@@ -141,7 +149,7 @@ const AddRecipePage = () => {
                         <button
                             onClick={addIngredientInput}
                             type="button"
-                            className="add-btn"
+                            className="btn_sizeMed"
                         >
                             + Ingredient
                         </button>
@@ -150,7 +158,7 @@ const AddRecipePage = () => {
                     <br />
 
                     {/* INSTRUCTIONS HERE */}
-                    <label htmlFor="instructions"><b>Instructions</b></label>
+                    <label className="small-label" htmlFor="instructions"><b>Instructions</b></label>
                     <div className="instructions-list">
                             {instructions.map((instruction, index) => {
                                 return (
@@ -158,10 +166,11 @@ const AddRecipePage = () => {
                                         {/* input field for instruction */}
                                         <input
                                             key={`instruction-${index}`}
+                                            className="instruction-input"
                                             id="instructions"
                                             name="instructions"
                                             value={instruction.instruction}
-                                            placeholder="Instruction"
+                                            placeholder="instruction"
                                             required
                                             onChange={(event) => setInstructions(instructions => {
                                                 const newInstructions = [ ...instructions ];
@@ -177,7 +186,7 @@ const AddRecipePage = () => {
                                                 key={`remove-btn2-${index}`} 
                                                 onClick={() => removeInstructionInput(index)}
                                                 type="button"
-                                                className="remove-btn"
+                                                className="btn_sizeMin"
                                             >
                                                 X
                                             </button>
@@ -189,7 +198,7 @@ const AddRecipePage = () => {
                         <button
                             onClick={addInstructionInput}
                             type="button"
-                            className="add-btn"
+                            className="btn_sizeMed"
                         >
                             + Instruction
                         </button>
@@ -198,9 +207,16 @@ const AddRecipePage = () => {
                     <br />
                     <button
                         type="submit"
-                        className="submit-recipe-btn"
+                        className="btn_save"
                     >
                         Save Recipe
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button
+                        type="button"
+                        className="btn_cancel"
+                        onClick={() => history.push('/user')}>
+                            Cancel
                     </button>
                 </form>
             </div> {/* end "page-content" div */}

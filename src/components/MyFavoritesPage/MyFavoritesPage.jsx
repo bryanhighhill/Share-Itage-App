@@ -10,6 +10,7 @@ const MyFavoritesPage = () => {
     const user = useSelector(store => store.user);
     const favorites = useSelector((store) => store.setFavorites);
     const id = user.id;
+    const page = 2;
 
     // console.log('fav recipes in fav recipes page: ', favoriteRecipes)
 
@@ -29,7 +30,7 @@ const MyFavoritesPage = () => {
     return (
         <div>
             <div className="user-nav">
-                <UserPage />
+                <UserPage page={page}/>
             </div>
             {favorites
             ? <div className="favorites-recipe-grid">

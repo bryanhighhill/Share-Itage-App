@@ -1,0 +1,25 @@
+.content-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+.instruction-input {
+    width: 40%;
+    height: 1.1rem;
+    padding: 5px 10px;
+    font-size: 20px;
+}
+
+.ingredient-input {
+    height: 1.1rem;
+    padding: 5px 10px;
+    font-size: 20px;
+}
+
+.title {
+    font-size: 25px;
+}
+
+.small-label {
+    font-size: 20px;
+}

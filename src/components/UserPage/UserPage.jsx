@@ -4,7 +4,7 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import SidePanel from '../SidePanel/SidePanel';
 import NewUserPage from '../NewUserPage/NewUserPage';
 
-function UserPage() {
+function UserPage({page}) {
   const [loading, setLoading] = useState(false);
   const user = useSelector((store) => store.user);
 
@@ -14,7 +14,7 @@ function UserPage() {
         <div className="container">
           <h4>Welcome, {user.username}!</h4>
           {/* <p>Your belong to the {user.}</p> */}
-          <SidePanel />
+          <SidePanel page={page}/>
           <LogOutButton className="logout-btn" />
         </div>
       </div>
