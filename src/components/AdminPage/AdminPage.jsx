@@ -1,10 +1,11 @@
 import UserPage from '../UserPage/UserPage';
 
 const AdminPage = () => {
+    const page = 5;
     return (
         <>
             <div className="user-nav">
-                <UserPage />
+                <UserPage page={page}/>
             </div> {/*end "user-nav" div */}
             <div className="admin-container">
             <h2>ADMIN PANEL</h2>

@@ -13,6 +13,7 @@ const RandomRecipePage = () => {
     const [instructions, setInstructions] = useState(['']);
     // const [instructionsLength, setInstructionsLength] = useState(0);
     const [checkedInstruction, setCheckedInstruction] = useState(['']);
+    const page = 4;
 
     // const initialCheckedArray = new Array(instructionsLength).fill(false);
 
@@ -43,7 +44,7 @@ const RandomRecipePage = () => {
     return (
         <>
             <div className="user-nav">
-                <UserPage />
+                <UserPage page={page}/>
             </div>
             <div className="random-recipe">
                 <h2><u>{title}</u></h2>

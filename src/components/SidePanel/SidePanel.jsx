@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const SidePanel = () => {
+const SidePanel = ({page}) => {
     const history = useHistory();
     const user = useSelector((store) => store.user);
 
@@ -11,7 +11,7 @@ const SidePanel = () => {
             <br />
 
             <button
-                className="btn"
+                className={page === 1 ? "btn_selected" : "btn"}
                 onClick={() => {history.push(`/addrecipe`)}}
             >
                 Add Recipe
@@ -20,7 +20,7 @@ const SidePanel = () => {
             <br />
 
             <button
-                className="btn"
+                className={page === 2 ? "btn_selected" : "btn"}
                 onClick={() => {history.push(`/myfavorites`)}}
             >
                 My Favorites
@@ -30,7 +30,7 @@ const SidePanel = () => {
             <br />
             {/* STRETCH:*/} 
             <button
-                className="btn"
+                className={page === 3 ? "btn_selected" : "btn"}
                 onClick={() => {history.push(`/findrecipe`)}}
             >
                 Find New Recipe
@@ -39,7 +39,7 @@ const SidePanel = () => {
             <br />
 
             <button
-                className="btn"
+                className={page === 4 ? "btn_selected" : "btn"}
                 onClick={() => {history.push(`/randomrecipe`)}}
             >
                 Random Recipe
@@ -52,7 +52,7 @@ const SidePanel = () => {
                 && 
                     <>
                         <button
-                            className="btn"
+                            className={page === 5 ? "btn_selected" : "btn"}
                             onClick={() => {history.push(`/admin`)}}
                         >
                             Admin Panel

@@ -9,6 +9,7 @@ const FindRecipePage = () => {
     const user = useSelector((store) => store.user);
     const recipes = useSelector((store) => store.recipes);
     console.log('recipes: ', recipes);
+    const page = 3;
 
     useEffect(() => {
         dispatch({ type: 'FETCH_RECIPES', payload: user.family_id });
@@ -18,7 +19,7 @@ const FindRecipePage = () => {
         return(
             <>
                 <div className="user-nav">
-                    <UserPage />
+                    <UserPage page={page}/>
                 </div>
                 <h2>You have no recipes yet!</h2>
                 <p>to add recipes, please click on "Add Recipe" in your user panel</p>
@@ -29,7 +30,7 @@ const FindRecipePage = () => {
         return(
             <div>
                 <div className="user-nav">
-                    <UserPage />
+                    <UserPage page={page}/>
                 </div>
                 <RecipeGrid />
             </div>
