@@ -20,7 +20,7 @@ const RecipeCard = ({recipe, favorite}) => {
         setCheckedInstruction(updatedArray);
     }
 
-    const addToFavorites = () => {
+    const addFavorites = () => {
         console.log('you want to add to favorites: ', recipe.title);
 
         const favoriteRecipe = {
@@ -34,9 +34,16 @@ const RecipeCard = ({recipe, favorite}) => {
     }
 
     const removeFavorites = () => {
-        return (
-            console.log('you want to remove from favorites')
-        )
+            console.log('you want to remove from favorites');
+
+            const favoriteRecipe = {
+                id: recipe.id,
+                user_id: user.id,
+            }
+            dispatch({
+                type: 'REMOVE_FAVORITE',
+                payload: favoriteRecipe,
+            })
     };
 
     return (
@@ -86,7 +93,7 @@ const RecipeCard = ({recipe, favorite}) => {
 
                 {favorite 
                 ? <button onClick={removeFavorites}>Remove from favorites</button>
-                : <button onClick={addToFavorites}>Add to favorites</button>}
+                : <button onClick={addFavorites}>Add to favorites</button>}
                 <br />
 
                 {(user.admin || user.id === recipe.user_id)
