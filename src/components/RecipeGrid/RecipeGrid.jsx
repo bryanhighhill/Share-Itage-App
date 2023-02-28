@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import RecipeCard from '../RecipeCard/RecipeCard';
 
-const RecipeGrid = () => {
+const RecipeGrid = ({favoriteIds}) => {
     const recipes = useSelector((store) => store.recipes);
     console.log('recipes: ', recipes);
 
@@ -10,7 +10,7 @@ const RecipeGrid = () => {
             {recipes.map((recipe, index) => {
                 console.log('recipe in map: ', recipe);
                 return (
-                    <RecipeCard recipe={recipe}/>
+                    <RecipeCard recipe={recipe} favoriteIds={favoriteIds}/>
                 );
             })}
         </div>
