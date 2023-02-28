@@ -3,15 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import EditButton from '../EditButton/EditButton';
 import './RecipeCard.css';
  
-const RecipeCard = ({recipe, favorite}) => {
+const RecipeCard = ({recipe, favorite, favoriteIds}) => {
     const user = useSelector((store) => store.user);
-    const dispatch = useDispatch();
-    
+    const dispatch = useDispatch();    
     const initialCheckedArray = new Array(JSON.parse(recipe.instructions).length).fill(false);
-
     const [checkedInstruction, setCheckedInstruction] = useState(initialCheckedArray);
-        
-    // const [updatedArray, setUpdatedArray] = useState([]);
 
     const onChange = (index) => {
         const updatedArray = [...checkedInstruction];

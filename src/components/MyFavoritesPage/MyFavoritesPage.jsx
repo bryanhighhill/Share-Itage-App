@@ -11,21 +11,11 @@ const MyFavoritesPage = () => {
     const favorites = useSelector((store) => store.setFavorites);
     const id = user.id;
     const page = 2;
-
-    // console.log('fav recipes in fav recipes page: ', favoriteRecipes)
-
+    
     useEffect(() => {
         dispatch({ type: 'FETCH_FAVORITES', payload: id });
     }, [id]);
 
-    // useEffect(() => {
-    //     setFavoriteRecipes(favorites);
-    // }, [id]);
-
-    // const setFavorites = () => {
-    //     setFavoriteRecipes(favorites);
-    //     console.log('set favorites with: ', favorites);
-    // }
 
     return (
         <div className="content-container">

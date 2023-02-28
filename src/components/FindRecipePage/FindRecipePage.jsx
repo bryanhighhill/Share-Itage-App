@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import UserPage from '../UserPage/UserPage';
 import RecipeGrid from '../RecipeGrid/RecipeGrid';
 
-const FindRecipePage = () => {
+const FindRecipePage = ({favoriteIds}) => {
     const dispatch = useDispatch();
     const user = useSelector((store) => store.user);
     const recipes = useSelector((store) => store.recipes);
@@ -32,7 +32,7 @@ const FindRecipePage = () => {
                 <div className="user-nav">
                     <UserPage page={page}/>
                 </div>
-                <RecipeGrid />
+                <RecipeGrid favoriteIds={favoriteIds}/>
             </div>
         )   
     }
