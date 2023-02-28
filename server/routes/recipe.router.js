@@ -106,10 +106,11 @@ router.get('/favorite/:id', (req, res) => {
   const id = req.params.id;
   console.log('in get favorite recipes request: ', id);
   const queryText = 
-    `SELECT "recipes"."title", "recipes"."ingredients", "recipes"."instructions" FROM "user"
+    `SELECT "recipes"."title", "recipes"."ingredients", "recipes"."instructions", "recipes"."id", "recipes"."user_id" FROM "user"
     JOIN "favorites" ON "favorites"."user_id" = "user"."id"
     JOIN "recipes" ON "recipes"."id" = "favorites"."recipe_id"
-    WHERE "user"."id" = $1;`;
+    WHERE "user"."id" = $1
+    ORDER BY "recipes"."title" ASC;`;
 
   pool.query(queryText, [id])
     .then( result => {
@@ -118,6 +119,24 @@ router.get('/favorite/:id', (req, res) => {
     })
     .catch(err => {
       console.log('ERROR with getting favorites data: ', err);
+      res.sendStatus(500);
+    });
+});
+
+//DELETE route for user's favorite recipes
+router.delete('/favorite/:id', (req, res) => {
+  console.log(`in delete favorites request with req params id: ${req.params.id} and data ${req.body.user_id}`);
+  const id = req.params.id;
+  const user_id = req.body.user_id;
+  const queryText = `DELETE from "favorites" WHERE "recipe_id" = $1 AND "user_id" = $2;`;
+  
+  pool.query(queryText, [id, user_id])
+    .then((result) => {
+      console.log('this is your delete favorites result: ', result);
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.log('error with deleting favorites: ', err);
       res.sendStatus(500);
     });
 });
@@ -137,7 +156,7 @@ router.put('/edit/:id', (req, res) => {
     .catch(err => {
       console.log('error with updating recipe: ', err);
       res.sendStatus(500);
-    })
+    });
 });
 
 

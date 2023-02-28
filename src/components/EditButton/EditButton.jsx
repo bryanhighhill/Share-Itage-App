@@ -7,17 +7,16 @@ function EditButton({ recipe }) {
     const history = useHistory();
 
     const clickHandler = (recipe) => {
-      // dispatch({
-      //   type: 'FETCH_RECIPE_DATA', 
-      //   payload: recipe.id
-      // })
+      dispatch({
+        type: 'FETCH_RECIPE_DATA', 
+        payload: recipe.id
+      })
         history.push(`/edit/${recipe.id}`)
     }
 
 
   return (
     <button
-      // is passed to it from it's parents through React props
       className="edit-btn"
       onClick={() => clickHandler(recipe)}
     >

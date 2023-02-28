@@ -89,14 +89,28 @@ function* fetchFavorites(action) {
   }
 }
 
+//remove user favorite recipe
+function* removeFavorite(action) {
+  console.log('in remove favorites saga with ids: ', action.payload);
+  const id = action.payload.id;
+  const user_id = action.payload.user_id;
+  try {
+    yield axios.delete(`api/recipe/favorite/${id}`, {data: {user_id}});
+    yield put({ type: 'FETCH_FAVORITES', payload: user_id })
+  } catch (error) {
+    console.log('error with removing favorite saga: ', error);
+  }
+}
+
 function* recipeSaga() {
   yield takeEvery('POST_NEW_RECIPE', createRecipe); //dispatched from AddRecipePage
   yield takeEvery('FETCH_RECIPES', fetchRecipes); //dispatched from FindRecipePage
   yield takeEvery('FETCH_RECIPE_DATA', fetchRecipeData); //dispatched from EditRecipePage
   yield takeEvery('UPDATE_RECIPE', updateRecipe); //dispatched from EditRecipePage onSubmit
   yield takeEvery('FETCH_RANDOM_RECIPE', fetchRandomRecipe); //dispatched from RandomRecipePage
-  yield takeEvery('ADD_FAVORITE', addFavorite); //dispatched from recipeCard or RandomRecipePage
-  yield takeEvery('FETCH_FAVORITES', fetchFavorites); //dispatched from MyFavoritesPage
+  yield takeEvery('ADD_FAVORITE', addFavorite); //dispatched from recipeCard
+  yield takeEvery('FETCH_FAVORITES', fetchFavorites); //dispatched from MyFavoritesPage and from removeFavorite saga
+  yield takeEvery('REMOVE_FAVORITE', removeFavorite); //dispatched from RecipeCard
 }
 
 export default recipeSaga;
