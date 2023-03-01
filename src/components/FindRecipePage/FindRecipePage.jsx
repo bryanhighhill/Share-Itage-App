@@ -21,6 +21,7 @@ const FindRecipePage = () => {
                 <div className="user-nav">
                     <UserPage page={page}/>
                 </div>
+                
                 <div>
                     <h1>Find a Recipe</h1>
                     <br />
@@ -37,6 +38,7 @@ const FindRecipePage = () => {
                 <div className="user-nav">
                     <UserPage page={page}/>
                 </div>
+
                 <div>
                 <h1>Find a Recipe</h1>
                 <br />

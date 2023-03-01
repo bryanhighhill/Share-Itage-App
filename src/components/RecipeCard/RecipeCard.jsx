@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import EditButton from '../EditButton/EditButton';
 import './RecipeCard.css';
  
-const RecipeCard = ({recipe, favorite}) => {
+const RecipeCard = ({recipe}) => {
     const user = useSelector((store) => store.user);
     const dispatch = useDispatch();    
     const initialCheckedArray = new Array(JSON.parse(recipe.instructions).length).fill(false);
@@ -18,20 +18,6 @@ const RecipeCard = ({recipe, favorite}) => {
     useEffect(() => {
         dispatch({ type: 'FETCH_FAVORITES', payload: id });
     }, [id]);
-
-    const onChange = (index) => {
-        const updatedArray = [...checkedInstruction];
-        updatedArray[index] = !checkedInstruction[index];
-        setCheckedInstruction(updatedArray);
-    }
-
-    const addFavorites = () => {
-        
-        dispatch({
-            type: 'ADD_FAVORITE', 
-            payload: {recipe_id: recipe.id}
-        })
-    }
 
     return (
         <>
