@@ -53,7 +53,7 @@ Button
   border-width: 1px 1px 3px;
   border-radius: 4px;
   background-color: #f8f8f8;
-  color: #cc580b;
+  color: #ac4a09;
   font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
@@ -105,9 +105,9 @@ Button
 .btn_save {
   display: inline-block;
   padding: 10px 20px;
-  border-color: #01411c;
-  border-width: 1px 1px 3px;
   border-radius: 4px;
+  box-shadow: 1px 2px 5px;
+  border: none;
   background-color: #98d882;
   color: #0b0b0b;
   font-size: 1.1rem;
@@ -116,15 +116,16 @@ Button
 
 .btn_save:hover {
   background-color:  #3def46;
-  transition: .5s;
+  transition: .2s;
+  box-shadow: .5px 1px 2px;
 }
 
 .btn_cancel {
   display: inline-block;
   padding: 10px 20px;
-  border-color: #01411c;
-  border-width: 1px 1px 3px;
   border-radius: 4px;
+  border: none;
+  box-shadow: 1px 2px 5px black;
   background-color: #464747;
   color: #f8f8f8;
   font-size: 1.1rem;
@@ -133,6 +134,7 @@ Button
 
 .btn_cancel:hover {
   background-color:  #141515;
+  box-shadow: .5px 1px 2px;
   transition: .5s;
 }
 
