@@ -93,7 +93,10 @@ const RecipeCard = ({recipe, favorite}) => {
                                         if (favRecipe.id === recipe.id) {
                                             return <button onClick={removeFavorites}>Remove from favorites</button>
                                         }
+                                        else if (favRecipe.id != recipe.id) { 
                                             return <button onClick={addFavorites}>Add to favorites</button>
+                                        }
+                                        return;
                                     })}
                                 </div>
                             :
