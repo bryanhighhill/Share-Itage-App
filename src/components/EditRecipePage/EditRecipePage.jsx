@@ -110,8 +110,8 @@ const EditRecipePage = () => {
                 <form onSubmit={onSubmit}>
 
                     {/* collect recipe title update here */}
-                    <div className="title-container">
-                        <label htmlFor="title"><b>Edit Title:</b></label>
+                    <div className="title">
+                        <label htmlFor="title"><b>Edit Title</b></label>
                         <br />
                         {selectedRecipe.title
                             ? <input
@@ -119,6 +119,7 @@ const EditRecipePage = () => {
                                 name="title"
                                 value={title}
                                 required 
+                                className="ingredient-input"
                                 onChange={(event) => setTitle(event.target.value)}
                             />
                             : null
@@ -129,7 +130,7 @@ const EditRecipePage = () => {
                     <br />
             
                     <div className="ingredients-container">
-                        <p><b>Edit Ingredients:</b></p>
+                        <label className="small-label" htmlFor="ingredients"><b>Edit Ingredients</b></label>
                         {/* was having issue with ingredients array not being defined, but was showing up accurate in console. Added a conditional to check
                         if the ingredients array exists, which has corrected the timing issue */}
                         <div className="ingredient-list">
@@ -142,6 +143,7 @@ const EditRecipePage = () => {
                                                 key={`ingredient-${index}`}
                                                 value={ingredients[index].ingredient}
                                                 required
+                                                className="ingredient-input"
                                                 onChange={(event) => ingredientOnChange(event.target.value, index)}
                                             />
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -151,16 +153,17 @@ const EditRecipePage = () => {
                                                 key={`amount-${index}`}
                                                 value={ingredients[index].amount}
                                                 required
+                                                className="ingredient-input"
                                                 onChange={(event) => amountOnChange(event.target.value, index)}
                                             />
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
                                             {/* conditional to prevent first ingredient field from being deleted */}
                                             {index !== 0 && (
                                                 <button
                                                     key={`remove-btn-${index}`} 
                                                     onClick={() => removeIngredientInput(index)}
                                                     type="button"
-                                                    className="remove-btn"
+                                                    className="btn_sizeMin"
                                                 >
                                                     X
                                                 </button>
@@ -175,10 +178,11 @@ const EditRecipePage = () => {
                                 <button
                                     onClick={addIngredientInput}
                                     type="button"
-                                    className="add-btn"
+                                    className="btn_sizeMed"
                                 >
                                     + Ingredient
                                 </button>
+                                
                         </div>
                     </div>
 
@@ -186,7 +190,7 @@ const EditRecipePage = () => {
                     <br />
 
                     <div className="instructions-container">
-                        <p><b>Edit Instructions:</b></p>
+                        <label className="small-label" htmlFor="ingredients"><b>Edit Instructions</b></label>
                         {/* was having issue with ingredients array not being defined, but was showing up accurate in console. Added a conditional to check
                         if the ingredients array exists, which has corrected the timing issue */}
                         {instructions
@@ -198,16 +202,16 @@ const EditRecipePage = () => {
                                             key={`instruction-${index}`}
                                             value={instructions[index]}
                                             required
+                                            className="instruction-input"
                                             onChange={(event) => instructionOnChange(event.target.value, index)}
                                         />
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         {/* conditional to prevent first instruction field from being deleted */}
                                         {index !== 0 && (
                                             <button
                                                 key={`remove-btn-${index}`} 
                                                 onClick={() => removeInstructionInput(index)}
                                                 type="button"
-                                                className="remove-btn"
+                                                className="btn_sizeMin"
                                             >
                                                 X
                                             </button>
@@ -220,7 +224,7 @@ const EditRecipePage = () => {
                         <button
                             onClick={addInstructionInput}
                             type="button"
-                            className="add-btn"
+                            className="btn_sizeMed"
                         >
                             + Instruction
                         </button>
@@ -228,6 +232,13 @@ const EditRecipePage = () => {
                     <br />
                     <br />
                     <button type="submit" className="btn_save">Update Recipe</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button
+                        type="button"
+                        className="btn_cancel"
+                        onClick={() => history.goBack()}>
+                            Cancel
+                    </button>
                 </form>
             </div>
         </div>
