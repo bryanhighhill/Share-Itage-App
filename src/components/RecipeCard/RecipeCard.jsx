@@ -12,6 +12,7 @@ const RecipeCard = ({recipe, favorite}) => {
     const favorites = useSelector((store) => store.setFavorites);
     console.log('favorite recipes in recipe card: ', favorites);
 
+
     useEffect(() => {
         dispatch({ type: 'FETCH_FAVORITES', payload: id });
     }, [id]);
@@ -90,14 +91,11 @@ const RecipeCard = ({recipe, favorite}) => {
                             ?
                                 <div>
                                     {favorites.map((favRecipe, index) => {
-                                        if (favRecipe.id === recipe.id) {
-                                            return <button onClick={removeFavorites}>Remove from favorites</button>
-                                        }
-                                        else if (favRecipe.id != recipe.id) { 
-                                            return <button onClick={addFavorites}>Add to favorites</button>
-                                        }
-                                        return;
-                                    })}
+                                       return favRecipe.id;
+                                    }).includes(recipe.id) ?
+                                        <button className="btn_sizeMed" onClick={removeFavorites}>Remove from favorites</button>
+                                        :   <button onClick={addFavorites}>Add to favorites</button>
+                                    }
                                 </div>
                             :
                                 <button onClick={addFavorites}>Add to favorites</button>}

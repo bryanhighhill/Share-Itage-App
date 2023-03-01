@@ -42,11 +42,14 @@ const RandomRecipePage = () => {
     }
 
     return (
-        <>
+        <div className="content-container">
             <div className="user-nav">
                 <UserPage page={page}/>
             </div>
             <div className="random-recipe">
+                <h1>Random Recipe</h1>
+                <br />
+                <br />
                 <h2><u>{title}</u></h2>
                 {ingredients
                 ?   <div className="ingredients">
@@ -84,9 +87,9 @@ const RandomRecipePage = () => {
                         </ul>
                     </div>
                 : null}
-                <button className="btn" onClick={refreshPage}>Generate another random recipe</button>
+                <button className="btn_save" onClick={refreshPage}>Generate another random recipe</button>
             </div>
-        </>
+        </div>
     )
 }
 

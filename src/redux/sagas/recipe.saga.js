@@ -71,6 +71,7 @@ function* addFavorite(action) {
   console.log('in add favorite saga with: ', action.payload);
   try {
     yield axios.post(`/api/recipe/favorite/`, action.payload); //sends to recipe.router.js
+    yield put({ type: 'FETCH_FAVORITES' });
   } catch (error) {
     console.log('Error with adding recipe to favorites:', error);
     yield put({ type: 'FAVORITE_FAILED' });
@@ -96,7 +97,7 @@ function* removeFavorite(action) {
   const id = action.payload.id;
   try {
     yield axios.delete(`api/recipe/favorite/${recipe_id}`);
-    yield put({ type: 'FETCH_FAVORITES', payload: id })
+    yield put({ type: 'FETCH_FAVORITES', payload: id });
   } catch (error) {
     console.log('error with removing favorite saga: ', error);
   }

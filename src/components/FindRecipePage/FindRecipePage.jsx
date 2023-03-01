@@ -17,22 +17,32 @@ const FindRecipePage = () => {
 
     if (recipes.length === 0) {
         return(
-            <>
+            <div className="content-container">
                 <div className="user-nav">
                     <UserPage page={page}/>
                 </div>
-                <h2>You have no recipes yet!</h2>
-                <p>to add recipes, please click on "Add Recipe" in your user panel</p>
-            </>
+                <div>
+                    <h1>Find a Recipe</h1>
+                    <br />
+                    <br />
+                    <h2>You have no recipes yet!</h2>
+                    <p>to add recipes, please click on "Add Recipe" in your user panel</p>
+                </div>
+            </div>
         )
     } else
     if (recipes.length > 0) {
         return(
-            <div>
+            <div className="content-container">
                 <div className="user-nav">
                     <UserPage page={page}/>
                 </div>
-                <RecipeGrid />
+                <div>
+                <h1>Find a Recipe</h1>
+                <br />
+                <br />
+                    <RecipeGrid />
+                </div>
             </div>
         )   
     }

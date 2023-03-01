@@ -106,10 +106,9 @@ router.get('/favorite/:id', (req, res) => {
   const id = req.user.id;
   console.log('in get favorite recipes request: ', id);
   const queryText = 
-    `SELECT "recipes"."title", "recipes"."ingredients", "recipes"."instructions", "recipes"."id", "recipes"."user_id" FROM "user"
-    JOIN "favorites" ON "favorites"."user_id" = "user"."id"
+    `SELECT "recipes"."title", "recipes"."ingredients", "recipes"."instructions", "recipes"."id", "recipes"."user_id" FROM "favorites"
     JOIN "recipes" ON "recipes"."id" = "favorites"."recipe_id"
-    WHERE "user"."id" = $1
+    WHERE "favorites"."user_id" = $1
     ORDER BY "recipes"."title" ASC;`;
 
   pool.query(queryText, [id])

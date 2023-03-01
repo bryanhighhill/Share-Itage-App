@@ -96,140 +96,141 @@ const EditRecipePage = () => {
 
 
     return(
-        <>
+        <div className="content-container">
             <div className="user-nav">
                 <UserPage />
             </div>
-            {selectedRecipe.title
-            ?   <h2>Edit Details for <b>{selectedRecipe.title}</b></h2>
-            : null}
+            <div>
+                {selectedRecipe.title
+                    ?   <h1>Edit Details for <b>{selectedRecipe.title}</b></h1>
+                    : null
+                }
+                <br />
+                <br />
+                <form onSubmit={onSubmit}>
 
-            <br />
-            <br />
+                    {/* collect recipe title update here */}
+                    <div className="title-container">
+                        <label htmlFor="title"><b>Edit Title:</b></label>
+                        <br />
+                        {selectedRecipe.title
+                            ? <input
+                                id="title" 
+                                name="title"
+                                value={title}
+                                required 
+                                onChange={(event) => setTitle(event.target.value)}
+                            />
+                            : null
+                        }
+                    </div>
 
-            <form onSubmit={onSubmit}>
-
-                {/* collect recipe title update here */}
-                <div className="title-container">
-                    <label htmlFor="title"><b>Edit Title:</b></label>
                     <br />
-                    {selectedRecipe.title
-                        ? <input
-                            id="title" 
-                            name="title"
-                            value={title}
-                            required 
-                            onChange={(event) => setTitle(event.target.value)}
-                        />
-                        : null
-                    }
-                </div>
+                    <br />
+            
+                    <div className="ingredients-container">
+                        <p><b>Edit Ingredients:</b></p>
+                        {/* was having issue with ingredients array not being defined, but was showing up accurate in console. Added a conditional to check
+                        if the ingredients array exists, which has corrected the timing issue */}
+                        <div className="ingredient-list">
+                            {ingredients
+                                ? ingredients.map((ingredient, index) => {
+                                    return (
+                                        <>
+                                            <input
+                                                id={`id-ingredient-${index}`}
+                                                key={`ingredient-${index}`}
+                                                value={ingredients[index].ingredient}
+                                                required
+                                                onChange={(event) => ingredientOnChange(event.target.value, index)}
+                                            />
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                <br />
-                <br />
-        
-                <div className="ingredients-container">
-                    <p><b>Edit Ingredients:</b></p>
-                    {/* was having issue with ingredients array not being defined, but was showing up accurate in console. Added a conditional to check
-                    if the ingredients array exists, which has corrected the timing issue */}
-                    <div className="ingredient-list">
-                        {ingredients
-                            ? ingredients.map((ingredient, index) => {
+                                            <input
+                                                id={`id-amount-${index}`}
+                                                key={`amount-${index}`}
+                                                value={ingredients[index].amount}
+                                                required
+                                                onChange={(event) => amountOnChange(event.target.value, index)}
+                                            />
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            {/* conditional to prevent first ingredient field from being deleted */}
+                                            {index !== 0 && (
+                                                <button
+                                                    key={`remove-btn-${index}`} 
+                                                    onClick={() => removeIngredientInput(index)}
+                                                    type="button"
+                                                    className="remove-btn"
+                                                >
+                                                    X
+                                                </button>
+                                            )}
+                                            <br />
+                                            <br />
+                                        </>
+                                    )
+                                })
+                                : null
+                            }
+                                <button
+                                    onClick={addIngredientInput}
+                                    type="button"
+                                    className="add-btn"
+                                >
+                                    + Ingredient
+                                </button>
+                        </div>
+                    </div>
+
+                    <br /> 
+                    <br />
+
+                    <div className="instructions-container">
+                        <p><b>Edit Instructions:</b></p>
+                        {/* was having issue with ingredients array not being defined, but was showing up accurate in console. Added a conditional to check
+                        if the ingredients array exists, which has corrected the timing issue */}
+                        {instructions
+                            ? instructions.map((instruction, index) => {
                                 return (
-                                    <>
+                                    <div className="instruction-list">
                                         <input
-                                            id={`id-ingredient-${index}`}
-                                            key={`ingredient-${index}`}
-                                            value={ingredients[index].ingredient}
+                                            id={`instruction-id-${index}`}
+                                            key={`instruction-${index}`}
+                                            value={instructions[index]}
                                             required
-                                            onChange={(event) => ingredientOnChange(event.target.value, index)}
+                                            onChange={(event) => instructionOnChange(event.target.value, index)}
                                         />
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                                        <input
-                                            id={`id-amount-${index}`}
-                                            key={`amount-${index}`}
-                                            value={ingredients[index].amount}
-                                            required
-                                            onChange={(event) => amountOnChange(event.target.value, index)}
-                                        />
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        {/* conditional to prevent first ingredient field from being deleted */}
+                                        {/* conditional to prevent first instruction field from being deleted */}
                                         {index !== 0 && (
                                             <button
                                                 key={`remove-btn-${index}`} 
-                                                onClick={() => removeIngredientInput(index)}
+                                                onClick={() => removeInstructionInput(index)}
                                                 type="button"
                                                 className="remove-btn"
                                             >
                                                 X
                                             </button>
                                         )}
-                                        <br />
-                                        <br />
-                                    </>
+                                    </div>
                                 )
                             })
                             : null
                         }
-                            <button
-                                onClick={addIngredientInput}
-                                type="button"
-                                className="add-btn"
-                            >
-                                + Ingredient
-                            </button>
+                        <button
+                            onClick={addInstructionInput}
+                            type="button"
+                            className="add-btn"
+                        >
+                            + Instruction
+                        </button>
                     </div>
-                </div>
-
-                <br /> 
-                <br />
-
-                <div className="instructions-container">
-                    <p><b>Edit Instructions:</b></p>
-                    {/* was having issue with ingredients array not being defined, but was showing up accurate in console. Added a conditional to check
-                    if the ingredients array exists, which has corrected the timing issue */}
-                    {instructions
-                        ? instructions.map((instruction, index) => {
-                            return (
-                                <div className="instruction-list">
-                                    <input
-                                        id={`instruction-id-${index}`}
-                                        key={`instruction-${index}`}
-                                        value={instructions[index]}
-                                        required
-                                        onChange={(event) => instructionOnChange(event.target.value, index)}
-                                    />
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    {/* conditional to prevent first instruction field from being deleted */}
-                                    {index !== 0 && (
-                                        <button
-                                            key={`remove-btn-${index}`} 
-                                            onClick={() => removeInstructionInput(index)}
-                                            type="button"
-                                            className="remove-btn"
-                                        >
-                                            X
-                                        </button>
-                                    )}
-                                </div>
-                            )
-                        })
-                        : null
-                    }
-                    <button
-                        onClick={addInstructionInput}
-                        type="button"
-                        className="add-btn"
-                    >
-                        + Instruction
-                    </button>
-                </div>
-                <br />
-                <br />
-                <button type="submit" className="btn">Update Recipe</button>
-            </form>
-        </>
+                    <br />
+                    <br />
+                    <button type="submit" className="btn_save">Update Recipe</button>
+                </form>
+            </div>
+        </div>
     )
 };
 
