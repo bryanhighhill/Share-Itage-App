@@ -8,33 +8,32 @@ const RecipeCard = ({recipe, favorite}) => {
     const dispatch = useDispatch();    
     const initialCheckedArray = new Array(JSON.parse(recipe.instructions).length).fill(false);
     const [checkedInstruction, setCheckedInstruction] = useState(initialCheckedArray);
+    const id = user.id;
+    const favorites = useSelector((store) => store.setFavorites);
+    console.log('favorite recipes in recipe card: ', favorites);
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_FAVORITES', payload: id });
+    }, [id]);
 
     const onChange = (index) => {
         const updatedArray = [...checkedInstruction];
         updatedArray[index] = !checkedInstruction[index];
-        console.log('checked instruction in on chage', updatedArray);
         setCheckedInstruction(updatedArray);
     }
 
     const addFavorites = () => {
-        console.log('you want to add to favorites: ', recipe.title);
-
-        const favoriteRecipe = {
-            user_id: user.id,
-            recipe_id: recipe.id,
-        }
+        
         dispatch({
             type: 'ADD_FAVORITE', 
-            payload: favoriteRecipe
+            payload: {recipe_id: recipe.id}
         })
     }
 
     const removeFavorites = () => {
-            console.log('you want to remove from favorites');
-
             const favoriteRecipe = {
-                id: recipe.id,
-                user_id: user.id,
+                id,
+                recipe_id: recipe.id,
             }
             dispatch({
                 type: 'REMOVE_FAVORITE',
@@ -44,6 +43,7 @@ const RecipeCard = ({recipe, favorite}) => {
 
     return (
         <div className="recipe-card">
+
             <div className="recipe-title">
                 <h2>{recipe.title}</h2>
             </div>
@@ -60,42 +60,59 @@ const RecipeCard = ({recipe, favorite}) => {
                     </ul>
                 : null}
             </div>
+
             <div className="instruction-list">
                 <p><b>Instructions</b></p>
                 {recipe.ingredients
                 ?   <div>
                         {JSON.parse(recipe.instructions).map((instruction, index) => {
-
                             return(
-                            // <li key={index}>{instruction}</li>
-                            <div className="instruction">
-                                {/* <label htmlFor={instruction}></label> */}
-                                <input
-                                    key={`checkbox-${index}`}
-                                    type="checkbox"
-                                    id={`custom-checkbox-${index}`}
-                                    name={instruction}
-                                    value={instruction}
-                                    onChange={() => onChange(index)}
-                                />
-                                <label className={!checkedInstruction[index] ? "checked-instruction-false" : "checked-instruction-true"} htmlFor={`custom-checkbox-${index}`}>{instruction}</label>
+                                <div className="instruction">
+                                    <input
+                                        key={`checkbox-${index}`}
+                                        type="checkbox"
+                                        id={`custom-checkbox-${index}`}
+                                        name={instruction}
+                                        value={instruction}
+                                        onChange={() => onChange(index)}
+                                    />
+                                    <label className={!checkedInstruction[index] ? "checked-instruction-false" : "checked-instruction-true"} htmlFor={`custom-checkbox-${index}`}>{instruction}</label>
 
-                            </div>
+                                </div>
                             )
                         })}
                     </div>
                 : null}
                 </div>
 
-                {favorite 
-                ? <button onClick={removeFavorites}>Remove from favorites</button>
-                : <button onClick={addFavorites}>Add to favorites</button>}
-                <br />
+{/* MAP TO CHECK FOR ID AGAINST FAV ID TO CONDITIONALLY RENDER ADD/REMOVE FAV BUTTON */}
+                            {favorites.length > 0
+                            ?
+                                <div>
+                                    {favorites.map((favRecipe, index) => {
+                                        if (favRecipe.id === recipe.id) {
+                                            return <button onClick={removeFavorites}>Remove from favorites</button>
+                                        }
+                                            return <button onClick={addFavorites}>Add to favorites</button>
+                                    })}
+                                </div>
+                            :
+                                <button onClick={addFavorites}>Add to favorites</button>}
+                        
+                    
+                        
+                    
+                        
+                {/* {favorite === 'true' */}
+                {/* // ? <button className="btn_sizeMed" onClick={removeFavorites}>Remove from favorites</button>
+                // : <button onClick={addFavorites}>Add to favorites</button>} 
+                <br /> */}
 
                 {(user.admin || user.id === recipe.user_id)
                     &&
                     <EditButton recipe={recipe}/>
                 }
+
                 </div>
     )
 };
