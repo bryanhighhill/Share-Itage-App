@@ -214,7 +214,7 @@ const AddRecipePage = () => {
                     <button
                         type="button"
                         className="btn_cancel"
-                        onClick={() => history.push('/user')}>
+                        onClick={() => history.goBack()}>
                             Cancel
                     </button>
                 </form>

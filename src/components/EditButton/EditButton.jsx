@@ -17,7 +17,7 @@ function EditButton({ recipe }) {
 
   return (
     <button
-      className="edit-btn"
+      className="btn_edit"
       onClick={() => clickHandler(recipe)}
     >
         Edit

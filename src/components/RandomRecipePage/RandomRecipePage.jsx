@@ -87,7 +87,7 @@ const RandomRecipePage = () => {
                         </ul>
                     </div>
                 : null}
-                <button className="btn_save" onClick={refreshPage}>Generate another random recipe</button>
+                <button className="btn_save" onClick={refreshPage}><b>? ? ?</b></button>
             </div>
         </div>
     )

@@ -2,7 +2,7 @@ html,
 body,
 #react-root {
   height: 100%;
-  background-color:#fbe5d6;
+  background-color:#f9eae0;
 }
 
 body {
@@ -64,7 +64,7 @@ Button
   padding: 5px 10px;
   border: 0;
   border-radius: 4px;
-  background-color: #464747;
+  background-color: #1d6787;
   color: #f8f8f8;
   font-size: 1.2rem;
   outline: 0;
@@ -72,7 +72,7 @@ Button
 }
 
 .btn_sizeMin:hover {
-  background-color: #141515;
+  background-color: #10455c;
   transition: .5s;
 } 
 
@@ -81,14 +81,14 @@ Button
   padding: 5px 10px;
   border:0;
   border-radius: 4px;
-  background-color: #464747;
+  background-color: #1d6787;
   color: #f8f8f8;
   font-size: .9rem;
   cursor: pointer;
 }
 
 .btn_sizeMed:hover {
-  background-color: #141515;
+  background-color: #10455c;
   transition: .5s;
 }
 
@@ -115,7 +115,7 @@ Button
 }
 
 .btn_save:hover {
-  background-color:  #3def46;
+  background-color:  #6dd14b;
   transition: .2s;
   box-shadow: .5px 1px 2px black;
 }
@@ -143,6 +143,22 @@ Button
   background-color: #ff7b22;
   transition: .5s;
   text-decoration: none;
+}
+
+.btn_edit {
+  display: inline-block;
+  padding: 5px 10px;
+  border:0;
+  border-radius: 4px;
+  background-color: #666764;
+  color: #f8f8f8;
+  font-size: .9rem;
+  cursor: pointer;
+}
+
+.btn_edit:hover {
+  background-color: #1d1d1e;
+  transition: .5s;
 }
 
 /* This line makes the "Register" and "Login" buttons look like links */
@@ -177,7 +193,7 @@ Button
 .btn_remove:hover {
   background-color:  #008cc8;
   box-shadow: .5px 1px 2px;
-  transition: .s;
+  transition: .3s;
 }
 
 /* --------------------------------------------------------------------------------

@@ -87,34 +87,25 @@ const RecipeCard = ({recipe, favorite}) => {
                 </div>
 
 {/* MAP TO CHECK FOR ID AGAINST FAV ID TO CONDITIONALLY RENDER ADD/REMOVE FAV BUTTON */}
-                            {favorites.length > 0
-                            ?
-                                <div>
-                                    {favorites.map((favRecipe, index) => {
-                                       return favRecipe.id;
-                                    }).includes(recipe.id) ?
-                                        <button className="btn_sizeMed" onClick={removeFavorites}>Remove from favorites</button>
-                                        :   <button onClick={addFavorites}>Add to favorites</button>
-                                    }
-                                </div>
-                            :
-                                <button onClick={addFavorites}>Add to favorites</button>}
-                        
-                    
-                        
-                    
-                        
-                {/* {favorite === 'true' */}
-                {/* // ? <button className="btn_sizeMed" onClick={removeFavorites}>Remove from favorites</button>
-                // : <button onClick={addFavorites}>Add to favorites</button>} 
-                <br /> */}
+            {favorites.length > 0
+            ?
+                <>
+                    {favorites.map((favRecipe, index) => {
+                        return favRecipe.id;
+                    }).includes(recipe.id) ?
+                        <button className="btn_sizeMed" onClick={removeFavorites}>Remove from favorites</button>
+                        :   <button className="btn_sizeMed" onClick={addFavorites}>Add to favorites</button>
+                    }
+                </>
+            :
+                <button className="btn_sizeMed" onClick={addFavorites}>Add to favorites</button>}
+            &nbsp;&nbsp;
+            {(user.admin || user.id === recipe.user_id)
+                &&
+                <EditButton recipe={recipe}/>
+            }
 
-                {(user.admin || user.id === recipe.user_id)
-                    &&
-                    <EditButton recipe={recipe}/>
-                }
-
-                </div>
+        </div>
     )
 };
 

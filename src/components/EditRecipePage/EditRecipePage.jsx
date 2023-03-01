@@ -137,7 +137,7 @@ const EditRecipePage = () => {
                             {ingredients
                                 ? ingredients.map((ingredient, index) => {
                                     return (
-                                        <>
+                                        <div className="ingredient-list">
                                             <input
                                                 id={`id-ingredient-${index}`}
                                                 key={`ingredient-${index}`}
@@ -168,9 +168,7 @@ const EditRecipePage = () => {
                                                     X
                                                 </button>
                                             )}
-                                            <br />
-                                            <br />
-                                        </>
+                                        </div>
                                     )
                                 })
                                 : null
