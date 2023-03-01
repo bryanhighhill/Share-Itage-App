@@ -102,21 +102,7 @@ const RecipeCard = ({recipe, favorite}) => {
                     </div>
                 : null}
             </div> */}
-
-{/* MAP TO CHECK FOR ID AGAINST FAV ID TO CONDITIONALLY RENDER ADD/REMOVE FAV BUTTON */}
-            {favorites.length > 0
-            ?
-                <>
-                    {favorites.map((favRecipe, index) => {
-                        return favRecipe.id;
-                    }).includes(recipe.id) ?
-                        <button className="btn_sizeMed" onClick={removeFavorites}>Remove from favorites</button>
-                        :   <button className="btn_sizeMed" onClick={addFavorites}>Add to favorites</button>
-                    }
-                </>
-            :
-                <button className="btn_sizeMed" onClick={addFavorites}>Add to favorites</button>}
-            &nbsp;&nbsp;
+            
             {(user.admin || user.id === recipe.user_id)
                 &&
                 <EditButton recipe={recipe}/>

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import UserPage from '../UserPage/UserPage';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
+import EditButton from '../EditButton/EditButton';
+// import DeleteButton from '../DeleteButton/DeleteButton';
 
 
 const RecipePage = () => {
@@ -14,6 +16,7 @@ const RecipePage = () => {
     const [instructions, setInstructions] = useState(['']);
     const [checkedInstruction, setCheckedInstruction] = useState(['']);
     const favorites = useSelector((store) => store.setFavorites);
+    const history = useHistory();
     console.log('favorites on recipePage: ', favorites);
 
     console.log('selectedRecipe on Edit Page: ', selectedRecipe);
@@ -76,7 +79,7 @@ const RecipePage = () => {
                         <ul>
                             {ingredients.map((ingredient, index) => {
                                 return(
-                                    <li key={index}><i>{ingredient.amount}</i> of <b>{ingredient.ingredient}</b></li>
+                                    <li key={index}><i>{ingredient.amount}</i>&nbsp;<b>{ingredient.ingredient}</b></li>
                                 )
                             })}  
                         </ul>
@@ -106,7 +109,7 @@ const RecipePage = () => {
                     </div>
                 : null}
 
-                 {favorites.length > 0
+                {favorites.length > 0
                     ?
                         <>
                             {favorites.map((favRecipe, index) => {
@@ -117,6 +120,17 @@ const RecipePage = () => {
                             }
                         </>
                     :   <button className="btn_sizeMed" onClick={addFavorites}>Add to favorites</button>}
+                    &nbsp;&nbsp;
+                    <button className="btn_sizeMed" onClick={() => {history.goBack()}}>Back</button>
+                <br />
+                <br />
+                {(user.admin || user.id === selectedRecipe.user_id) &&
+                    <EditButton recipe={selectedRecipe}/>
+                }
+                {/* {user.admin  &&
+                    <DeleteButton recipe={selectedRecipe}/>
+                } */}
+
             </div>
         </div>
     )
