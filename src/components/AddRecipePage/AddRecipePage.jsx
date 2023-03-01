@@ -178,7 +178,6 @@ const AddRecipePage = () => {
                                                 return newInstructions;
                                             })}
                                         />
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         
                                         {/* conditional to prevent first instruction field from being deleted */}
                                         {index !== 0 && (
