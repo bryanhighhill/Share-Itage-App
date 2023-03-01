@@ -36,34 +36,10 @@ function App() {
   const dispatch = useDispatch();
   const user = useSelector(store => store.user);
   const id = user.id;
-  const favorites = useSelector((store) => store.setFavorites);
-  const favoriteIds = [];
-
-
-  
   
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
-  
-  useEffect(() => {
-      dispatch({ type: 'FETCH_FAVORITES', payload: id });
-  }, [id]);
-
-  useEffect(() => {
-    setFavorites();
-}, [id]);
-
-  const setFavorites = () => {
-    {favorites
-      ? <>
-          {favorites.map(recipe => {
-            favoriteIds.push(recipe.id);
-          })}
-        </>
-      : null}
-  }
-
 
   return (
     <Router>
@@ -149,7 +125,7 @@ function App() {
            <ProtectedRoute
             exact
             path="/findrecipe">
-            <FindRecipePage favoriteIds={favoriteIds}/>
+            <FindRecipePage />
           </ProtectedRoute>
 
            {/* protected route for RANDOM RECIPE (located in sidePanel) */}

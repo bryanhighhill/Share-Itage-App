@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import EditButton from '../EditButton/EditButton';
 import './RecipeCard.css';
  
-const RecipeCard = ({recipe, favorite, favoriteIds}) => {
+const RecipeCard = ({recipe, favorite}) => {
     const user = useSelector((store) => store.user);
     const dispatch = useDispatch();    
     const initialCheckedArray = new Array(JSON.parse(recipe.instructions).length).fill(false);
