@@ -40,10 +40,10 @@ router.post('/', (req, res) => {
 
 // POST route for favorite recipes
 router.post('/favorite', (req, res) => {
-  console.log('in recipe favorites post with: ', req.body.title);
+  console.log('in recipe favorites post with: ', req.body);
   const queryText = `INSERT INTO "favorites" (user_id, recipe_id)
   VALUES ($1, $2)`;
-  pool.query(queryText, [req.body.user_id, req.body.recipe_id])
+  pool.query(queryText, [req.user.id, req.body.recipe_id])
   .then(() => res.sendStatus(201))
   .catch((err) => {
       console.log('error with adding recipe to favorites: ', err);
@@ -103,7 +103,7 @@ router.get('/random/:id', (req, res) => {
 
 //GET route for user's favorite recipe
 router.get('/favorite/:id', (req, res) => {
-  const id = req.params.id;
+  const id = req.user.id;
   console.log('in get favorite recipes request: ', id);
   const queryText = 
     `SELECT "recipes"."title", "recipes"."ingredients", "recipes"."instructions", "recipes"."id", "recipes"."user_id" FROM "user"
@@ -125,9 +125,9 @@ router.get('/favorite/:id', (req, res) => {
 
 //DELETE route for user's favorite recipes
 router.delete('/favorite/:id', (req, res) => {
-  console.log(`in delete favorites request with req params id: ${req.params.id} and data ${req.body.user_id}`);
+  console.log(`in delete favorites request with req params id: ${req.params.id} and data ${req.user.id}`);
   const id = req.params.id;
-  const user_id = req.body.user_id;
+  const user_id = req.user.id;
   const queryText = `DELETE from "favorites" WHERE "recipe_id" = $1 AND "user_id" = $2;`;
   
   pool.query(queryText, [id, user_id])
