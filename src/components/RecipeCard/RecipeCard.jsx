@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'; 
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import EditButton from '../EditButton/EditButton';
 import './RecipeCard.css';
  
@@ -9,6 +10,7 @@ const RecipeCard = ({recipe, favorite}) => {
     const initialCheckedArray = new Array(JSON.parse(recipe.instructions).length).fill(false);
     const [checkedInstruction, setCheckedInstruction] = useState(initialCheckedArray);
     const id = user.id;
+    const history = useHistory();
     const favorites = useSelector((store) => store.setFavorites);
     console.log('favorite recipes in recipe card: ', favorites);
 
@@ -42,14 +44,29 @@ const RecipeCard = ({recipe, favorite}) => {
             })
     };
 
+    // const favoriteButton = () => {
+    //     {favorites.length > 0
+    //     ?
+    //         <>
+    //             {favorites.map((favRecipe, index) => {
+    //                 return favRecipe.id;
+    //             }).includes(recipe.id) ?
+    //                 <button className="btn_sizeMed" onClick={removeFavorites}>Remove from favorites</button>
+    //                 :   <button className="btn_sizeMed" onClick={addFavorites}>Add to favorites</button>
+    //             }
+    //         </>
+    //     :
+    //         <button className="btn_sizeMed" onClick={addFavorites}>Add to favorites</button>}
+    // }
+
     return (
         <div className="recipe-card">
 
             <div className="recipe-title">
-                <h2>{recipe.title}</h2>
+                <h2 onClick={() => history.push(`/recipe/${recipe.id}`)}>{recipe.title}</h2>
             </div>
 
-            <div className="ingredient-list">
+            {/* <div className="ingredient-list">
                 <p><b>Ingredients</b></p>
                 {recipe.ingredients
                 ?   <ul>
@@ -84,7 +101,7 @@ const RecipeCard = ({recipe, favorite}) => {
                         })}
                     </div>
                 : null}
-                </div>
+            </div> */}
 
 {/* MAP TO CHECK FOR ID AGAINST FAV ID TO CONDITIONALLY RENDER ADD/REMOVE FAV BUTTON */}
             {favorites.length > 0

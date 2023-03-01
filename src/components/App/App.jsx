@@ -29,6 +29,7 @@ import JoinFamilyPage from '../JoinFamilyPage/JoinFamilyPage';
 import FamilyConfirmationPage from '../FamilyConfirmationPage/FamilyConfirmationPage';
 import AdminPage from '../AdminPage/AdminPage';
 import EditRecipePage from '../EditRecipePage/EditRecipePage';
+import RecipePage from '../RecipePage/RecipePage';
 
 import './App.css';
 
@@ -128,11 +129,11 @@ function App() {
             <FindRecipePage />
           </ProtectedRoute>
 
-           {/* protected route for RANDOM RECIPE (located in sidePanel) */}
-           <ProtectedRoute
-            exact
-            path="/randomrecipe">
-            <RandomRecipePage />
+          {/* protected route for RANDOM RECIPE (located in sidePanel) */}
+          <ProtectedRoute
+              exact
+              path="/randomrecipe">
+              <RandomRecipePage />
           </ProtectedRoute>
 
           {/* protected route for ADMIN (located in sidePanel) */}
@@ -147,6 +148,13 @@ function App() {
             exact
             path="/edit/:id">
             <EditRecipePage />
+          </ProtectedRoute>
+
+          {/* protected route for RECIPE PAGE */}
+          <ProtectedRoute
+            exact
+            path="/recipe/:id">
+            <RecipePage />
           </ProtectedRoute>
 
 
