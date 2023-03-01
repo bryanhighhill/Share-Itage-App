@@ -72,10 +72,10 @@ const RecipePage = () => {
                 <h1>Recipe</h1>
                 <br />
                 <br />
-                <h1><u>{title}</u></h1>
+                <h1>{title}</h1>
                 {ingredients
                 ?   <div className="ingredients">
-                        <h2>Ingredients</h2>
+                        <label className="small-label" htmlFor="ingredients"><b>Ingredients</b></label>
                         <ul>
                             {ingredients.map((ingredient, index) => {
                                 return(
@@ -87,7 +87,7 @@ const RecipePage = () => {
                 : null}
                 {instructions
                 ?   <div className="instructions">
-                        <h2>Instructions</h2>
+                        <label className="small-label" htmlFor="instructions"><b>Instructions</b></label>
                         <ul>
                             {instructions.map((instruction, index) => {
                                 return(
