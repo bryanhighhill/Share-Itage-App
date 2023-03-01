@@ -33,7 +33,7 @@ const SidePanel = ({page}) => {
                 className={page === 3 ? "btn_selected" : "btn"}
                 onClick={() => {history.push(`/findrecipe`)}}
             >
-                Find New Recipe
+                Find a Recipe
             </button>
             <br />
             <br />

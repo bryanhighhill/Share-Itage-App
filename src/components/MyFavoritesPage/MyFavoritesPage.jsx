@@ -22,18 +22,24 @@ const MyFavoritesPage = () => {
             <div className="user-nav">
                 <UserPage page={page}/>
             </div>
-            {favorites
-            ? <div className="favorites-recipe-grid">
-                <h1>My Favorites</h1>
-                <br />
-                <br />
-                {favorites.map((recipe, index) => {
-                    return (
-                        <RecipeCard recipe={recipe} favorite="true"/>
-                    );
-                })}
-            </div>
-            : 'You have no favorites yet!'}
+            {favorites.length > 0
+                ? <div className="favorites-recipe-grid">
+                    <h1>My Favorites</h1>
+                    <br />
+                    <br />
+                    {favorites.map((recipe, index) => {
+                        return (
+                            <RecipeCard recipe={recipe} favorite="true"/>
+                        );
+                    })}
+                </div>
+                :   <div>
+                        <h1>My Favorites</h1>
+                        <br />
+                        <br />
+                        <h2>You have no favorites yet!</h2>
+                    </div>
+            }
         </div>
     )
 }
