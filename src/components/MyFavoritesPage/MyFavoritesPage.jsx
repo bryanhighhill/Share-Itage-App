@@ -37,9 +37,6 @@ const MyFavoritesPage = () => {
                         </div>
 
                     :   <div>
-                            <h1>My Favorites</h1>
-                            <br />
-                            <br />
                             <h2>You have no favorites yet!</h2>
                         </div>}
             </div>
