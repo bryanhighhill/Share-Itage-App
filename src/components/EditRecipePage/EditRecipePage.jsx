@@ -131,8 +131,6 @@ const EditRecipePage = () => {
             
                     <div className="ingredients-container">
                         <label className="small-label" htmlFor="ingredients"><b>Edit Ingredients</b></label>
-                        {/* was having issue with ingredients array not being defined, but was showing up accurate in console. Added a conditional to check
-                        if the ingredients array exists, which has corrected the timing issue */}
                         <div className="ingredient-list">
                             {ingredients
                                 ? ingredients.map((ingredient, index) => {
@@ -157,7 +155,6 @@ const EditRecipePage = () => {
                                                 onChange={(event) => amountOnChange(event.target.value, index)}
                                             />
 
-                                            {/* conditional to prevent first ingredient field from being deleted */}
                                             {index !== 0 && (
                                                 <button
                                                     key={`remove-btn-${index}`} 
@@ -189,8 +186,6 @@ const EditRecipePage = () => {
 
                     <div className="instructions-container">
                         <label className="small-label" htmlFor="ingredients"><b>Edit Instructions</b></label>
-                        {/* was having issue with ingredients array not being defined, but was showing up accurate in console. Added a conditional to check
-                        if the ingredients array exists, which has corrected the timing issue */}
                         {instructions
                             ? instructions.map((instruction, index) => {
                                 return (
@@ -203,7 +198,7 @@ const EditRecipePage = () => {
                                             className="instruction-input"
                                             onChange={(event) => instructionOnChange(event.target.value, index)}
                                         />
-                                        {/* conditional to prevent first instruction field from being deleted */}
+
                                         {index !== 0 && (
                                             <button
                                                 key={`remove-btn-${index}`} 
