@@ -107,9 +107,7 @@ const RecipePage = () => {
                             </ul>
                         </div>
                     : null}
-                    </div>
-                    <br />
-                    <div className="nav-buttons">
+                    <div className="fav-buttons">
                         {favorites.length > 0
                         ?
                             <>
@@ -121,16 +119,20 @@ const RecipePage = () => {
                                 }
                             </>
                         :   <button className="btn_sizeMed" onClick={addFavorites}>Add to favorites</button>}
-                        &nbsp;&nbsp;&nbsp;&nbsp; <button className="btn_sizeMed" onClick={() => {history.goBack()}}>Back</button> &nbsp;&nbsp;&nbsp;&nbsp;
-                        
-                            {(user.admin || user.id === selectedRecipe.user_id) &&
-                                <EditButton id={id}/>
-                            }
-                            {/* {user.admin  &&
-                                <DeleteButton recipe={selectedRecipe}/>
-                            } */}
                     </div>
                 </div>
+                <br />
+                <div className="nav-buttons">
+                    &nbsp;&nbsp;&nbsp;&nbsp; <button className="btn_sizeMed" onClick={() => {history.goBack()}}>Back</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                    
+                        {(user.admin || user.id === selectedRecipe.user_id) &&
+                            <EditButton id={id}/>
+                        }
+                        {/* {user.admin  &&
+                            <DeleteButton recipe={selectedRecipe}/>
+                        } */}
+                </div>
+            </div>
         </div>
     );
 };
