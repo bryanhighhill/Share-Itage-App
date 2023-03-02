@@ -18,9 +18,6 @@ const RecipePage = () => {
     const [checkedInstruction, setCheckedInstruction] = useState(['']);
     const favorites = useSelector((store) => store.setFavorites);
     const history = useHistory();
-    console.log('favorites on recipePage: ', favorites);
-
-    console.log('selectedRecipe on Edit Page: ', selectedRecipe);
     
     useEffect(() => {
         dispatch({ type: 'FETCH_RECIPE_DATA', payload: id });
@@ -44,7 +41,6 @@ const RecipePage = () => {
     };
 
     const addFavorites = () => {
-        
         dispatch({
             type: 'ADD_FAVORITE', 
             payload: {recipe_id: id}
@@ -71,7 +67,7 @@ const RecipePage = () => {
 
             <div>
                 <div className="recipe-page">
-                    <h1>{title}</h1>
+                    <h1><u>{title}</u></h1>
                     {ingredients
                     ?   <div className="ingredients">
                             <label className="small-label" htmlFor="ingredients"><b>Ingredients</b></label>

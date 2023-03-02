@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import UserPage from '../UserPage/UserPage';
 import RecipeGrid from '../RecipeGrid/RecipeGrid';
 
@@ -18,6 +17,7 @@ const FindRecipePage = () => {
     if (recipes.length === 0) {
         return(
             <div className="content-container">
+
                 <div className="user-nav">
                     <UserPage page={page}/>
                 </div>
@@ -35,19 +35,20 @@ const FindRecipePage = () => {
     if (recipes.length > 0) {
         return(
             <div className="content-container">
+
                 <div className="user-nav">
                     <UserPage page={page}/>
                 </div>
 
                 <div>
-                <h1>Find a Recipe</h1>
-                <br />
-                <br />
+                    <h1>Find a Recipe</h1>
+                    <br />
+                    <br />
                     <RecipeGrid />
                 </div>
             </div>
         )   
     }
-}
+};
 
 export default FindRecipePage;
