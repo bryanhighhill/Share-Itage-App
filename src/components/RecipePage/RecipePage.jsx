@@ -125,7 +125,7 @@ const RecipePage = () => {
                 <br />
                 <br />
                 {(user.admin || user.id === selectedRecipe.user_id) &&
-                    <EditButton recipe={selectedRecipe}/>
+                    <EditButton id={id}/>
                 }
                 {/* {user.admin  &&
                     <DeleteButton recipe={selectedRecipe}/>

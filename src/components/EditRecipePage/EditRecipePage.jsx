@@ -12,7 +12,7 @@ const EditRecipePage = () => {
     const [ingredients, setIngredients] = useState([{ingredient:'', amount:''}]);
     const [instructions, setInstructions] = useState(['']);
 
-    console.log('selectedRecipe on Edit Page: ', selectedRecipe);
+    console.log('selectedRecipe ID on edit page: ', id);
     
     useEffect(() => {
         dispatch({ type: 'FETCH_RECIPE_DATA', payload: id });
@@ -91,7 +91,7 @@ const EditRecipePage = () => {
         setIngredients([{ingredient: '', amount: ''}]);
         setInstructions(['']);
         alert(`Oh yeah, that looks so much better now!`);
-        history.push(`/findrecipe`);
+        history.goBack();
     }
 
 

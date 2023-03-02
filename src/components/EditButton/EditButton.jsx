@@ -2,23 +2,23 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-function EditButton({ recipe }) {
+function EditButton({ id }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const clickHandler = (recipe) => {
+    const clickHandler = (id) => {
       dispatch({
         type: 'FETCH_RECIPE_DATA', 
-        payload: recipe.id
+        payload: id
       })
-        history.push(`/edit/${recipe.id}`)
+        history.push(`/edit/${id}`);
     }
 
 
   return (
     <button
       className="btn_edit"
-      onClick={() => clickHandler(recipe)}
+      onClick={() => clickHandler(id)}
     >
         Edit
     </button>
