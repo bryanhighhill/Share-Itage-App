@@ -3,6 +3,7 @@
 } */
 
 .checked-instruction-true {
+    text-decoration: line-through;
     opacity: 50%;
 }
 
