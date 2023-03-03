@@ -1,15 +1,3 @@
-.checked-instruction-true {
-    text-decoration: line-through;
-    opacity: 50%;
-}
-
-.recipe-grid {
-    display: grid;
-    width: 70%;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-}
-
 .recipe-card {
     background-color: rgb(255, 255, 255);
     text-align: center;

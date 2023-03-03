@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import UserPage from '../UserPage/UserPage';
 import { useDispatch, useSelector } from 'react-redux';
+import UserPage from '../UserPage/UserPage';
+import FavoritesButton from '../FavoritesButton/FavoritesButton';
 import './RandomRecipe.css';
 
 
@@ -19,26 +20,6 @@ const RandomRecipePage = () => {
     const page = 4;
 
     console.log('random recipe id: ', randomRecipe.id);
-
-    const addFavorites = () => {
-        console.log('id in add fav: ', recipeId);
-        dispatch({
-            type: 'ADD_FAVORITE', 
-            payload: {recipe_id: randomRecipe.id}
-        });
-    };
-
-    const removeFavorites = () => {
-            const favoriteRecipe = {
-                recipe_id: randomRecipe.id,
-            }
-            dispatch({
-                type: 'REMOVE_FAVORITE',
-                payload: favoriteRecipe,
-            });
-    };
-
-
     
     useEffect(() => {
         dispatch({ type: 'FETCH_RECIPES', payload: user.family_id });
@@ -123,19 +104,11 @@ const RandomRecipePage = () => {
                             </ul>
                         </div>
                     : null}
-                    {favorites.length > 0
-                        ?
-                            <>
-                                {favorites.map((favRecipe, index) => {
-                                    return favRecipe.id;
-                                }).includes(recipeId) 
-                                    ?   <button className="btn_sizeMed" onClick={removeFavorites}>Remove from favorites</button>
-                                    :   <button className="btn_sizeMed" onClick={addFavorites}>Add to favorites</button>
-                                }
-                            </>
-                        :   <button className="btn_sizeMed" onClick={addFavorites}>Add to favorites</button>}
+                    <div className="fav-buttons">
+                        <FavoritesButton recipeId={recipeId}/>
+                    </div>
                 </div>
-                <div className="random-button">
+                <div className="btn_random">
                     <button className="btn_save" onClick={refreshPage}><b>? ? ?</b></button>
                 </div>
             </div>
