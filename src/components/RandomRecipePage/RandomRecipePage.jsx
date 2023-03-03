@@ -9,35 +9,61 @@ const RandomRecipePage = () => {
     const randomRecipe = useSelector(store => store.randomRecipe);
     const user = useSelector(store => store.user);
     const recipes = useSelector((store) => store.recipes);
+    const favorites = useSelector((store) => store.setFavorites);
     const id = user.family_id;
     const [title, setTitle] = useState('');
     const [ingredients, setIngredients] = useState([{ingredient:'', amount:''}]);
     const [instructions, setInstructions] = useState(['']);
-    // const [instructionsLength, setInstructionsLength] = useState(0);
+    const [recipeId, setRecipeId] = useState(0);
     const [checkedInstruction, setCheckedInstruction] = useState(['']);
     const page = 4;
 
-    // const initialCheckedArray = new Array(instructionsLength).fill(false);
+    console.log('random recipe id: ', randomRecipe.id);
 
+    const addFavorites = () => {
+        console.log('id in add fav: ', recipeId);
+        dispatch({
+            type: 'ADD_FAVORITE', 
+            payload: {recipe_id: randomRecipe.id}
+        });
+    };
+
+    const removeFavorites = () => {
+            const favoriteRecipe = {
+                recipe_id: randomRecipe.id,
+            }
+            dispatch({
+                type: 'REMOVE_FAVORITE',
+                payload: favoriteRecipe,
+            });
+    };
+
+
+    
     useEffect(() => {
         dispatch({ type: 'FETCH_RECIPES', payload: user.family_id });
-    }, []);
-
-    {recipes.length > 0
-    ? useEffect(() => {
+    }, [id]);
+        
+    
+    useEffect(() => {
         dispatch({ type: 'FETCH_RANDOM_RECIPE', payload: id });
-    }, [id])
-    : null}
+    }, [id]);
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_FAVORITES', payload: user.id });
+    }, [id]);
 
     useEffect(() => {
         setIngredients(randomRecipe.ingredients);
         setInstructions(randomRecipe.instructions);
         setTitle(randomRecipe.title);
+        setRecipeId(randomRecipe.id);
     }, [randomRecipe]);
 
     const refreshPage = () => {
+        console.log('in refresh page');
         window.location.reload(false);
-      }
+      };
     
 
     const onChange = (index) => {
@@ -47,6 +73,7 @@ const RandomRecipePage = () => {
         setCheckedInstruction(updatedArray);
     }
 
+    console.log('favorites in random: ', favorites);
     return (
         <div className="content-container">
 
@@ -88,7 +115,6 @@ const RandomRecipePage = () => {
                                             value={instruction}
                                             onChange={() => onChange(index)}
                                         />
-                                        {/* <label htmlFor={`custom-checkbox-${index}`}>{instruction}</label> */}
                                         <label className={!checkedInstruction[index] ? "checked-instruction-false" : "checked-instruction-true"} htmlFor={`custom-checkbox-${index}`}>{instruction}</label>
                                         <br />
                                         </>
@@ -97,6 +123,17 @@ const RandomRecipePage = () => {
                             </ul>
                         </div>
                     : null}
+                    {favorites.length > 0
+                        ?
+                            <>
+                                {favorites.map((favRecipe, index) => {
+                                    return favRecipe.id;
+                                }).includes(recipeId) 
+                                    ?   <button className="btn_sizeMed" onClick={removeFavorites}>Remove from favorites</button>
+                                    :   <button className="btn_sizeMed" onClick={addFavorites}>Add to favorites</button>
+                                }
+                            </>
+                        :   <button className="btn_sizeMed" onClick={addFavorites}>Add to favorites</button>}
                 </div>
                 <div className="random-button">
                     <button className="btn_save" onClick={refreshPage}><b>? ? ?</b></button>
@@ -110,7 +147,7 @@ const RandomRecipePage = () => {
                 <p>to add recipes, please click on "Add Recipe" in your user panel</p>
             </div>}
         </div>
-    )
-}
+    );
+};
 
 export default RandomRecipePage;

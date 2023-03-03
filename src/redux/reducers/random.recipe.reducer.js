@@ -1,5 +1,5 @@
 const randomRecipeReducer = (state = [], action) => {
-    console.log('in selectedRecipe reducer with: ', action);
+    console.log('in random reducer with: ', action);
 
     switch (action.type) {
         case 'SET_RANDOM_RECIPE':

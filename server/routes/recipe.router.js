@@ -83,6 +83,7 @@ router.get('/random/:id', (req, res) => {
         title: result.rows[0].title,
         ingredients,
         instructions,
+        id: result.rows[0].id,
       }
 
       res.send(results);

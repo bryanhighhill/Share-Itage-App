@@ -63,6 +63,7 @@ function* fetchRandomRecipe(action) {
 
 //POST recipe to favorites table
 function* addFavorite(action) {
+  console.log('action payload in addFavorite', action.payload);
   try {
     yield axios.post(`/api/recipe/favorite/`, action.payload); //sends to recipe.router.js
     yield put({ type: 'FETCH_FAVORITES' });
