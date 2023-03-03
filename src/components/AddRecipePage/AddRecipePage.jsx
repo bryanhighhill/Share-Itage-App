@@ -35,7 +35,7 @@ const AddRecipePage = () => {
         setInstructions(['']);
         //send user to CONFIRMATION PAGE/NEW RECIPE PAGE? instead of user page <----------------------------------------
         alert('Your recipe book is getting bigger!');
-        history.push('/user');
+        history.push('/findrecipe');
     };
 
     //function to add new fields for ingredient/amount on button click
@@ -214,7 +214,7 @@ const AddRecipePage = () => {
                     <button
                         type="button"
                         className="btn_cancel"
-                        onClick={() => history.goBack()}>
+                        onClick={() => history.push('/user')}>
                             Cancel
                     </button>
                 </form>
