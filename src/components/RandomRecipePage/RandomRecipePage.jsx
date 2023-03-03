@@ -67,7 +67,7 @@ const RandomRecipePage = () => {
                             <ul>
                                 {ingredients.map((ingredient, index) => {
                                     return(
-                                        <li key={index}><i>{ingredient.amount}</i> of <b>{ingredient.ingredient}</b></li>
+                                        <li key={index}><i>{ingredient.amount}</i>&nbsp;&nbsp;&nbsp;&nbsp;<b>{ingredient.ingredient}</b></li>
                                     )
                                 })}  
                             </ul>
