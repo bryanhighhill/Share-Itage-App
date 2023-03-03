@@ -11,9 +11,3 @@
     background-image: repeating-linear-gradient(rgb(255, 255, 255) 0px, rgb(255, 255, 255) 23px, teal 24px);
     box-shadow: 1px 2px 5px;
 }
-
-.random-button {
-    padding-top: 20px;
-    text-align: center;
-    width: 80%;
-}

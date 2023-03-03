@@ -12,21 +12,3 @@
     background-image: repeating-linear-gradient(rgb(255, 255, 255) 0px, rgb(255, 255, 255) 23px, teal 24px);
     box-shadow: 1px 2px 5px;
 }
-
-.nav-buttons {
-    width: 80%;
-    text-align: center;
-    padding: 5px;
-}
-
-.fav-buttons {
-    position: absolute;
-    bottom: 0;
-    padding-bottom: 15px;
-    padding-top: 15px;
-}
-
-.instructions {
-    padding-bottom: 25px;
-    width: 90%;
-}

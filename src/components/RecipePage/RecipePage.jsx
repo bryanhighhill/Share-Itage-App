@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import EditButton from '../EditButton/EditButton';
 import DeleteButton from '../DeleteButton/DeleteButton';
+import FavoritesButton from '../FavoritesButton/FavoritesButton';
 import './RecipePage.css';
 
 
@@ -38,24 +39,6 @@ const RecipePage = () => {
         const updatedArray = [...checkedInstruction];
         updatedArray[index] = !checkedInstruction[index];
         setCheckedInstruction(updatedArray);
-    };
-
-    const addFavorites = () => {
-        dispatch({
-            type: 'ADD_FAVORITE', 
-            payload: {recipe_id: id}
-        });
-    };
-
-    const removeFavorites = () => {
-            const favoriteRecipe = {
-                id,
-                recipe_id: id,
-            }
-            dispatch({
-                type: 'REMOVE_FAVORITE',
-                payload: favoriteRecipe,
-            });
     };
 
     return (
@@ -104,17 +87,7 @@ const RecipePage = () => {
                         </div>
                     : null}
                     <div className="fav-buttons">
-                        {favorites.length > 0
-                        ?
-                            <>
-                                {favorites.map((favRecipe, index) => {
-                                    return favRecipe.id;
-                                }).includes(Number(id)) 
-                                    ?   <button className="btn_sizeMed" onClick={removeFavorites}>Remove from favorites</button>
-                                    :   <button className="btn_sizeMed" onClick={addFavorites}>Add to favorites</button>
-                                }
-                            </>
-                        :   <button className="btn_sizeMed" onClick={addFavorites}>Add to favorites</button>}
+                        <FavoritesButton recipeId={Number(id)}/>
                     </div>
                 </div>
                 <br />
