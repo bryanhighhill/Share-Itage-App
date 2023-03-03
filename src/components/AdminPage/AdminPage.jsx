@@ -1,7 +1,27 @@
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import UserPage from '../UserPage/UserPage';
 
 const AdminPage = () => {
+    const user = useSelector(store => store.user);
+    const family =useSelector(store => store.family);
+    const dispatch = useDispatch();
     const page = 5;
+
+    console.log('family on admin page', family);
+
+    useEffect(() => {
+        console.log('user family id: ', user.family_id);
+        dispatch({ type: 'FETCH_FAMILY_MEMBERS', payload: user.family_id });
+    }, [user.family_id]);
+
+    const admin = (member) => {
+        console.log('admin in change status: ', member)
+        const adminStatus = !member.admin;
+        dispatch({ type: 'CHANGE_ADMIN_STATUS', payload: {id: member.id, admin: adminStatus} });
+        dispatch({ type: 'FETCH_FAMILY_MEMBERS', payload: user.family_id });
+    }
+
     return (
         <div className="content-container">
             <div className="user-nav">
@@ -28,6 +48,25 @@ const AdminPage = () => {
                         <li><b>Add additional admins:</b> on this page, an admin will be able to view all users in their family, and assign any of them admin status</li>
                     </ul>
                 </div>
+
+                {family.map((member, index) => {
+                    return (
+                        <div className="famly-member-container">
+                                <b><u>{member.username}</u></b>
+                                <br />
+                                <b>registered on:</b> {member.registration_date}
+                                <br />
+                                <b>status:</b> {member.admin ? 'admin' : 'not admin'}
+                                <br />
+                                {(member.username != user.username) &&
+                                    <button className="btn_sizeMed" onClick={() => {admin(member)}}>{member.admin ? 'remove admin' : 'make admin'}</button>
+                                }
+                                <br />
+                                <br />
+                        </div>
+                    )
+                
+                })}
             </div>
         </div>
     )

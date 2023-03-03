@@ -23,9 +23,23 @@ router.get('/:id', (req, res) => {
   });
 });
 
-/**
- * POST route 
- */
+// GET request to retrieve family members from db - user table
+router.get('/members/:id', (req, res) => {
+  console.log('in family members GET request with: ', req.params.id);
+  // GET route code here
+  const queryText = 'SELECT * FROM "user" WHERE "family_id" = $1 ORDER BY "username" ASC;';
+  pool.query(queryText, [req.params.id])
+  .then(result => {
+    console.log('family members get results: ', result.rows)
+    res.send(result.rows);
+  })
+  .catch(err => {
+    console.log('ERROR with getting Family members data: ', err);
+    res.sendStatus(500);
+  });
+});
+
+//POST Route for new family
 router.post('/', (req, res) => {
       
     const queryText = `INSERT INTO "family" (name)
@@ -47,6 +61,24 @@ router.post('/', (req, res) => {
       res.sendStatus(500);
     });
   });
+
+//PUT request to change admin status of family member
+router.put('/', (req, res) => {
+  const id = req.body.id;
+  const admin = req.body.admin;
+
+  const queryText = 'UPDATE "user" SET "admin"=$1 WHERE "id"=$2;';
+
+  pool.query(queryText, [admin, id])
+    .then(result => {
+      res.sendStatus(201);
+    })
+    .catch(err => {
+      console.log('error with updating admin status: ', err);
+      res.sendStatus(500);
+    });
+});
+
   
 
 module.exports = router;
