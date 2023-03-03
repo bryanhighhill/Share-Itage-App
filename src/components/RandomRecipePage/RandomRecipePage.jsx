@@ -8,6 +8,7 @@ const RandomRecipePage = () => {
     const dispatch = useDispatch();
     const randomRecipe = useSelector(store => store.randomRecipe);
     const user = useSelector(store => store.user);
+    const recipes = useSelector((store) => store.recipes);
     const id = user.family_id;
     const [title, setTitle] = useState('');
     const [ingredients, setIngredients] = useState([{ingredient:'', amount:''}]);
@@ -18,11 +19,15 @@ const RandomRecipePage = () => {
 
     // const initialCheckedArray = new Array(instructionsLength).fill(false);
 
-
-
     useEffect(() => {
+        dispatch({ type: 'FETCH_RECIPES', payload: user.family_id });
+    }, []);
+
+    {recipes.length > 0
+    ? useEffect(() => {
         dispatch({ type: 'FETCH_RANDOM_RECIPE', payload: id });
-    }, [id]);
+    }, [id])
+    : null}
 
     useEffect(() => {
         setIngredients(randomRecipe.ingredients);
@@ -49,7 +54,8 @@ const RandomRecipePage = () => {
                 <UserPage page={page}/>
             </div>
 
-            <div className="random-recipe">
+            {recipes.length > 0
+            ? <div className="random-recipe">
                 <h1>Random Recipe</h1>
                 <br />
                 <br />
@@ -96,6 +102,13 @@ const RandomRecipePage = () => {
                     <button className="btn_save" onClick={refreshPage}><b>? ? ?</b></button>
                 </div>
             </div>
+            : <div>
+                <h1>Random Recipe</h1>
+                <br />
+                <br />
+                <h2>You have no recipes yet!</h2>
+                <p>to add recipes, please click on "Add Recipe" in your user panel</p>
+            </div>}
         </div>
     )
 }

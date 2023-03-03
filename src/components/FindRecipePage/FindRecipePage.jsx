@@ -7,7 +7,6 @@ const FindRecipePage = () => {
     const dispatch = useDispatch();
     const user = useSelector((store) => store.user);
     const recipes = useSelector((store) => store.recipes);
-    console.log('recipes: ', recipes);
     const page = 3;
 
     useEffect(() => {
