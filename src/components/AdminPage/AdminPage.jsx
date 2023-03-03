@@ -57,9 +57,12 @@ const AdminPage = () => {
                                 <b>registered on:</b> {member.registration_date}
                                 <br />
                                 <b>status:</b> {member.admin ? 'admin' : 'not admin'}
-                                <br />
+                                
                                 {(member.username != user.username) &&
-                                    <button className="btn_sizeMed" onClick={() => {admin(member)}}>{member.admin ? 'remove admin' : 'make admin'}</button>
+                                    <>
+                                        <br />
+                                        <button className="btn_sizeMed" onClick={() => {admin(member)}}>{member.admin ? 'remove admin' : 'make admin'}</button>
+                                    </>
                                 }
                                 <br />
                                 <br />
