@@ -24,10 +24,9 @@ const RandomRecipePage = () => {
     useEffect(() => {
         dispatch({ type: 'FETCH_RECIPES', payload: user.family_id });
     }, [id]);
-        
     
     useEffect(() => {
-        dispatch({ type: 'FETCH_RANDOM_RECIPE', payload: id });
+        dispatch({ type: 'FETCH_RANDOM_RECIPE', payload: id })
     }, [id]);
 
     useEffect(() => {
@@ -35,15 +34,16 @@ const RandomRecipePage = () => {
     }, [id]);
 
     useEffect(() => {
-        setIngredients(randomRecipe.ingredients);
-        setInstructions(randomRecipe.instructions);
-        setTitle(randomRecipe.title);
-        setRecipeId(randomRecipe.id);
-    }, [randomRecipe]);
+        {setIngredients(randomRecipe.ingredients)}
+        {setInstructions(randomRecipe.instructions)}
+        {setTitle(randomRecipe.title)}
+        {setRecipeId(randomRecipe.id)}
+    }, [randomRecipe])
 
     const refreshPage = () => {
         console.log('in refresh page');
         window.location.reload(false);
+        dispatch({ type: 'FETCH_RECIPES', payload: user.family_id });
       };
     
 

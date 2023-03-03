@@ -133,22 +133,10 @@ router.delete('/favorite/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   console.log(`in delete recipe request with req params: ${req.params.id} and family id data ${req.body.family_id} and favorite status ${req.body.favorite}`);
   const id = req.params.id; //recipe id
-  const family_id = req.body.family_id;
-  const favorite = req.body.favorite;
 
-  {favorite
-    ? pool.query(`DELETE FROM "favorites" WHERE "user_id" = $1 AND "recipe_id" = $2;`, [req.user.id, id])
-    .then((result) => {
-      pool.query(`DELETE FROM "recipes" WHERE "id" = $1 AND "family_id" = $2;`, [id, family_id])
-        .then((result) => {
-          res.sendStatus(204);
-        })
-        .catch((err) => {
-          console.log('error with deleting recipe: ', err);
-          res.sendStatus(500);
-        });
-      })
-    : pool.query(`DELETE FROM "recipes" WHERE "id" = $1 AND "family_id" = $2;`, [id, family_id])
+  pool.query(`DELETE FROM "favorites" WHERE "recipe_id" = $1`, [id])
+  .then((result) => {
+    pool.query(`DELETE FROM "recipes" WHERE "id" = $1`, [id])
       .then((result) => {
         res.sendStatus(204);
       })
@@ -156,8 +144,30 @@ router.delete('/:id', (req, res) => {
         console.log('error with deleting recipe: ', err);
         res.sendStatus(500);
       });
-  };
-})
+  });
+});
+
+  // {favorite
+  //   ? pool.query(`DELETE FROM "favorites" WHERE "user_id" = $1 AND "recipe_id" = $2;`, [req.user.id, id])
+  //   .then((result) => {
+  //     pool.query(`DELETE FROM "recipes" WHERE "id" = $1 AND "family_id" = $2;`, [id, family_id])
+  //       .then((result) => {
+  //         res.sendStatus(204);
+  //       })
+  //       .catch((err) => {
+  //         console.log('error with deleting recipe: ', err);
+  //         res.sendStatus(500);
+  //       });
+  //     })
+  //   : pool.query(`DELETE FROM "recipes" WHERE "id" = $1 AND "family_id" = $2;`, [id, family_id])
+  //     .then((result) => {
+  //       res.sendStatus(204);
+  //     })
+  //     .catch((err) => {
+  //       console.log('error with deleting recipe: ', err);
+  //       res.sendStatus(500);
+  //     });
+  // };
   
     
 

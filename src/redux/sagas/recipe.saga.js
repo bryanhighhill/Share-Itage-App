@@ -24,7 +24,7 @@ function* fetchRecipes(action) {
     const recipes = yield axios.get(`/api/recipe/${id}`);
     yield put({ type: 'SET_RECIPES', payload: recipes.data });
   } catch (error) {
-   alert('Fetch recipes failed with error: ', error);
+  //  alert('Fetch recipes failed with error: ', error);
   };
 };
 
@@ -57,7 +57,7 @@ function* fetchRandomRecipe(action) {
     const randomRecipe = yield axios.get(`api/recipe/random/${id}`);
     yield put({ type: 'SET_RANDOM_RECIPE', payload: randomRecipe.data})
   } catch (error) {
-    alert('Fetch random recipe failed with error: ', error);
+    // alert('Fetch random recipe failed with error: ', error);
   };
 };
 
