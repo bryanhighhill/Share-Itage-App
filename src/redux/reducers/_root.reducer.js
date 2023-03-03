@@ -16,7 +16,7 @@ import setFavorites from './set.favorites.reducer';
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
-  family, //will have an id and name
+  family, //will have an id and name, user data belonging to family id
   recipes, //will contain all recipes for specific family_id in db
   selectedRecipe, //will contain recipe that is being edited
   randomRecipe, //will contain recipe picked at random at user's family_id

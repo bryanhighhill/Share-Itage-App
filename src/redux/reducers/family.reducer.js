@@ -3,6 +3,8 @@ const familyReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_FAMILY':
         return action.payload;
+      case 'SET_FAMILY_MEMBERS':
+        return action.payload;
       default:
         return state;
     }

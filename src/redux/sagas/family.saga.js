@@ -16,11 +16,6 @@ function* createFamily(action) {
   }
 }
 
-function* familySaga() {
-  yield takeEvery('POST_FAMILY_NAME', createFamily);
-}
-
-
 // Fetch Family Details from db - family table
 function* fetchFamily(action) {
   const id = action.payload;
@@ -32,8 +27,32 @@ function* fetchFamily(action) {
   }
 }
 
-function* fetchFamilySaga() {
-  yield takeEvery('FETCH_FAMILY', fetchFamily);
+function* fetchFamilyMembers(action) {
+  console.log('action.payload in fetch family members saga: ', action.payload);
+  const id = action.payload;
+  try {
+    const familyMembers = yield axios.get(`/api/family/members/${id}`);
+    yield put({ type: 'SET_FAMILY_MEMBERS', payload: familyMembers.data});
+  } catch (error) {
+    console.log('error with fetching family members: ', error);
+  }
 }
 
-export { familySaga, fetchFamilySaga };
+function* changeAdminStatus(action) {
+  console.log('action payload in admin status saga: ', action.payload);
+  try {
+    yield axios.put(`api/family`, action.payload);
+    yield put({ type: 'FETCH_FAMILY_MEMBERS'});
+  } catch (error) {
+    console.log('error with changing admin status', error);
+  }
+}
+
+
+function* familySaga() {
+  yield takeEvery('POST_FAMILY_NAME', createFamily); //dispatched from CreateFamilyPage
+  yield takeEvery('FETCH_FAMILY', fetchFamily); //dispatched from family confirmation page
+  yield takeEvery('FETCH_FAMILY_MEMBERS', fetchFamilyMembers); //dispatched from admin page
+  yield takeEvery('CHANGE_ADMIN_STATUS', changeAdminStatus); //dispatched from admin page
+}
+export { familySaga };
