@@ -9,12 +9,10 @@ const router = express.Router();
 
 // GET request to retrieve family's recipe data from db - family table
 router.get('/:id', (req, res) => {
-  console.log('in recipes GET request with: ', req.params.id);
   // GET route code here
   const queryText = 'SELECT * FROM "recipes" WHERE "family_id" = $1 ORDER BY "title" ASC;';
   pool.query(queryText, [req.params.id])
   .then(result => {
-    console.log('recipes get results: ', result.rows)
     res.send(result.rows);
   })
   .catch(err => {
@@ -27,7 +25,6 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   ingredients = JSON.stringify(req.body.ingredients);
   instructions = JSON.stringify(req.body.instructions);
-  console.log('in recipe post with ingredients: ', req.body.ingredients);
   const queryText = `INSERT INTO "recipes" (title, ingredients, instructions, family_id, user_id)
   VALUES ($1, $2, $3, $4, $5)`;
   pool.query(queryText, [req.body.title, ingredients, instructions, req.body.family_id, req.body.user_id])
@@ -40,7 +37,6 @@ router.post('/', (req, res) => {
 
 // POST route for favorite recipes
 router.post('/favorite', (req, res) => {
-  console.log('in recipe favorites post with: ', req.body);
   const queryText = `INSERT INTO "favorites" (user_id, recipe_id)
   VALUES ($1, $2)`;
   pool.query(queryText, [req.user.id, req.body.recipe_id])
@@ -54,7 +50,6 @@ router.post('/favorite', (req, res) => {
 //GET route for editing recipe
 router.get('/edit/:id', (req, res) => {
   const id = req.params.id;
-  console.log('id in get recipe data request: ', id);
   const queryText = 'SELECT * FROM "recipes" WHERE "id" = $1;';
   pool.query(queryText, [id])
     .then( result => {
@@ -68,7 +63,6 @@ router.get('/edit/:id', (req, res) => {
       }
 
       res.send(results);
-      console.log('result rows from edit recipe get request: ', result.rows[0]);
     })
     .catch(err => {
       console.log('ERROR with getting requested recipe data: ', err);
@@ -79,7 +73,6 @@ router.get('/edit/:id', (req, res) => {
 //GET route for random recipe
 router.get('/random/:id', (req, res) => {
   const id = req.params.id;
-  console.log('in get random recipe data request: ', id);
   const queryText = 'SELECT * FROM "recipes" WHERE "family_id" = $1 ORDER BY RANDOM() LIMIT 1;';
   pool.query(queryText, [id])
     .then( result => {
@@ -93,7 +86,6 @@ router.get('/random/:id', (req, res) => {
       }
 
       res.send(results);
-      console.log('result rows from random get request: ', results);
     })
     .catch(err => {
       console.log('ERROR with getting requested recipe data: ', err);
@@ -104,7 +96,6 @@ router.get('/random/:id', (req, res) => {
 //GET route for user's favorite recipe
 router.get('/favorite/:id', (req, res) => {
   const id = req.user.id;
-  console.log('in get favorite recipes request: ', id);
   const queryText = 
     `SELECT "recipes"."title", "recipes"."ingredients", "recipes"."instructions", "recipes"."id", "recipes"."user_id" FROM "favorites"
     JOIN "recipes" ON "recipes"."id" = "favorites"."recipe_id"
@@ -114,7 +105,6 @@ router.get('/favorite/:id', (req, res) => {
   pool.query(queryText, [id])
     .then( result => {
       res.send(result.rows);
-      console.log('result rows from favorites request: ', result.rows);
     })
     .catch(err => {
       console.log('ERROR with getting favorites data: ', err);
@@ -124,18 +114,34 @@ router.get('/favorite/:id', (req, res) => {
 
 //DELETE route for user's favorite recipes
 router.delete('/favorite/:id', (req, res) => {
-  console.log(`in delete favorites request with req params id: ${req.params.id} and data ${req.user.id}`);
   const id = req.params.id;
   const user_id = req.user.id;
-  const queryText = `DELETE from "favorites" WHERE "recipe_id" = $1 AND "user_id" = $2;`;
+  const queryText = `DELETE FROM "favorites" WHERE "recipe_id" = $1 AND "user_id" = $2;`;
   
   pool.query(queryText, [id, user_id])
     .then((result) => {
-      console.log('this is your delete favorites result: ', result);
       res.sendStatus(204);
     })
     .catch((err) => {
       console.log('error with deleting favorites: ', err);
+      res.sendStatus(500);
+    });
+});
+
+//DELETE route for removing recipe from database
+router.delete('/:id', (req, res) => {
+  console.log(`in delete recipe request with req params: ${req.params.id} and data ${req.body.family_id}`);
+  const id = req.params.id;
+  const family_id = req.body.family_id;
+  const queryText = `DELETE FROM "recipes" WHERE "id" = $1 AND "family_id" = $2;`;
+
+  pool.query(queryText, [id, family_id])
+    .then((result) => {
+      console.log('successful delete recipe');
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.log('error with deleting recipe: ', err);
       res.sendStatus(500);
     });
 });
@@ -145,7 +151,6 @@ router.put('/edit/:id', (req, res) => {
   ingredients = JSON.stringify(req.body.ingredients);
   instructions = JSON.stringify(req.body.instructions);
   const id = req.params.id;
-  console.log(`in recipe put request with:  ${req.body.title}, ${ingredients}, ${instructions}, ${id}`)
   const queryText = 'UPDATE "recipes" SET "title"=$1, "ingredients"=$2, "instructions"=$3 WHERE "id"=$4;';
 
   pool.query(queryText, [req.body.title, ingredients, instructions, req.body.id])
