@@ -3,7 +3,7 @@ import UserPage from '../UserPage/UserPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import EditButton from '../EditButton/EditButton';
-// import DeleteButton from '../DeleteButton/DeleteButton';
+import DeleteButton from '../DeleteButton/DeleteButton';
 import './RecipePage.css';
 
 
@@ -124,9 +124,9 @@ const RecipePage = () => {
                         {(user.admin || user.id === selectedRecipe.user_id) &&
                             <EditButton id={id}/>
                         }
-                        {/* {user.admin  &&
-                            <DeleteButton recipe={selectedRecipe}/>
-                        } */}
+                        {user.admin  &&
+                            <DeleteButton id={id}/>
+                        }
                 </div>
             </div>
         </div>
