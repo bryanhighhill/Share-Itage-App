@@ -124,9 +124,27 @@ const RecipePage = () => {
                         {(user.admin || user.id === selectedRecipe.user_id) &&
                             <EditButton id={id}/>
                         }
-                        {user.admin  &&
+                        {/* {user.admin  &&
                             <DeleteButton id={id}/>
-                        }
+                        } */}
+
+                {user.admin  &&
+                    <div className="delete-buttons">
+                        {favorites.length > 0
+                        ?
+                            <>
+                                {favorites.map((favRecipe, index) => {
+                                    return favRecipe.id;
+                                }).includes(Number(id)) 
+                                    ?   <DeleteButton id={id} favorite={true}/>
+                                    :   <DeleteButton id={id} favorite={false}/>
+                                }
+                            </>
+                        :   <DeleteButton id={id} favorite='false'/>}
+                    </div>
+                }
+
+
                 </div>
             </div>
         </div>

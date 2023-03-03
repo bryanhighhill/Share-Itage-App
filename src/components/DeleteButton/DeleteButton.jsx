@@ -2,15 +2,17 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-const DeleteButton = ({id}) => {
+const DeleteButton = ({id, favorite}) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector((store) => store.user);
+    console.log('fav status in delete button: ', favorite);
 
     const clickHandler = (id) => {
         const recipe = {
             id, 
-            family_id: user.family_id
+            family_id: user.family_id,
+            favorite
         }
         dispatch({
         type: 'REMOVE_RECIPE', 

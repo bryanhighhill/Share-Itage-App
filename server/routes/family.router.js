@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
 });
 
 /**
- * POST route template
+ * POST route 
  */
 router.post('/', (req, res) => {
       

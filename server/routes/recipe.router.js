@@ -130,21 +130,35 @@ router.delete('/favorite/:id', (req, res) => {
 
 //DELETE route for removing recipe from database
 router.delete('/:id', (req, res) => {
-  console.log(`in delete recipe request with req params: ${req.params.id} and data ${req.body.family_id}`);
-  const id = req.params.id;
+  console.log(`in delete recipe request with req params: ${req.params.id} and family id data ${req.body.family_id} and favorite status ${req.body.favorite}`);
+  const id = req.params.id; //recipe id
   const family_id = req.body.family_id;
-  const queryText = `DELETE FROM "recipes" WHERE "id" = $1 AND "family_id" = $2;`;
+  const favorite = req.body.favorite;
 
-  pool.query(queryText, [id, family_id])
+  {favorite
+    ? pool.query(`DELETE FROM "favorites" WHERE "user_id" = $1 AND "recipe_id" = $2;`, [req.user.id, id])
     .then((result) => {
-      console.log('successful delete recipe');
-      res.sendStatus(204);
-    })
-    .catch((err) => {
-      console.log('error with deleting recipe: ', err);
-      res.sendStatus(500);
-    });
-});
+      pool.query(`DELETE FROM "recipes" WHERE "id" = $1 AND "family_id" = $2;`, [id, family_id])
+        .then((result) => {
+          res.sendStatus(204);
+        })
+        .catch((err) => {
+          console.log('error with deleting recipe: ', err);
+          res.sendStatus(500);
+        });
+      })
+    : pool.query(`DELETE FROM "recipes" WHERE "id" = $1 AND "family_id" = $2;`, [id, family_id])
+      .then((result) => {
+        res.sendStatus(204);
+      })
+      .catch((err) => {
+        console.log('error with deleting recipe: ', err);
+        res.sendStatus(500);
+      });
+  };
+})
+  
+    
 
 //PUT route for editing recipe
 router.put('/edit/:id', (req, res) => {
