@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import './CreateFamilyPage.css';
 
 const CreateFamilyPage = () => {
     const [name, setName] = useState('');
@@ -34,23 +35,27 @@ const CreateFamilyPage = () => {
             <div className="user-nav">
                 {/* <UserPage /> */}
             </div>
-            <div className="page-content-div">
+            <div className="family-div">
                 <form onSubmit={onSubmit}>
-                <label htmlFor="name"><b>Family Name</b></label>
-                        <br />
-                        <input
-                            id="name"
-                            name="name"
-                            value={name}
-                            placeholder="What's your family name?"
-                            onChange={(event) => setName(event.target.value)}
-                        />
-                        <button
-                            type="submit"
-                            className="submit-family-btn"
-                        >
-                            Create Family
-                        </button>
+                <label htmlFor="name"><b>Create a Family Name</b></label>
+                    <br />
+                    <br />
+                    <input
+                        id="name"
+                        name="name"
+                        value={name}
+                        placeholder="What's your family name?"
+                        className="family-input"
+                        onChange={(event) => setName(event.target.value)}
+                    />
+                    <br />
+                    <br />
+                    <button
+                        type="submit"
+                        className="btn_save"
+                    >
+                        Create Family
+                    </button>
                 </form>
             </div>
         </div>

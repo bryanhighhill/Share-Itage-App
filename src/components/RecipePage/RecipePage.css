@@ -12,3 +12,15 @@
     background-image: repeating-linear-gradient(rgb(255, 255, 255) 0px, rgb(255, 255, 255) 23px, teal 24px);
     box-shadow: 1px 2px 5px;
 }
+
+
+
+.instruct {
+    margin: 8px;
+    font-size: 15px;
+}
+
+.ingredients {
+    margin: 8px;
+    font-size: 15px;
+}

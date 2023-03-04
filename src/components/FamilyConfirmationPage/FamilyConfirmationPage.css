@@ -23,3 +23,15 @@
   .congrats {
     font-size: 20px;
   }
+
+  .nav-next {
+    text-align: center;
+    font-size: 20px;
+    background-color: white;
+    width: 40%;
+    margin: 0 auto;
+    padding: 25px;
+    position: relative;
+    box-shadow: 1px 2px 5px black;
+    border-radius: 20px;
+  }

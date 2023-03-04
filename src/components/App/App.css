@@ -172,14 +172,14 @@ Button
   padding: 5px 10px;
   border:0;
   border-radius: 4px;
-  background-color: #cb3d00;
+  background-color: #ff6969;
   color: #f8f8f8;
   font-size: .9rem;
   cursor: pointer;
 }
 
 .btn_delete:hover {
-  background-color: #972d00;
+  background-color: #ff0000;
   transition: .5s;
 }
 

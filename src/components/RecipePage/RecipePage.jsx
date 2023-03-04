@@ -57,35 +57,37 @@ const RecipePage = () => {
                             <ul>
                                 {ingredients.map((ingredient, index) => {
                                     return(
-                                        <li key={index}><i>{ingredient.amount}</i>&nbsp;&nbsp;&nbsp;&nbsp;<b>{ingredient.ingredient}</b></li>
+                                        <li key={index}><i>{ingredient.amount}</i>&nbsp;&nbsp;&nbsp;&nbsp;{ingredient.ingredient}</li>
                                     );
                                 })} 
                             </ul>
                         </div>
                     : null}
+                    
                     {instructions
                     ?   <div className="instructions">
                             <label className="small-label" htmlFor="instructions"><b>Instructions</b></label>
                             <ul>
                                 {instructions.map((instruction, index) => {
                                     return(
-                                        <>
-                                        <input
-                                            key={`checkbox-${index}`}
-                                            type="checkbox"
-                                            id={`custom-checkbox-${index}`}
-                                            name={instruction}
-                                            value={instruction}
-                                            onChange={() => onChange(index)}
-                                        />
-                                        <label className={!checkedInstruction[index] ? "checked-instruction-false" : "checked-instruction-true"} htmlFor={`custom-checkbox-${index}`}>{instruction}</label>
-                                        <br />
-                                        </>
+                                        <div className="instruct">
+                                            <input
+                                                key={`checkbox-${index}`}
+                                                type="checkbox"
+                                                id={`custom-checkbox-${index}`}
+                                                name={instruction}
+                                                value={instruction}
+                                                onChange={() => onChange(index)}
+                                            />
+                                            <label className={!checkedInstruction[index] ? "checked-instruction-false" : "checked-instruction-true"} htmlFor={`custom-checkbox-${index}`}>{instruction}</label>
+                                            <br />
+                                        </div>
                                     );
                                 })}
                             </ul>
                         </div>
                     : null}
+                    
                     <div className="fav-buttons">
                         <FavoritesButton recipeId={Number(id)}/>
                     </div>

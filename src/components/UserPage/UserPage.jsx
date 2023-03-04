@@ -13,7 +13,6 @@ function UserPage({page}) {
       <div className="user-panel">
         <div className="container">
           <h4>Welcome, {user.username}!</h4>
-          {/* <p>Your belong to the {user.}</p> */}
           <SidePanel page={page}/>
           <LogOutButton className="logout-btn" />
         </div>
@@ -25,7 +24,6 @@ function UserPage({page}) {
         <div className="user-panel">
         <div className="container">
           <h4>Welcome, {user.username}!</h4>
-          {/* <p>Your ID is: {user.id}</p> */}
           <NewUserPage setLoading={setLoading}/>
           <LogOutButton className="logout-btn" />
         </div>
