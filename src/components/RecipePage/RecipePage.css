@@ -2,10 +2,7 @@
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     width: 80%;
-    padding-top: 7px;
-    padding-right: 5px;
-    padding-bottom: 10px;
-    padding-left: 40px;
+    padding: 20px;
     overflow-wrap: break-word;
     position: relative;
     height: 90%;
@@ -13,7 +10,17 @@
     box-shadow: 1px 2px 5px;
 }
 
+.recipe-page h1 {
+    padding: 0;
+    margin: 0;
+}
 
+.white-fill {
+   padding: 20px;
+   background-color: rgba(255,255,255,55%);
+   border-radius: 10px;
+   box-shadow: 0px 0px 29px #ffffff;
+}
 
 .instruct {
     margin: 8px;

@@ -50,29 +50,31 @@ const RecipePage = () => {
 
             <div>
                 <div className="recipe-page">
-                    <h1><u>{title}</u></h1>
-                    {ingredients
-                    ?   <div className="ingredients">
-                            <label className="small-label" htmlFor="ingredients"><b>Ingredients</b></label>
-                            <ul>
-                                {ingredients.map((ingredient, index) => {
-                                    return(
-                                        <li key={index}><i>{ingredient.amount}</i>&nbsp;&nbsp;&nbsp;&nbsp;{ingredient.ingredient}</li>
-                                    );
-                                })} 
-                            </ul>
-                        </div>
-                    : null}
-                    
-                    {instructions
-                    ?   <div className="instructions">
-                            <label className="small-label" htmlFor="instructions"><b>Instructions</b></label>
-                            <ul>
-                                {instructions.map((instruction, index) => {
-                                    return(
+                    <div className="white-fill">
+                        <h1><u>{title}</u></h1>
+                        {ingredients &&
+                            <div className="ingredients">
+                                <span><b>Ingredients</b></span>
+                                <ul>
+                                    {ingredients.map((ingredient, index) => (
+                                        <li key={`ingredient-${ingredient.ingredient}-${ingredient.amount}`}>
+                                            <i>{ingredient.amount}</i>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            {ingredient.ingredient}
+                                        </li>
+                                    ))} 
+                                </ul>
+                            </div>
+                        }
+                        
+                        {instructions &&
+                            <div className="instructions">
+                                <span><b>Instructions</b></span>
+                                <ul>
+                                    {instructions.map((instruction, index) => (
                                         <div className="instruct">
                                             <input
-                                                key={`checkbox-${index}`}
+                                                key={`instruction-${instruction}`}
                                                 type="checkbox"
                                                 id={`custom-checkbox-${index}`}
                                                 name={instruction}
@@ -82,14 +84,14 @@ const RecipePage = () => {
                                             <label className={!checkedInstruction[index] ? "checked-instruction-false" : "checked-instruction-true"} htmlFor={`custom-checkbox-${index}`}>{instruction}</label>
                                             <br />
                                         </div>
-                                    );
-                                })}
-                            </ul>
+                                    ))}
+                                </ul>
+                            </div>
+                        }
+                        
+                        <div className="fav-buttons">
+                            <FavoritesButton recipeId={Number(id)}/>
                         </div>
-                    : null}
-                    
-                    <div className="fav-buttons">
-                        <FavoritesButton recipeId={Number(id)}/>
                     </div>
                 </div>
                 <br />

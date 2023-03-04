@@ -61,28 +61,35 @@ const AdminPage = () => {
                     {family.length > 0
                     ?   <>
                             {family.map((member, index) => {
+                                var options = { year: 'numeric', month: 'long', day: 'numeric' };
+                                const date = new Date(member.registration_date);
+
                                 return (
                                     <>
                                         <div className={member.username != user.username ? "family-member-container" : "your-container"}>
                                             <b><u>{member.username}</u></b>
                                             <br />
                                             <br />
-                                            <b>registered on:</b> {member.registration_date}
+                                            <b>registered on:</b>
+                                            <br />
+                                            {(date.toLocaleDateString("en-US", options))} {/* date format string */}
                                             <br />
                                             <br />
-                                            <b>status:</b> {member.admin ? 'admin' : 'not admin'}
+                                            <b>status:</b>
+                                            <br />
+                                            {member.admin ? 'admin' : 'not admin'}
                                             <br />
                                             <br />
                                             <b>contact:</b> 
                                             <br />
                                             {member.email}
                                             <br />
-                                            {member.username != user.username 
-                                            ? <>
-                                                <br />
-                                                <button className="btn_sizeMed" onClick={() => {admin(member)}}>{member.admin ? 'remove admin' : 'make admin'}</button>
-                                            </>
-                                            : null}
+                                            {member.username != user.username &&
+                                                <>
+                                                    <br />
+                                                    <button className="btn_sizeMed" onClick={() => {admin(member)}}>{member.admin ? 'remove admin' : 'make admin'}</button>
+                                                </>
+                                            }
                                             <br />
                                             <br />
                                         </div>
