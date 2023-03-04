@@ -92,32 +92,20 @@ const RecipePage = () => {
                 </div>
                 <br />
                 <div className="nav-buttons">
-                    &nbsp;&nbsp;&nbsp;&nbsp; <button className="btn_sizeMed" onClick={() => {history.goBack()}}>Back</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button className="btn_sizeMed" onClick={() => {history.goBack()}}>Back</button>
                     
                         {(user.admin || user.id === selectedRecipe.user_id) &&
-                            <EditButton id={id}/>
-                        }
-                        {/* {user.admin  &&
-                            <DeleteButton id={id}/>
-                        } */}
-
-                {user.admin  &&
-                    <div className="delete-buttons">
-                        {favorites.length > 0
-                        ?
                             <>
-                                {favorites.map((favRecipe, index) => {
-                                    return favRecipe.id;
-                                }).includes(Number(id)) 
-                                    ?   <DeleteButton id={id} favorite={true}/>
-                                    :   <DeleteButton id={id} favorite={false}/>
-                                }
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <EditButton id={id}/>
                             </>
-                        :   <DeleteButton id={id} favorite='false'/>}
-                    </div>
-                }
-
-
+                        }
+                        {user.admin  &&
+                            <>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <DeleteButton id={id}/>
+                            </>
+                        }                        
                 </div>
             </div>
         </div>

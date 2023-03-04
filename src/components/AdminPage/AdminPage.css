@@ -1,0 +1,18 @@
+.family-members-container {
+    display: grid;
+    width: 90%;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.family-member-container {
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    width: 80%;
+    padding: 10px;
+    overflow-wrap: break-word;
+    position: relative;
+    /* background-image: repeating-linear-gradient(rgb(255, 255, 255) 0px, rgb(255, 255, 255) 23px, teal 24px); */
+    box-shadow: 1px 2px 5px;
+}

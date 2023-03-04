@@ -167,6 +167,22 @@ Button
   transition: .5s;
 }
 
+.btn_delete {
+  display: inline-block;
+  padding: 5px 10px;
+  border:0;
+  border-radius: 4px;
+  background-color: #cb3d00;
+  color: #f8f8f8;
+  font-size: .9rem;
+  cursor: pointer;
+}
+
+.btn_delete:hover {
+  background-color: #972d00;
+  transition: .5s;
+}
+
 /* This line makes the "Register" and "Login" buttons look like links */
 .btn_asLink {
   padding: 0;
