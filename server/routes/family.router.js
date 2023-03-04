@@ -15,7 +15,7 @@ router.get('/:id', (req, res) => {
   pool.query(queryText, [req.params.id])
   .then(result => {
     console.log('family get results: ', result.rows)
-    res.send(result.rows);
+    res.send(result.rows[0]);
   })
   .catch(err => {
     console.log('ERROR with getting Family data: ', err);

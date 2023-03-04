@@ -1,0 +1,25 @@
+.confirmation-div {
+    text-align: center;
+}
+
+.btn_next {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 4px;
+    box-shadow: 1px 2px 5px black;
+    border: none;
+    background-color: #1d6787;
+    color: #ffffff;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+
+  .btn_next:hover {
+    background-color:  #10455c;
+    transition: .2s;
+    box-shadow: .5px 1px 2px black;
+  }
+
+  .congrats {
+    font-size: 20px;
+  }

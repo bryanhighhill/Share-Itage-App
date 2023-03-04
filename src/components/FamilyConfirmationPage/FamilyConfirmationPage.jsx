@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
+import './FamilyConfirmationPage.css';
 
 const FamilyConfirmationPage = () => {
     const dispatch = useDispatch();
@@ -14,19 +15,17 @@ const FamilyConfirmationPage = () => {
 
     return(
         <div className="confirmation-div">
-            <h2>Congratulations, {user.username}, you have successfully created the family "
-                {family.map(family => {
-                    return (
-                        family.name
-                    )
-                })}
-                "!
-            </h2>
+            <div className="congrats">
+                Congratulations, {user.username}, you have successfully created the family
+                <br />
+                <h1>"{family.name}"</h1>
             <br />
-            <p>What would you like to do next?</p>
-            <button className="btn" onClick={() => history.push('/user')}>View family portal</button>
+            What would you like to do next?
+            </div>
+            <br />
+            <button className="btn_next" onClick={() => history.push('/user')}>View family portal</button>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button className="btn">Invite others to join family</button>
+            <button className="btn_next">Invite others to join family</button>
         </div>
     );
 };
