@@ -62,7 +62,9 @@ const AdminPage = () => {
                     ?   <>
                             {family.map((member, index) => {
                                     return (
-                                        <div className="family-member-container">
+                                        <>
+                                            {(member.username != user.username)
+                                            ? <div className="family-member-container">
                                                 <b><u>{member.username}</u></b>
                                                 <br />
                                                 <br />
@@ -71,7 +73,10 @@ const AdminPage = () => {
                                                 <br />
                                                 <b>status:</b> {member.admin ? 'admin' : 'not admin'}
                                                 <br />
-                                                {(member.username != user.username) &&
+                                                <br />
+                                                <b>contact:</b> {member.email}
+                                                <br />
+                                                {member.username != user.username &&
                                                     <>
                                                         <br />
                                                         <button className="btn_sizeMed" onClick={() => {admin(member)}}>{member.admin ? 'remove admin' : 'make admin'}</button>
@@ -79,7 +84,28 @@ const AdminPage = () => {
                                                 }
                                                 <br />
                                                 <br />
-                                        </div>
+                                            </div>
+                                            : <div className="your-container">   
+                                                <b><u>YOU</u></b>
+                                                <br />
+                                                <br />
+                                                <b>registered on:</b> {member.registration_date}
+                                                <br />
+                                                <br />
+                                                <b>status:</b> {member.admin ? 'admin' : 'not admin'}
+                                                <br />
+                                                <br />
+                                                <b>contact:</b> {member.email}
+                                                {member.username != user.username &&
+                                                    <>
+                                                        <br />
+                                                        <button className="btn_sizeMed" onClick={() => {admin(member)}}>{member.admin ? 'remove admin' : 'make admin'}</button>
+                                                    </>
+                                                }
+                                                <br />
+                                                <br />
+                                            </div>}
+                                        </>
                                     )
                                 })}
                             </>

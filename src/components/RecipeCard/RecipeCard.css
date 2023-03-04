@@ -15,7 +15,8 @@
 }
 
 .recipe-card:hover {
-    background-image: repeating-linear-gradient(rgb(212, 234, 176) 0px, rgb(212, 234, 176) 23px, teal 24px);
+    background-image: repeating-linear-gradient(#1d6787 0px, #1d6787 23px, rgb(255, 255, 255) 24px);
     box-shadow: .5px 1px 2px black;
-    transition: .2s;
+    transition: .1s;
+    color: white;
 }

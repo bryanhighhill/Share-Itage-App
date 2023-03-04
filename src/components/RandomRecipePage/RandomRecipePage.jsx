@@ -108,8 +108,8 @@ const RandomRecipePage = () => {
                         <FavoritesButton recipeId={recipeId}/>
                     </div>
                 </div>
-                <div className="btn_random">
-                    <button className="btn_save" onClick={refreshPage}><b>? ? ?</b></button>
+                <div className="btn_random_div">
+                    <button className="btn_random" onClick={refreshPage}><b>? ? ?</b></button>
                 </div>
             </div>
             : <div>
