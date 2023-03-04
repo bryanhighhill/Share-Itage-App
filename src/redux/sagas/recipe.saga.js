@@ -101,10 +101,9 @@ function* removeFavorite(action) {
 function* removeRecipe(action) {
   const id = action.payload.id;
   const family_id = action.payload.family_id;
-  const favorite = action.payload.favorite;
-  console.log('in delete recipe with favorite status: ', action.payload.favorite);
+
   try {
-    yield axios.delete(`api/recipe/${id}`, {data: {family_id, favorite}});
+    yield axios.delete(`api/recipe/${id}`, {data: {family_id}});
     yield put({ type: 'FETCH_RECIPES', payload: family_id });
   } catch (error) {
     alert('Error with removing recipe from database: ', error);

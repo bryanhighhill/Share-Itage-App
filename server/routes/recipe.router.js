@@ -131,7 +131,7 @@ router.delete('/favorite/:id', (req, res) => {
 
 //DELETE route for removing recipe from database
 router.delete('/:id', (req, res) => {
-  console.log(`in delete recipe request with req params: ${req.params.id} and family id data ${req.body.family_id} and favorite status ${req.body.favorite}`);
+  console.log(`in delete recipe request with req params: ${req.params.id} and family id data ${req.body.family_id}`);
   const id = req.params.id; //recipe id
 
   pool.query(`DELETE FROM "favorites" WHERE "recipe_id" = $1`, [id])
