@@ -28,6 +28,7 @@
     border: 1px solid #ddd;
     border-radius: 15px;
     z-index: 2;
+    left: 40%;
 }
   
 .modal .flex {

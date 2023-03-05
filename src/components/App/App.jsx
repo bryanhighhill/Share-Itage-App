@@ -30,6 +30,7 @@ import FamilyConfirmationPage from '../FamilyConfirmationPage/FamilyConfirmation
 import AdminPage from '../AdminPage/AdminPage';
 import EditRecipePage from '../EditRecipePage/EditRecipePage';
 import RecipePage from '../RecipePage/RecipePage';
+import UserInvitation from '../UserInvitation/UserInvitation';
 
 import './App.css';
 
@@ -155,6 +156,13 @@ function App() {
             exact
             path="/recipe/:id">
             <RecipePage />
+          </ProtectedRoute>
+
+          {/* protected route for USER INVITATION */}
+          <ProtectedRoute
+            exact
+            path="/userinvite">
+            <UserInvitation />
           </ProtectedRoute>
 
 
