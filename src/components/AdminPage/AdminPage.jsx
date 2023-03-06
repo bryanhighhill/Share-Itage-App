@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import UserPage from '../UserPage/UserPage';
 import './AdminPage.css';
+import cryptoRandomString from 'crypto-random-string';
 
 const AdminPage = () => {
     const user = useSelector(store => store.user);
@@ -22,6 +23,12 @@ const AdminPage = () => {
         dispatch({ type: 'CHANGE_ADMIN_STATUS', payload: {id: member.id, admin: adminStatus} });
         dispatch({ type: 'FETCH_FAMILY_MEMBERS', payload: user.family_id });
     }
+
+    const generateToken = () => {
+        const newToken = cryptoRandomString({length: 48, type: 'url-safe'});
+        console.log('new token: ', newToken);
+    };
+
 
     return (
         <div className="content-container">
@@ -66,6 +73,7 @@ const AdminPage = () => {
 
                                 return (
                                     <>
+                                    <button onClick = {generateToken}>Generate New Token</button>
                                         <div className={member.username != user.username ? "family-member-container" : "your-container"}>
                                             <b><u>{member.username}</u></b>
                                             <br />
@@ -102,6 +110,6 @@ const AdminPage = () => {
             </div>
         </div>
     )
-}
+};
 
 export default AdminPage;
