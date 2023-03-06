@@ -48,11 +48,21 @@ function* changeAdminStatus(action) {
   }
 }
 
+function* postUserInvite(action) {
+  const token = action.payload;
+  try {
+    yield axios.post(`api/family/${token}`);
+  } catch (error) {
+    console.log('error with posting user invite', error);
+  }
+}
+
 
 function* familySaga() {
   yield takeEvery('POST_FAMILY_NAME', createFamily); //dispatched from CreateFamilyPage
   yield takeEvery('FETCH_FAMILY', fetchFamily); //dispatched from family confirmation page
   yield takeEvery('FETCH_FAMILY_MEMBERS', fetchFamilyMembers); //dispatched from admin page
   yield takeEvery('CHANGE_ADMIN_STATUS', changeAdminStatus); //dispatched from admin page
+  yield takeEvery('POST_USER_INVITE', postUserInvite); 
 }
 export { familySaga };

@@ -62,6 +62,20 @@ router.post('/', (req, res) => {
     });
   });
 
+  //POST route for user invites
+  router.post('/:id', (req, res) => {
+    const queryText = `INSERT INTO "invitations" (token, family_id)
+    VALUES ($1, $2)`;
+    pool.query(queryText, [req.params.id, req.user.family_id])
+    .then((query) => {
+      res.sendStatus(201)
+    })
+    .catch((err) => {
+      console.log('user invitation post failed', err);
+      res.sendStatus(500);
+    });
+  });
+
 //PUT request to change admin status of family member
 router.put('/', (req, res) => {
   const id = req.body.id;
