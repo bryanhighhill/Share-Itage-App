@@ -124,3 +124,4 @@ Customize this ReadMe and the code comments in this project to read less like a 
 
 
 Added package: crypto-random-string to generate cryptographically strong tokens - admin page
+Added package: npm install --save react-copy-to-clipboard

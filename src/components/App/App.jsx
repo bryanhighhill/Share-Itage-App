@@ -25,12 +25,12 @@ import FindRecipePage from '../FindRecipePage/FindRecipePage';
 import RandomRecipePage from '../RandomRecipePage/RandomRecipePage';
 import CreateFamilyPage from '../CreateFamilyPage/CreateFamilyPage';
 import JoinFamilyPage from '../JoinFamilyPage/JoinFamilyPage';
-// import FamilyInvitationPage from '../FamilyInvitationPage/FamilyInvitationPage';
 import FamilyConfirmationPage from '../FamilyConfirmationPage/FamilyConfirmationPage';
 import AdminPage from '../AdminPage/AdminPage';
 import EditRecipePage from '../EditRecipePage/EditRecipePage';
 import RecipePage from '../RecipePage/RecipePage';
 import UserInvitation from '../UserInvitation/UserInvitation';
+import InvitationLoginPage from '../InvitationLoginPage/InvitationLoginPage';
 
 import './App.css';
 
@@ -164,6 +164,12 @@ function App() {
             path="/userinvite">
             <UserInvitation />
           </ProtectedRoute>
+
+          <Route
+            exact
+            path="/inviteduserregpage/:id">
+            <InvitationLoginPage />
+          </Route>
 
 
           <Route

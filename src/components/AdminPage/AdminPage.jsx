@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import UserPage from '../UserPage/UserPage';
 import './AdminPage.css';
-import cryptoRandomString from 'crypto-random-string';
 
 const AdminPage = () => {
     const user = useSelector(store => store.user);
@@ -24,11 +23,6 @@ const AdminPage = () => {
         dispatch({ type: 'FETCH_FAMILY_MEMBERS', payload: user.family_id });
     }
 
-    const generateToken = () => {
-        const newToken = cryptoRandomString({length: 48, type: 'url-safe'});
-        console.log('new token: ', newToken);
-    };
-
 
     return (
         <div className="content-container">
@@ -37,20 +31,16 @@ const AdminPage = () => {
             </div> {/*end "user-nav" div */}
             <div className="admin-container">
                 <h1>Admin Panel</h1>
-                <br />
-                <br />
                 <div className="page-description">
                     Welcome to the few...the elite...the "admin" 
                     <br />
-                    <br />
-                    If the logged-in user has admin status they are able to see and interact with the "Admin Panel" button located in the user panel
+                    If the logged-in user has admin status they're able to see and interact with the "Admin Panel" button located in the user panel
                     <br />
                     (the button that brought you to this page)
                     <br />
-                    <br />
                     As an admin, you're able to do things that the regular user cannot!
                     <br />
-                    Admins can:
+                    <h3>Admins can:</h3>
                     <ul>
                         <li><b>Edit a recipe:</b> an option to edit is included on every recipe card, which allows admin to edit the title, ingredients, amounts, 
                             <br />and instructions of that recipe
@@ -58,11 +48,12 @@ const AdminPage = () => {
                             <i>please note:</i> the user who originally created the recipe card can also make edits to it
                         </li>
                         <li><b>Delete a recipe:</b> an option to delete is included on every recipe card, which allows admin to delete that recipe</li>
-                        <li><b>Add additional admins:</b> on this page, an admin will be able to view all users in their family, and assign any of them admin status</li>
+                        <li><b>Add additional admins:</b> all users in your family are shown below, and you have the ability to define their admin status</li>
+                        <li><b>Delete Family Members:</b> you have an option to delete family members below</li>
+                        <li><b>Generate Family Invites:</b> On this page you'll find an option to generate a unique registration link which you can send out to someone who you'd like to join your family</li>
                     </ul>
                 </div>
-                <br />
-                <br />
+                <div className="your-family"></div>
                 <h2>Your Family</h2>
                 <div className="family-members-container">
                     {family.length > 0
@@ -73,7 +64,6 @@ const AdminPage = () => {
 
                                 return (
                                     <>
-                                    <button onClick = {generateToken}>Generate New Token</button>
                                         <div className={member.username != user.username ? "family-member-container" : "your-container"}>
                                             <b><u>{member.username}</u></b>
                                             <br />
