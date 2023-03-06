@@ -30,11 +30,6 @@ const UserInvitation = () => {
         setModalVisible(!modalVisible);
     }
 
-    const copyToClipboard = () => {
-        console.log('copy function', CopyToClipboard(registrationLink));
-        alert(`copied!`);
-    }
-
     
     return (
         <div className ="modal-conatiner">
@@ -72,8 +67,7 @@ const UserInvitation = () => {
                 <div className={modalVisible ? "overlay" : "hidden"}></div> {/* overlay element - dark blurred background when modal is open */}
                 <button onClick = {generateToken}>Generate New Registration Link</button>
         </div>
-    )
-
-}
+    );
+};
 
 export default UserInvitation;
