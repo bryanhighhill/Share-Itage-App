@@ -9,63 +9,61 @@ const UserInvitation = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const [registrationLink, setRegistrationLink] = useState('');
-    const [isCopied, setIsCopied] = useState(false);
+    const [linkVisible, setLinkVisible] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
+    const [isCopied, setIsCopied] = useState(false);
     const [copyText, setCopyText] = useState('');
 
 
 
     const generateToken = () => {
         const newToken = cryptoRandomString({length: 48, type: 'url-safe'});
-        setModalVisible(!modalVisible);
+        // setModalVisible(!modalVisible);
         setRegistrationLink(`localhost:3000/#/inviteduserregpage/${newToken}`);
+        setLinkVisible(true);
 
         dispatch({
             type: 'POST_USER_INVITE', 
             payload: newToken,
         });
     };
-
-    const closeModal = () => {
-        setModalVisible(!modalVisible);
-    }
-
-    
+ 
     return (
-        <div className ="modal-conatiner">
-            <div className="user-invitation-container">
-                <h2>Want to invite someone to join your family?</h2>
-                <br />
-                click the button below to receive a unique registration link
-                <br />
-                <br />
-            </div>
+        <div className="invite-container">
+            
+            <h2>Invite someone to join your family!</h2>
+            Generate a registration link so that others can join your
+            <br /> <b>Share-itage</b> family!
+            <br />
+            <button type="text" className="btn_invite" onClick={generateToken}>Generate New Registration Link</button>
+            <br />
+            <i>Registration links remain valid for 30 minutes</i>
 
-            <section className={modalVisible ? "modal" : "hidden"}> {/* modal container */}
-                <div className="flex">
-                    <button onClick={closeModal} className="btn_close_modal">X</button>
-                </div>
-                <div className="link-div">
-                    <h2>Please copy the following link:</h2>
-                    {registrationLink}
-                </div>
-                <div className="modal_delete_container">
+            {linkVisible && 
+                <p>
+                    <b>New link:</b>
+                    <br />
+                    <input className="invitation-input" defaultValue={registrationLink} readOnly={true}></input>
+                    <br />
                     <CopyToClipboard
                         text={registrationLink}
                         onCopy={() => {
                             setIsCopied(true);
                             setTimeout(() => {
                                 setIsCopied(false);
-                            }, 1000);
+                                setLinkVisible(false);
+                            }, 5000);
                         }}
                     >
-                        <button className="btn_modal_copy" onClick={() => alert('link copied!')}> Copy link</button>
+                        <button className="btn_sizeMed"> Copy link</button>
                     </CopyToClipboard>
-                </div>
-            </section>
-
-                <div className={modalVisible ? "overlay" : "hidden"}></div> {/* overlay element - dark blurred background when modal is open */}
-                <button onClick = {generateToken}>Generate New Registration Link</button>
+                        {isCopied &&
+                        <div className="link-copied">                            
+                            <i>link copied!</i>
+                        </div>
+                        }
+                </p>
+            }
         </div>
     );
 };
