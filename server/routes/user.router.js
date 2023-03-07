@@ -33,6 +33,23 @@ router.post('/register', (req, res, next) => {
     });
 });
 
+router.post('/register/:id', (req, res, next) => {
+  const username = req.body.username;
+  const email = req.body.email;
+  const family_id = req.body.family_id;
+  const password = encryptLib.encryptPassword(req.body.password);
+
+  const queryText = `INSERT INTO "user" (username, email, password, family_id)
+    VALUES ($1, $2, $3, $4) RETURNING id`;
+  pool
+    .query(queryText, [username, email, password, family_id])
+    .then(() => res.sendStatus(201))
+    .catch((err) => {
+      console.log('User registration failed: ', err);
+      res.sendStatus(500);
+    });
+});
+
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
 // this middleware will run our POST if successful
@@ -47,5 +64,23 @@ router.post('/logout', (req, res) => {
   req.logout();
   res.sendStatus(200);
 });
+
+//Fetch Invitations data
+router.get('/invites/:id', (req, res) => {
+  console.log('in get request for invitations', req.params.id);
+  const queryText = 
+    `SELECT * FROM "invitations" WHERE "token" = $1 AND "exp_date" > now();`;
+  pool.query(queryText, [req.params.id])
+    .then( result => {
+      console.log('result rows in invitations get: ', result.rows);
+      if (result.rows.length > 0) {
+        res.send(result.rows[0])
+      }
+    })
+    .catch(err => {
+      console.log('ERROR with getting favorites data: ', err);
+      res.sendStatus(500);
+    });
+})
 
 module.exports = router;
