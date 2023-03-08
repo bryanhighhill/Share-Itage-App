@@ -57,11 +57,10 @@ const RecipePage = () => {
         } else 
         if (comment.length > 100) {
             alert('comment can only be 100 characters');
-        }
+        } else
         dispatch({ type: 'POST_COMMENT', payload: newComment });
         // setCommentsVisible(false);
         setComment('');
-
     };
 
     return (
