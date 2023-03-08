@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import UserPage from '../UserPage/UserPage';
 import SidePanel from '../SidePanel/SidePanel';
 import UserInvitation from '../UserInvitation/UserInvitation';
 import './AdminPage.css';
@@ -8,11 +7,8 @@ import './AdminPage.css';
 const AdminPage = () => {
     const user = useSelector(store => store.user);
     const family = useSelector(store => store.family);
-    const [deleteMessageVisible, setDeleteMessageVisible] = useState(false);
     const dispatch = useDispatch();
     const page = 5;
-
-    console.log('family on admin page', family);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_FAMILY_MEMBERS', payload: user.family_id });
@@ -66,7 +62,7 @@ const AdminPage = () => {
 
                     </div>
                     <div className="your-family"></div>
-                    <h2>Your Family</h2>
+                    {family.length > 0 && <h2>Your Family</h2>}
                     <div className="family-members-container">
                         {family.length > 0 &&
                             <>
