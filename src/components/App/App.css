@@ -244,6 +244,17 @@ Button
   padding: 5px;
 }
 
+.logout-btn {
+  border: none;
+  background: none;
+  font-size: 10px;
+}
+
+.logout-btn:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+
 /* --------------------------------------------------------------------------------
 Alert
 -------------------------------------------------------------------------------- */
