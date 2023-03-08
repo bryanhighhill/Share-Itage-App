@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
   ingredients = JSON.stringify(req.body.ingredients);
   instructions = JSON.stringify(req.body.instructions);
   const queryText = `INSERT INTO "recipes" (title, ingredients, instructions, family_id, user_id)
-  VALUES ($1, $2, $3, $4, $5)`;
+  VALUES ($1, $2, $3, $4, $5);`;
   pool.query(queryText, [req.body.title, ingredients, instructions, req.body.family_id, req.body.user_id])
   .then(() => res.sendStatus(201))
   .catch((err) => {
@@ -38,12 +38,24 @@ router.post('/', (req, res) => {
 // POST route for favorite recipes
 router.post('/favorite', (req, res) => {
   const queryText = `INSERT INTO "favorites" (user_id, recipe_id)
-  VALUES ($1, $2)`;
+  VALUES ($1, $2);`;
   pool.query(queryText, [req.user.id, req.body.recipe_id])
   .then(() => res.sendStatus(201))
   .catch((err) => {
       console.log('error with adding recipe to favorites: ', err);
       res.sendStatus(500);
+  });
+});
+
+//POST route for recipe_remarks comments
+router.post('/remarks', (req, res) => {
+  const queryText = `INSERT INTO "user_remarks" (comment, user_id, recipes_id)
+  VALUES ($1, $2, $3);`;
+  pool.query(queryText, [req.body.comment, req.user.id, req.body.recipes_id])
+  .then(() => res.sendStatus(201))
+  .catch((err) => {
+    console.log('error with posting comment', err);
+    res.sendStatus(500);
   });
 });
 
@@ -109,6 +121,25 @@ router.get('/favorite/:id', (req, res) => {
     })
     .catch(err => {
       console.log('ERROR with getting favorites data: ', err);
+      res.sendStatus(500);
+    });
+});
+
+//GET route for user comments at recipe id
+router.get('/remarks/:id', (req, res) => {
+  const id = req.params.id;
+  const queryText = 
+  `SELECT "user_remarks"."comment", "user_remarks"."memory", "user_remarks"."user_id", "user_remarks"."recipes_id", "user"."username" FROM "recipes"
+	JOIN "user_remarks" ON "user_remarks"."recipes_id" = "recipes"."id"
+	JOIN "user" ON "user"."id" = "user_remarks"."user_id"
+	WHERE "recipes"."id" = $1;`;
+
+  pool.query(queryText, [id])
+    .then( result => {
+      res.send(result.rows);
+    })
+    .catch(err => {
+      console.log('Error with getting user comments', err);
       res.sendStatus(500);
     });
 });
