@@ -133,6 +133,18 @@ function* postComment(action) {
   };
 };
 
+//delete user comment
+function* deleteComment(action) {
+  const id = action.payload.id;
+  const recipes_id = action.payload.recipes_id;
+  try {
+    yield axios.delete(`api/recipe/comments/${id}`);
+    yield put({ type: 'FETCH_USER_REMARKS', payload: recipes_id });
+  } catch (error) {
+    alert('Error with removing comment from database: ', error);
+  };
+}
+
 function* recipeSaga() {
   yield takeEvery('POST_NEW_RECIPE', createRecipe); //dispatched from AddRecipePage
   yield takeEvery('FETCH_RECIPES', fetchRecipes); //dispatched from FindRecipePage
@@ -145,6 +157,7 @@ function* recipeSaga() {
   yield takeEvery('REMOVE_RECIPE', removeRecipe); //dispatched from RecipePage
   yield takeEvery('FETCH_USER_REMARKS', fetchUserRemarks); //dispatched from UserComments component
   yield takeEvery('POST_COMMENT', postComment); //dispatched from recipe page
+  yield takeEvery('DELETE_COMMENT', deleteComment); //dispatched from UserComments component
 }
 
 export default recipeSaga;

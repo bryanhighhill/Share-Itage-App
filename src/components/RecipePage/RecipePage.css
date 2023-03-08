@@ -63,3 +63,19 @@
 .comment-input {
     width: 32%;
 }
+
+.btn_commentDelete {
+  padding: 2px;
+  margin-left: 5px;
+  border-radius: 2px;
+  border: none;
+  background-color: #1d6787;
+  color: #ffffff;
+  font-size: .5rem;
+  cursor: pointer;
+}
+
+.btn_commentDelete:hover {
+  background-color:  #008cc8;
+  transition: .3s;
+}

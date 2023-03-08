@@ -129,10 +129,10 @@ router.get('/favorite/:id', (req, res) => {
 router.get('/remarks/:id', (req, res) => {
   const id = req.params.id;
   const queryText = 
-  `SELECT "user_remarks"."id", "user_remarks"."comment", "user_remarks"."memory", "user_remarks"."user_id", "user_remarks"."recipes_id", "user"."username" FROM "recipes"
+  `SELECT "user_remarks"."id", "user_remarks"."comment", "user_remarks"."user_id", "user_remarks"."recipes_id", "user"."username" FROM "recipes"
 	JOIN "user_remarks" ON "user_remarks"."recipes_id" = "recipes"."id"
 	JOIN "user" ON "user"."id" = "user_remarks"."user_id"
-	WHERE "recipes"."id" = $1
+	WHERE "recipes"."id" = $1 AND "user_remarks"."comment" IS NOT NULL
   ORDER BY "user_remarks"."id" ASC;`;
 
   pool.query(queryText, [id])
@@ -179,28 +179,18 @@ router.delete('/:id', (req, res) => {
   });
 });
 
-  // {favorite
-  //   ? pool.query(`DELETE FROM "favorites" WHERE "user_id" = $1 AND "recipe_id" = $2;`, [req.user.id, id])
-  //   .then((result) => {
-  //     pool.query(`DELETE FROM "recipes" WHERE "id" = $1 AND "family_id" = $2;`, [id, family_id])
-  //       .then((result) => {
-  //         res.sendStatus(204);
-  //       })
-  //       .catch((err) => {
-  //         console.log('error with deleting recipe: ', err);
-  //         res.sendStatus(500);
-  //       });
-  //     })
-  //   : pool.query(`DELETE FROM "recipes" WHERE "id" = $1 AND "family_id" = $2;`, [id, family_id])
-  //     .then((result) => {
-  //       res.sendStatus(204);
-  //     })
-  //     .catch((err) => {
-  //       console.log('error with deleting recipe: ', err);
-  //       res.sendStatus(500);
-  //     });
-  // };
-  
+//DELETE route for user comment
+router.delete('/comments/:id', (req, res) => {
+  console.log('in delete comment request with id: ', req.params.id);
+  pool.query('DELETE FROM "user_remarks" WHERE "id" = $1;', [req.params.id])
+    .then((result) => {
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.log('error with deleting comment', err);
+      res.sendStatus(500);
+    });
+});
     
 
 //PUT route for editing recipe
