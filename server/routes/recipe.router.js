@@ -129,10 +129,11 @@ router.get('/favorite/:id', (req, res) => {
 router.get('/remarks/:id', (req, res) => {
   const id = req.params.id;
   const queryText = 
-  `SELECT "user_remarks"."comment", "user_remarks"."memory", "user_remarks"."user_id", "user_remarks"."recipes_id", "user"."username" FROM "recipes"
+  `SELECT "user_remarks"."id", "user_remarks"."comment", "user_remarks"."memory", "user_remarks"."user_id", "user_remarks"."recipes_id", "user"."username" FROM "recipes"
 	JOIN "user_remarks" ON "user_remarks"."recipes_id" = "recipes"."id"
 	JOIN "user" ON "user"."id" = "user_remarks"."user_id"
-	WHERE "recipes"."id" = $1;`;
+	WHERE "recipes"."id" = $1
+  ORDER BY "user_remarks"."id" ASC;`;
 
   pool.query(queryText, [id])
     .then( result => {
