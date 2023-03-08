@@ -6,6 +6,7 @@ import EditButton from '../EditButton/EditButton';
 import DeleteButton from '../DeleteButton/DeleteButton';
 import FavoritesButton from '../FavoritesButton/FavoritesButton';
 import './RecipePage.css';
+import UserComments from '../UserComments/UserComments';
 
 
 const RecipePage = () => {
@@ -17,6 +18,9 @@ const RecipePage = () => {
     const [ingredients, setIngredients] = useState([{ingredient:'', amount:''}]);
     const [instructions, setInstructions] = useState(['']);
     const [checkedInstruction, setCheckedInstruction] = useState(['']);
+    const [commentsVisible, setCommentsVisible] = useState(false);
+    const [commentInputVisible, setCommentInputVisible] = useState(false);
+    const [comment, setComment] = useState('');
     const favorites = useSelector((store) => store.setFavorites);
     const history = useHistory();
     
@@ -41,6 +45,25 @@ const RecipePage = () => {
         setCheckedInstruction(updatedArray);
     };
 
+    const closeComments = () => {
+        setCommentsVisible(false);
+        setComment('');
+    };
+
+    const submitHandler = () => {
+        const newComment = {recipes_id: id, comment}
+        if (comment.length === 0) {
+            alert('comment cannot be blank!')
+        } else 
+        if (comment.length > 100) {
+            alert('comment can only be 100 characters');
+        }
+        dispatch({ type: 'POST_COMMENT', payload: newComment });
+        // setCommentsVisible(false);
+        setComment('');
+
+    };
+
     return (
         <div className="content-container">
 
@@ -49,6 +72,31 @@ const RecipePage = () => {
             </div>
 
             <div>
+                    {commentsVisible &&
+                        <div className="user-remarks-div">
+                            <UserComments id={id}/>
+                            {commentsVisible &&
+                                <>
+                                    <input 
+                                        placeholder="add your comment here!"
+                                        className="comment-input"
+                                        value={comment} 
+                                        onChange={(event) => setComment(event.target.value)}>
+                                    </input>
+                                    <button className="btn_sizeMed" onClick={submitHandler}>Submit</button>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button className="btn_edit" onClick={closeComments}>Close</button>
+                                </>
+                            }
+                        </div>
+                    }
+                    {!commentsVisible &&
+                        <>
+                            <button className="btn_sizeMed" onClick={() => setCommentsVisible(true)}>View Comments</button>
+                            <br />
+                            <br />
+                        </>
+                    }
                 <div className="recipe-page">
                     <div className="white-fill">
                         <h1><u>{title}</u></h1>
@@ -79,6 +127,7 @@ const RecipePage = () => {
                                                 id={`custom-checkbox-${index}`}
                                                 name={instruction}
                                                 value={instruction}
+                                                maxLength={100}
                                                 onChange={() => onChange(index)}
                                             />
                                             <label className={!checkedInstruction[index] ? "checked-instruction-false" : "checked-instruction-true"} htmlFor={`custom-checkbox-${index}`}>{instruction}</label>
@@ -88,12 +137,13 @@ const RecipePage = () => {
                                 </ul>
                             </div>
                         }
-                        
-                        <div className="fav-buttons">
-                            <FavoritesButton recipeId={Number(id)}/>
-                        </div>
+                    </div>
+                    
+                    <div className="fav-buttons">
+                        <FavoritesButton recipeId={Number(id)}/>
                     </div>
                 </div>
+                
                 <br />
                 <div className="nav-buttons">
                     <button className="btn_sizeMed" onClick={() => {history.goBack()}}>Back</button>

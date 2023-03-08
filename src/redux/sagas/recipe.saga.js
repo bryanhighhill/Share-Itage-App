@@ -101,12 +101,35 @@ function* removeFavorite(action) {
 function* removeRecipe(action) {
   const id = action.payload.id;
   const family_id = action.payload.family_id;
-
   try {
     yield axios.delete(`api/recipe/${id}`, {data: {family_id}});
     yield put({ type: 'FETCH_RECIPES', payload: family_id });
   } catch (error) {
     alert('Error with removing recipe from database: ', error);
+  };
+};
+
+//fetch user comments
+function* fetchUserRemarks(action) {
+  console.log('fetch remarks saga with: ', action.payload);
+  const id = action.payload;
+  try {
+    const userComments = yield axios.get(`api/recipe/remarks/${id}`);
+    yield put({ type: 'SET_USER_REMARKS', payload: userComments.data});
+    console.log('user comments after get is made in saga: ', userComments.data);
+  } catch (error) {
+    console.log('error with getting user comments', error);
+  };
+};
+
+//post user comment
+function* postComment(action) {
+  console.log('in post user comment saga with: ', action.payload);
+  try {
+    yield axios.post('api/recipe/remarks', action.payload);
+    yield put({ type: 'FETCH_USER_REMARKS', payload: action.payload.recipes_id})
+  } catch (error) {
+    console.log('error with comment post saga', error);
   };
 };
 
@@ -120,6 +143,8 @@ function* recipeSaga() {
   yield takeEvery('FETCH_FAVORITES', fetchFavorites); //dispatched from MyFavoritesPage and from removeFavorite saga
   yield takeEvery('REMOVE_FAVORITE', removeFavorite); //dispatched from RecipeCard
   yield takeEvery('REMOVE_RECIPE', removeRecipe); //dispatched from RecipePage
+  yield takeEvery('FETCH_USER_REMARKS', fetchUserRemarks); //dispatched from UserComments component
+  yield takeEvery('POST_COMMENT', postComment); //dispatched from recipe page
 }
 
 export default recipeSaga;
