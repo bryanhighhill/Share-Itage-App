@@ -127,7 +127,7 @@ function* postComment(action) {
   console.log('in post user comment saga with: ', action.payload);
   try {
     yield axios.post('api/recipe/remarks', action.payload);
-    yield put({ type: 'FETCH_USER_REMARKS', payload: action.payload.recipes_id})
+    yield put({ type: 'FETCH_USER_REMARKS', payload: action.payload.recipe_id})
   } catch (error) {
     console.log('error with comment post saga', error);
   };
@@ -136,10 +136,10 @@ function* postComment(action) {
 //delete user comment
 function* deleteComment(action) {
   const id = action.payload.id;
-  const recipes_id = action.payload.recipes_id;
+  const recipe_id = action.payload.recipe_id;
   try {
     yield axios.delete(`api/recipe/comments/${id}`);
-    yield put({ type: 'FETCH_USER_REMARKS', payload: recipes_id });
+    yield put({ type: 'FETCH_USER_REMARKS', payload: recipe_id });
   } catch (error) {
     alert('Error with removing comment from database: ', error);
   };

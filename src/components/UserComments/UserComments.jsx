@@ -12,7 +12,8 @@ const UserComments = ({id}) => {
     }, [id]);
 
     const deleteComment = (commentId) => {
-        const comment = {recipes_id: id, id: commentId}
+        const comment = {recipe_id: Number(id), id: commentId}
+        console.log('in delete comment with: ', comment);
         dispatch({ type: 'DELETE_COMMENT', payload: comment});
     }
 

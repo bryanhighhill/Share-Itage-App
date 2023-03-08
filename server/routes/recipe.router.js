@@ -49,9 +49,9 @@ router.post('/favorite', (req, res) => {
 
 //POST route for recipe_remarks comments
 router.post('/remarks', (req, res) => {
-  const queryText = `INSERT INTO "user_remarks" (comment, user_id, recipes_id)
+  const queryText = `INSERT INTO "user_remarks" (comment, user_id, recipe_id)
   VALUES ($1, $2, $3);`;
-  pool.query(queryText, [req.body.comment, req.user.id, req.body.recipes_id])
+  pool.query(queryText, [req.body.comment, req.user.id, req.body.recipe_id])
   .then(() => res.sendStatus(201))
   .catch((err) => {
     console.log('error with posting comment', err);
@@ -129,8 +129,8 @@ router.get('/favorite/:id', (req, res) => {
 router.get('/remarks/:id', (req, res) => {
   const id = req.params.id;
   const queryText = 
-  `SELECT "user_remarks"."id", "user_remarks"."comment", "user_remarks"."user_id", "user_remarks"."recipes_id", "user"."username" FROM "recipes"
-	JOIN "user_remarks" ON "user_remarks"."recipes_id" = "recipes"."id"
+  `SELECT "user_remarks"."id", "user_remarks"."comment", "user_remarks"."user_id", "user_remarks"."recipe_id", "user"."username" FROM "recipes"
+	JOIN "user_remarks" ON "user_remarks"."recipe_id" = "recipes"."id"
 	JOIN "user" ON "user"."id" = "user_remarks"."user_id"
 	WHERE "recipes"."id" = $1 AND "user_remarks"."comment" IS NOT NULL
   ORDER BY "user_remarks"."id" ASC;`;
@@ -167,6 +167,7 @@ router.delete('/:id', (req, res) => {
   const id = req.params.id; //recipe id
 
   pool.query(`DELETE FROM "favorites" WHERE "recipe_id" = $1`, [id])
+  pool.query(`DELETE FROM "user_remarks" where "recipe_id" = $1`, [id])
   .then((result) => {
     pool.query(`DELETE FROM "recipes" WHERE "id" = $1`, [id])
       .then((result) => {
