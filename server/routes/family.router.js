@@ -93,6 +93,21 @@ router.put('/', (req, res) => {
     });
 });
 
+//PUT request to remove family member
+router.put('/remove/:id', (req, res) => {
+
+  const queryText = 'UPDATE "user" SET "family_id"=null WHERE "id"=$1;';
+
+  pool.query(queryText, [req.body.id])
+    .then(result => {
+      res.sendStatus(201);
+    })
+    .catch(err => {
+      console.log('error with updating admin status: ', err);
+      res.sendStatus(500);
+    });
+});
+
   
 
 module.exports = router;

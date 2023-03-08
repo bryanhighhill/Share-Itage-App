@@ -13,8 +13,8 @@ function* createFamily(action) {
   } catch (error) {
     console.log('Error with creating family:', error);
     yield put({ type: 'FAMILY_FAILED' });
-  }
-}
+  };
+};
 
 // Fetch Family Details from db - family table
 function* fetchFamily(action) {
@@ -24,8 +24,8 @@ function* fetchFamily(action) {
     yield put({ type: 'SET_FAMILY', payload: family.data });
   } catch (error) {
     console.log('User get request failed', error);
-  }
-}
+  };
+};
 
 function* fetchFamilyMembers(action) {
   console.log('action.payload in fetch family members saga: ', action.payload);
@@ -35,8 +35,8 @@ function* fetchFamilyMembers(action) {
     yield put({ type: 'SET_FAMILY_MEMBERS', payload: familyMembers.data});
   } catch (error) {
     console.log('error with fetching family members: ', error);
-  }
-}
+  };
+};
 
 function* changeAdminStatus(action) {
   console.log('action payload in admin status saga: ', action.payload);
@@ -45,8 +45,8 @@ function* changeAdminStatus(action) {
     yield put({ type: 'FETCH_FAMILY_MEMBERS'});
   } catch (error) {
     console.log('error with changing admin status', error);
-  }
-}
+  };
+};
 
 function* postUserInvite(action) {
   const token = action.payload;
@@ -54,8 +54,19 @@ function* postUserInvite(action) {
     yield axios.post(`api/family/${token}`);
   } catch (error) {
     console.log('error with posting user invite', error);
-  }
-}
+  };
+};
+
+function* removeFamilyMember(action) {
+  const family_id = action.payload.family_id;
+  const id = action.payload.id;
+  try {
+    yield axios.put(`api/family/remove/${id}`, action.payload);
+    yield put({ type: 'FETCH_FAMILY_MEMBERS', payload: family_id})
+  } catch (error) {
+    console.log('error with removing family member: ', error);
+  };
+};
 
 
 function* familySaga() {
@@ -63,6 +74,7 @@ function* familySaga() {
   yield takeEvery('FETCH_FAMILY', fetchFamily); //dispatched from family confirmation page
   yield takeEvery('FETCH_FAMILY_MEMBERS', fetchFamilyMembers); //dispatched from admin page
   yield takeEvery('CHANGE_ADMIN_STATUS', changeAdminStatus); //dispatched from admin page
-  yield takeEvery('POST_USER_INVITE', postUserInvite); 
+  yield takeEvery('POST_USER_INVITE', postUserInvite); //dispatched from admin page
+  yield takeEvery('REMOVE_FAMILY_MEMBER', removeFamilyMember); //dispatched from admin page
 }
 export { familySaga };
