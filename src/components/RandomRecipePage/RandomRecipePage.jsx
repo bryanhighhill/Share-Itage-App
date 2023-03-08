@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import UserPage from '../UserPage/UserPage';
 import FavoritesButton from '../FavoritesButton/FavoritesButton';
+import UserComments from '../UserComments/UserComments';
 import './RandomRecipe.css';
 
 
@@ -17,6 +18,8 @@ const RandomRecipePage = () => {
     const [instructions, setInstructions] = useState(['']);
     const [recipeId, setRecipeId] = useState(0);
     const [checkedInstruction, setCheckedInstruction] = useState(['']);
+    const [commentsVisible, setCommentsVisible] = useState(false);
+    const [comment, setComment] = useState('');
     const page = 4;
 
     console.log('random recipe id: ', randomRecipe.id);
@@ -54,7 +57,25 @@ const RandomRecipePage = () => {
         setCheckedInstruction(updatedArray);
     }
 
-    console.log('favorites in random: ', favorites);
+    const closeComments = () => {
+        setCommentsVisible(false);
+        setComment('');
+    };
+
+    const submitHandler = () => {
+        const newComment = {recipe_id: Number(randomRecipe.id), comment}
+        console.log('in submit comment with', newComment);
+        if (comment.length === 0) {
+            alert('comment cannot be blank!')
+        } else 
+        if (comment.length > 100) {
+            alert('comment can only be 100 characters');
+        } else
+        dispatch({ type: 'POST_COMMENT', payload: newComment });
+        setComment('');
+    };
+
+   
     return (
         <div className="content-container">
 
@@ -65,8 +86,31 @@ const RandomRecipePage = () => {
             {recipes.length > 0
             ? <div className="random-recipe">
                 <h1>Random Recipe</h1>
-                <br />
-                <br />
+                {commentsVisible &&
+                        <div className="user-remarks-div">
+                            <UserComments id={randomRecipe.id}/>
+                            {commentsVisible &&
+                                <>
+                                    <input 
+                                        placeholder="add your comment here"
+                                        className="comment-input"
+                                        value={comment} 
+                                        onChange={(event) => setComment(event.target.value)}>
+                                    </input>
+                                    <button className="btn_sizeMed" onClick={submitHandler}>Submit</button>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button className="btn_edit" onClick={closeComments}>Close</button>
+                                </>
+                            }
+                        </div>
+                    }
+                    {!commentsVisible &&
+                        <>
+                            <button className="btn_sizeMed" onClick={() => setCommentsVisible(true)}>View Comments</button>
+                            <br />
+                            <br />
+                        </>
+                    }
                 <div className="random-recipe-card">
                     <h2><u>{title}</u></h2>
                     {ingredients

@@ -19,9 +19,7 @@ const RecipePage = () => {
     const [instructions, setInstructions] = useState(['']);
     const [checkedInstruction, setCheckedInstruction] = useState(['']);
     const [commentsVisible, setCommentsVisible] = useState(false);
-    const [commentInputVisible, setCommentInputVisible] = useState(false);
     const [comment, setComment] = useState('');
-    const favorites = useSelector((store) => store.setFavorites);
     const history = useHistory();
     
     useEffect(() => {
@@ -51,7 +49,8 @@ const RecipePage = () => {
     };
 
     const submitHandler = () => {
-        const newComment = {recipes_id: id, comment}
+        const newComment = {recipe_id: Number(id), comment}
+        console.log('in submit comment with', newComment);
         if (comment.length === 0) {
             alert('comment cannot be blank!')
         } else 
@@ -59,7 +58,6 @@ const RecipePage = () => {
             alert('comment can only be 100 characters');
         } else
         dispatch({ type: 'POST_COMMENT', payload: newComment });
-        // setCommentsVisible(false);
         setComment('');
     };
 
@@ -77,7 +75,7 @@ const RecipePage = () => {
                             {commentsVisible &&
                                 <>
                                     <input 
-                                        placeholder="add your comment here!"
+                                        placeholder="add your comment here"
                                         className="comment-input"
                                         value={comment} 
                                         onChange={(event) => setComment(event.target.value)}>
