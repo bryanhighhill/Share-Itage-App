@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import UserPage from '../UserPage/UserPage';
+import SidePanel from '../SidePanel/SidePanel';
 import RecipeGrid from '../RecipeGrid/RecipeGrid';
 
 const FindRecipePage = () => {
@@ -18,7 +18,7 @@ const FindRecipePage = () => {
             <div className="content-container">
 
                 <div className="user-nav">
-                    <UserPage page={page}/>
+                    <SidePanel page={page}/>
                 </div>
                 
                 <div>
@@ -36,7 +36,7 @@ const FindRecipePage = () => {
             <div className="content-container">
 
                 <div className="user-nav">
-                    <UserPage page={page}/>
+                    <SidePanel page={page}/>
                 </div>
 
                 <div>

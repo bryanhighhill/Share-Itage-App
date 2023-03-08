@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import UserPage from '../UserPage/UserPage';
+import SidePanel from '../SidePanel/SidePanel';
 import UserInvitation from '../UserInvitation/UserInvitation';
 import './AdminPage.css';
 
@@ -29,7 +30,7 @@ const AdminPage = () => {
         return (
             <div className="content-container">
                 <div className="user-nav">
-                    <UserPage page={page}/>
+                    <SidePanel page={page}/>
                 </div> {/*end "user-nav" div */}
                 <div className="admin-container">
                     <h1>Admin Panel</h1>

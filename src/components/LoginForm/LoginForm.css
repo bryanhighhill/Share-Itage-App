@@ -1,0 +1,23 @@
+.login-header {
+    text-align: center;
+    text-shadow: 2px 4px 4px rgb(0, 0, 0);
+    margin-bottom: 50px;
+}
+
+.username-header {
+    display: inline;
+    text-shadow: 2px 4px 4px rgb(0, 0, 0);
+}
+
+.login-bar {
+    background-color: rgba(0, 0, 0, 0.715);
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.login-btn {
+    margin-bottom: 17px;
+}

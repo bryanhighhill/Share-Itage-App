@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import UserPage from '../UserPage/UserPage';
+// import UserPage from '../UserPage/UserPage';
+import SidePanel from '../SidePanel/SidePanel';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './AddRecipePage.css';
@@ -67,7 +68,7 @@ const AddRecipePage = () => {
     return (
         <div className="content-container">
             <div className="user-nav">
-                <UserPage page={page}/>
+                <SidePanel page={page}/>
             </div> {/*end "user-nav" div */}
 
             <div className="form-container">

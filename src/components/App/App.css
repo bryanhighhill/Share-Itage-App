@@ -25,7 +25,7 @@ Container
 
 .content-container {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: .9fr 3fr;
 }
 
 
@@ -265,13 +265,17 @@ Form Treatment
 
 .formPanel {
   box-sizing: border-box;
+  text-align: center;
   width: 400px;
   max-width: 100%;
   padding: 25px;
   margin: 0 auto 20px;
-  background-color: #efefef;
-  border-radius: 3px;
-  box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
+  color: white;
+  border-radius: 10px;
+  background-image: url("/Users/bryanhighhill/Desktop/lydian/homework/Solo_Homework/solo_project/Share-Itage-App/public/images/recipe-box-front-closed.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 input {
@@ -298,4 +302,8 @@ Recipe Divs
   width: 70%;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
+}
+
+.user-nav {
+  width: 70%;
 }

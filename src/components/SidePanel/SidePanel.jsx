@@ -1,15 +1,24 @@
 import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import LogOutButton from '../LogOutButton/LogOutButton';
+import './SidePanel.css';
 
 const SidePanel = ({page}) => {
     const history = useHistory();
+    const dispatch = useDispatch();
     const user = useSelector((store) => store.user);
+    const family = useSelector((store) => store.family);
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_FAMILY', payload: user.family_id });
+    }, []);
 
     return (
-        <div className="side-panel-container">
-            <br />
-            <br />
-
+        <div className="container">
+           <div className="welcome-div">
+                Welcome, <h4 className="welcome-header">{user.username}</h4>!
+           </div>
             <button
                 className={page === 1 ? "btn_selected" : "btn"}
                 onClick={() => {history.push(`/addrecipe`)}}
@@ -61,6 +70,7 @@ const SidePanel = ({page}) => {
                         <br />
                     </>
             }
+            <LogOutButton className="logout-btn" />
         </div>
     )
 }

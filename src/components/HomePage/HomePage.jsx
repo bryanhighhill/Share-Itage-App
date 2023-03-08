@@ -3,23 +3,22 @@ import {useSelector } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import SidePanel from '../SidePanel/SidePanel';
 import NewUserPage from '../NewUserPage/NewUserPage';
-import './UserPage.css';
+// import './UserPage.css';
 
-function UserPage({page}) {
+function HomePage({page}) {
   const [loading, setLoading] = useState(false);
   const user = useSelector((store) => store.user);
 
   if (user.family_id) {
     return (
       <div className="content-container">
-
+        
         <div className="user-nav">
-          <SidePanel />
+            <UserPage />
         </div>
 
-        <div className="image-div">
-        </div>
-      
+        <div>new home page column 2</div>
+
       </div>
     );
   } else 
@@ -37,4 +36,4 @@ function UserPage({page}) {
 }
 
 // this allows us to use <App /> in index.js
-export default UserPage;
+export default HomePage;

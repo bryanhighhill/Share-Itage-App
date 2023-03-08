@@ -1,0 +1,12 @@
+.image-div {
+  padding-left: 20px;
+  padding-top: 55px;
+  width: 47%;
+  max-width: 100%;
+  /* margin: 0 auto 20px; */
+  background-image: url("/public/images/recipe-box-homebg.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right;
+  /* background-color: red; */
+}

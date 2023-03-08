@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import UserPage from '../UserPage/UserPage';
+import SidePanel from '../SidePanel/SidePanel';
 import RecipeCard from '../RecipeCard/RecipeCard';
 
 const MyFavoritesPage = () => {
@@ -20,7 +20,7 @@ const MyFavoritesPage = () => {
     return (
         <div className="content-container">
             <div className="user-nav">
-                <UserPage page={page}/>
+                <SidePanel page={page}/>
             </div>
             <div>
                 <h1>My Favorites</h1>

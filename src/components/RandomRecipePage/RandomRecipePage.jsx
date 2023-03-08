@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import UserPage from '../UserPage/UserPage';
+import SidePanel from '../SidePanel/SidePanel';
 import FavoritesButton from '../FavoritesButton/FavoritesButton';
 import UserComments from '../UserComments/UserComments';
 import './RandomRecipe.css';
@@ -80,7 +80,7 @@ const RandomRecipePage = () => {
         <div className="content-container">
 
             <div className="user-nav">
-                <UserPage page={page}/>
+                <SidePanel page={page}/>
             </div>
 
             {recipes.length > 0
