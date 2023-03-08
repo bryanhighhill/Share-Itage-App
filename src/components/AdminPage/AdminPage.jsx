@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import UserPage from '../UserPage/UserPage';
 import SidePanel from '../SidePanel/SidePanel';
 import UserInvitation from '../UserInvitation/UserInvitation';
@@ -7,14 +7,14 @@ import './AdminPage.css';
 
 const AdminPage = () => {
     const user = useSelector(store => store.user);
-    const family =useSelector(store => store.family);
+    const family = useSelector(store => store.family);
+    const [deleteMessageVisible, setDeleteMessageVisible] = useState(false);
     const dispatch = useDispatch();
     const page = 5;
 
     console.log('family on admin page', family);
 
     useEffect(() => {
-        console.log('user family id: ', user.family_id);
         dispatch({ type: 'FETCH_FAMILY_MEMBERS', payload: user.family_id });
     }, [user.family_id]);
 
@@ -23,6 +23,11 @@ const AdminPage = () => {
         const adminStatus = !member.admin;
         dispatch({ type: 'CHANGE_ADMIN_STATUS', payload: {id: member.id, admin: adminStatus} });
         dispatch({ type: 'FETCH_FAMILY_MEMBERS', payload: user.family_id });
+    }
+
+    const removeFromFamily = (id) => {
+        const remove = {family_id: user.family_id, id}
+        dispatch({ type: 'REMOVE_FAMILY_MEMBER', payload: remove});
     }
 
 
@@ -63,8 +68,8 @@ const AdminPage = () => {
                     <div className="your-family"></div>
                     <h2>Your Family</h2>
                     <div className="family-members-container">
-                        {family.length > 0
-                        ?   <>
+                        {family.length > 0 &&
+                            <>
                                 {family.map((member, index) => {
                                     var options = { year: 'numeric', month: 'long', day: 'numeric' };
                                     const date = new Date(member.registration_date);
@@ -93,6 +98,9 @@ const AdminPage = () => {
                                                     <>
                                                         <br />
                                                         <button className="btn_sizeMed" onClick={() => {admin(member)}}>{member.admin ? 'remove admin' : 'make admin'}</button>
+                                                        <br />
+                                                        <br />
+                                                        <button className="btn_delete" onClick={() => removeFromFamily(member.id)}>Remove</button>
                                                     </>
                                                 }
                                                 <br />
@@ -102,7 +110,7 @@ const AdminPage = () => {
                                     )
                                 })}
                             </>
-                        : null}
+                        }
                     </div>
                 </div>
             </div>
