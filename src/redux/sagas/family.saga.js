@@ -5,11 +5,8 @@ import axios from 'axios';
 function* createFamily(action) {
   try {
     // passes the family name and user.id from the payload to the server
-    yield axios.post('/api/family', action.payload); //sends to family.router.js
-
-    // set to 'login' mode so they see the login screen
-    // after registration or after they log out
-    // yield put({ type: 'SET_TO_LOGIN_MODE' });
+    const newFamilyId = yield axios.post('/api/family', action.payload); //sends to family.router.js
+    yield put({ type: 'FETCH_USER' }) //get request to update family data for user
   } catch (error) {
     console.log('Error with creating family:', error);
     yield put({ type: 'FAMILY_FAILED' });
