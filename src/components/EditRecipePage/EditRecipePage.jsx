@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import UserPage from '../UserPage/UserPage';
+import SidePanel from '../SidePanel/SidePanel';
 
 const EditRecipePage = () => {
     const { id } = useParams();
@@ -98,7 +98,7 @@ const EditRecipePage = () => {
     return(
         <div className="content-container">
             <div className="user-nav">
-                <UserPage />
+                <SidePanel />
             </div>
             <div>
                 {selectedRecipe.title

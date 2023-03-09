@@ -23,48 +23,50 @@ function RegisterForm() {
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
-      <h2 className="register">Register User</h2>
+      <h1 className="register-header">Register User</h1>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
         </h3>
       )}
+      <section className="register-bar">
       <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
-            value={username}
-            required
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="email">
-          Email:
-          <input
-            type="email"
-            name="username"
-            value={email}
-            required
-            onChange={(event) => setEmail(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-      </div>
+          <label htmlFor="username">
+          <h5 className="username-header">Username:</h5>
+            <input
+              type="text"
+              name="username"
+              value={username}
+              required
+              onChange={(event) => setUsername(event.target.value)}
+            />
+          </label>
+        </div>
+        <div>
+          <label htmlFor="email">
+          <h5 className="username-header">Email:</h5>
+            <input
+              type="email"
+              name="username"
+              value={email}
+              required
+              onChange={(event) => setEmail(event.target.value)}
+            />
+          </label>
+        </div>
+        <div>
+          <label htmlFor="password">
+          <h5 className="username-header">Password:</h5>
+            <input
+              type="password"
+              name="password"
+              value={password}
+              required
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </label>
+        </div>
+      </section>
       <div className="register-button">
         <input className="btn" type="submit" name="submit" value="Register" />
       </div>

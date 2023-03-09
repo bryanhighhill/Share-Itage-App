@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import UserPage from '../UserPage/UserPage';
 import SidePanel from '../SidePanel/SidePanel';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';

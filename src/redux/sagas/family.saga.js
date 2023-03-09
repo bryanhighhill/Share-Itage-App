@@ -73,5 +73,6 @@ function* familySaga() {
   yield takeEvery('CHANGE_ADMIN_STATUS', changeAdminStatus); //dispatched from admin page
   yield takeEvery('POST_USER_INVITE', postUserInvite); //dispatched from admin page
   yield takeEvery('REMOVE_FAMILY_MEMBER', removeFamilyMember); //dispatched from admin page
+  // yield takeEvery('REMOVE_MEMBER', removeMember); //dispatched from admin page / DeleteMemberButton
 }
 export { familySaga };

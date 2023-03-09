@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import SidePanel from '../SidePanel/SidePanel';
 import UserInvitation from '../UserInvitation/UserInvitation';
+import './DeleteMemberButton.css';
 import './AdminPage.css';
 
 const AdminPage = () => {
@@ -9,6 +10,7 @@ const AdminPage = () => {
     const family = useSelector(store => store.family);
     const dispatch = useDispatch();
     const page = 5;
+    const [deleteId, setDeleteID] = useState(0);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_FAMILY_MEMBERS', payload: user.family_id });
@@ -21,9 +23,33 @@ const AdminPage = () => {
         dispatch({ type: 'FETCH_FAMILY_MEMBERS', payload: user.family_id });
     }
 
-    const removeFromFamily = (id) => {
-        const remove = {family_id: user.family_id, id}
-        dispatch({ type: 'REMOVE_FAMILY_MEMBER', payload: remove});
+    const openModal = (member) => {
+        const modal = document.querySelector('.modal');
+        const overlay = document.querySelector('.overlay');
+        modal.classList.remove('hidden'); //removes hidden class from modal
+        overlay.classList.remove('hidden'); //removes hidden class from overlay
+        setDeleteID(member.id);
+    }
+
+    const closeModal = () => {
+        const modal = document.querySelector('.modal');
+        const overlay = document.querySelector('.overlay');
+        modal.classList.add('hidden'); //adds hidden class to modal
+        overlay.classList.add('hidden'); //adds hidden class to modal
+        setDeleteID(0);
+    }
+
+    const clickHandler = () => {
+        console.log('member to be deleted: ', deleteId);
+        const member = {
+            id: deleteId, 
+            family_id: user.family_id,
+        }
+        dispatch({
+        type: 'REMOVE_FAMILY_MEMBER', 
+        payload: member
+        })
+        closeModal();
     }
 
 
@@ -35,6 +61,7 @@ const AdminPage = () => {
                 </div> {/*end "user-nav" div */}
                 <div className="admin-container">
                     <h1>Admin Panel</h1>
+
                     <div className="page-description">
                         Welcome to the few...the elite...the "admin" 
                         <br />
@@ -67,6 +94,7 @@ const AdminPage = () => {
                         {family.length > 0 &&
                             <>
                                 {family.map((member, index) => {
+                                    console.log('member in fam: ', member);
                                     var options = { year: 'numeric', month: 'long', day: 'numeric' };
                                     const date = new Date(member.registration_date);
 
@@ -96,7 +124,26 @@ const AdminPage = () => {
                                                         <button className="btn_sizeMed" onClick={() => {admin(member)}}>{member.admin ? 'remove admin' : 'make admin'}</button>
                                                         <br />
                                                         <br />
-                                                        <button className="btn_delete" onClick={() => removeFromFamily(member.id)}>Remove</button>
+                                                        {/* <button className="btn_delete" onClick={() => removeFromFamily(member.id)}>Remove</button> */}
+                                                        <section className="modal hidden"> {/* modal container */}
+                                                            <div className="flex">
+                                                                <button onClick={closeModal} className="btn_close_modal">X</button>
+                                                            </div>
+                                                            <div>
+                                                                <h2>Are you sure you want to remove this user from your family?</h2>
+                                                            </div>
+                                                            <div className="modal_delete_container">
+                                                                <button onClick={clickHandler} className="btn_modal_delete">Delete</button>
+                                                            </div>
+                                                        </section>
+
+                                                        <div className="overlay hidden"></div> {/* overlay element - dark blurred background when modal is open */}
+                                                        <button
+                                                            className="btn_delete"
+                                                            onClick={() => openModal(member)}
+                                                        >
+                                                            Remove
+                                                        </button>
                                                     </>
                                                 }
                                                 <br />
