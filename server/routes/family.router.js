@@ -48,8 +48,10 @@ router.post('/', (req, res) => {
     .then((query) => {
       //query to take family id returned from line 32 request and set user family_id ALSO make user an admin
       pool.query('UPDATE "user" SET "family_id" = $1, "admin" = true WHERE "id" = $2;', [query.rows[0].id, req.body.user_id])
-      .then(() => {
-        res.sendStatus(201)
+      .then(result => {
+        console.log('in post return with', query.rows[0].id);
+        res.sendStatus(201);
+        // res.send(query.rows[0].id)
       })
       .catch((err) => {
         console.log('error with setting user family id: ', err);

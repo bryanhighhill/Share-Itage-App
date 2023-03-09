@@ -22,8 +22,6 @@ const CreateFamilyPage = () => {
             },
         });
 
-        //fetch user data here so that conditional is met in UserPage when rendering page content
-        dispatch({type: 'FETCH_USER'});
         //clear name
         setName('');
         //send user to UserPage
@@ -32,20 +30,15 @@ const CreateFamilyPage = () => {
 
     return (
         <div>
-            <div className="user-nav">
-                {/* <UserPage /> */}
-            </div>
-            <div className="family-div">
+            <div>
                 <form onSubmit={onSubmit}>
-                <label htmlFor="name"><b>Create a Family Name</b></label>
-                    <br />
-                    <br />
                     <input
                         id="name"
                         name="name"
                         value={name}
                         placeholder="What's your family name?"
                         className="family-input"
+                        required
                         onChange={(event) => setName(event.target.value)}
                     />
                     <br />

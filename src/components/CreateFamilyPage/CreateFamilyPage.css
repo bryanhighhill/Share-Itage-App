@@ -1,11 +1,20 @@
+.family-div {
+    text-align: center;
+    font-size: 20px;
+    text-align: center;
+    font-size: 20px;
+    background-color: white;
+    width: 40%;
+    margin: 0 auto;
+    padding: 25px;
+    /* position: relative; */
+    box-shadow: 1px 2px 5px black;
+    border-radius: 20px;
+}
+
 .family-input {
     height: 1.1rem;
     padding: 5px 10px;
     font-size: 20px;
-    width: 30%;
-}
-
-.family-div {
-    text-align: center;
-    font-size: 20px;
+    width: 80%;
 }

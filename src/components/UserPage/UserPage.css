@@ -10,3 +10,16 @@
   background-position: right;
   /* background-color: red; */
 }
+
+.welcome-header {
+  text-align: center;
+  text-decoration: bold;
+}
+
+.family-create-desc {
+  text-align: center;
+}
+
+.nav-instruction {
+  margin-bottom: 15px;
+}
