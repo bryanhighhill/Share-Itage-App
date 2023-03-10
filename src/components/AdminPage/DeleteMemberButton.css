@@ -1,10 +1,4 @@
-/* * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-} */
-
-.modal-container {
+.modal2-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,7 +7,7 @@
     position: relative;
 }
 
-.modal {
+.modal2 {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,7 +16,7 @@
     padding-left: 15px;
     padding-right: 15px;
     min-height: 250px;
-    position: absolute;
+    position: fixed;
     top: 20%;
     background-color: white;
     border: 1px solid #ddd;
@@ -31,13 +25,13 @@
     left: 40%;
 }
   
-.modal .flex {
+.modal2 .flex2 {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
   
-.btn_modal_delete {
+.btn_modal_delete2 {
     display: inline-block;
     padding: 0.8rem 1.4rem;
     font-weight: 700;
@@ -48,19 +42,19 @@
     font-size: 1em;
 }
   
-.btn_open {
+.btn_open2 {
     position: absolute;
     bottom: 150px;
 }
   
-.btn_close_modal {
+.btn_close_modal2 {
     transform: translate(10px, -20px);
     padding: 0.5rem 0.7rem;
     background: #eee;
     border-radius: 50%;
 }
 
-.overlay {
+.overlay2 {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -73,22 +67,22 @@
     z-index: 1;
 }
 
-.hidden {
+.hidden2 {
     display: none;
 }
 
-.btn_close_modal {
+.btn_close_modal2 {
     border: none;
     background-color: rgb(86, 86, 86);
     color: white;
 }
 
-.btn_close_modal:hover {
+.btn_close_modal2:hover {
     background-color: rgb(19, 19, 19);
     transition: .3s;
 }
 
-.btn_modal_delete {
+.btn_modal_delete2 {
     display: inline-block;
     padding: 10px;
     border:0;
@@ -100,12 +94,12 @@
     box-shadow: 1px 2px 5px black;
 }
   
-.btn_modal_delete:hover {
+.btn_modal_delete2:hover {
     background-color: #ff0000;
     box-shadow: .5px 1px 2px black;
     transition: .5s;
 }
 
-.modal_delete_container {
+.modal_delete_container2 {
     position: relative;
 }
