@@ -79,3 +79,16 @@
   background-color:  #008cc8;
   transition: .3s;
 }
+
+.btn_addToList {
+    border: none;
+    margin-left: 15px;
+    background-color: #1d6787;
+    color: white;
+}
+
+.btn_addToList:hover {
+    border: none;
+    margin-left: 15px;
+    background-color: #10455c;
+}

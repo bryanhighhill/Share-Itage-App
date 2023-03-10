@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import SidePanel from '../SidePanel/SidePanel';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import EditButton from '../EditButton/EditButton';
 import DeleteButton from '../DeleteButton/DeleteButton';
 import FavoritesButton from '../FavoritesButton/FavoritesButton';
+import ShoppingList from '../ShoppingList/ShoppingList';
 import './RecipePage.css';
 import UserComments from '../UserComments/UserComments';
 
@@ -21,6 +23,18 @@ const RecipePage = () => {
     const [commentsVisible, setCommentsVisible] = useState(false);
     const [comment, setComment] = useState('');
     const history = useHistory();
+    const [addedToList, setAddedToList] = useState(false);
+    const [ingredientAdded, setIngredientAdded] = useState('');
+    const [shoppingList, setShoppingList] = useState([]);
+
+    const addToList = (ingredient) => {
+        setShoppingList([ ...shoppingList, ingredient ]);
+        setAddedToList(true);
+        setIngredientAdded(ingredient);
+        setTimeout(() => {
+            setAddedToList(false)
+        }, 5000);
+    }
     
     useEffect(() => {
         dispatch({ type: 'FETCH_RECIPE_DATA', payload: id });
@@ -94,6 +108,9 @@ const RecipePage = () => {
                             <br />
                         </>
                     }
+                    
+                    {shoppingList.length > 0 &&
+                        <p>you have {shoppingList.length} items on your shopping list. Click to view your lise</p>}
                 <div className="recipe-page">
                     <div className="white-fill">
                         <h1><u>{title}</u></h1>
@@ -106,9 +123,12 @@ const RecipePage = () => {
                                             <i>{ingredient.amount}</i>
                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                             {ingredient.ingredient}
+                                        
+                                                <button onClick={() => addToList(ingredient.ingredient)} className="btn_addToList">+</button>
                                         </li>
                                     ))} 
                                 </ul>
+                                    {addedToList && <i>added {ingredientAdded} to shopping list!</i>}
                             </div>
                         }
                         
@@ -158,6 +178,7 @@ const RecipePage = () => {
                             </>
                         }                        
                 </div>
+                {/* <ShoppingList /> */}
             </div>
         </div>
     );
