@@ -15,15 +15,10 @@ const ShoppingList = () => {
     const [shoppingList, setShoppingList] = useState([]);
   
     const removeFromList = (ingredient, index) => {
-        list.splice(index, 1);
-        setShoppingList(list);
-        // setAddedToList(true);
-        // setIngredientAdded(ingredient);
-        // setTimeout(() => {
-        //     setAddedToList(false)
-        // }, 3000);
-        dispatch({ type: 'POST_SHOPPING_LIST', payload: {list, id: user.id} });
-        if (list.length == 0) {history.push('/recipes')}
+        const listCopy = [ ...list ];
+        listCopy.splice(index, 1);
+        console.log('list coppy: ', listCopy)
+        dispatch({ type: 'POST_SHOPPING_LIST', payload: {newShoppingList: listCopy, id: user.id} });
     };
 
     useEffect(() => {
@@ -42,8 +37,8 @@ const ShoppingList = () => {
             <div className="shopping-list-container">
                 <h1>Shopping List</h1>
                 
-                {list.length > 0 &&
-                
+                {list.length > 0 
+                ?
                     <>
                         {list.map((ingredient, index) => (
                             <div className="list-item">
@@ -54,7 +49,7 @@ const ShoppingList = () => {
                             </div>
                         ))}
                     </>
-            
+                : <h3>there's nothing on your shopping list yet!</h3>
                 }
             </div>
         </div>
