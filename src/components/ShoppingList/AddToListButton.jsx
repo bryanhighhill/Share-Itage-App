@@ -2,8 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import './ShoppingList.css';
 
-const AddToListButton = ({ ingredient, index }) => {
-    const list = useSelector(store => store.shoppingList);
+const AddToListButton = ({ ingredient, index, list }) => {
+    // const list = useSelector(store => store.shoppingList);
     const user = useSelector(store => store.user);
     const dispatch = useDispatch();
     const [addedToList, setAddedToList] = useState(false);
@@ -37,8 +37,8 @@ const AddToListButton = ({ ingredient, index }) => {
     // };
 
     const addToList = (ingredient, index) => {
-        console.log('shoppingList: ', shoppingList)
-        const newShoppingList = [ ...shoppingList, ingredient];
+        console.log('shoppingList: ', list)
+        const newShoppingList = [ ...list, ingredient];
         setShoppingList(newShoppingList);
         setAddedToList(true);
         setIngredientAdded(ingredient);
@@ -62,21 +62,25 @@ const AddToListButton = ({ ingredient, index }) => {
     // };
 
     return (
-        <>
-            {list
-            ?
-                <>
-                {shoppingList.map((item, index) => {
-                    return item;
-                }).includes(ingredient) 
-                    ?   <button onClick={() => addToList(ingredient, index)} className="btn_addToList">-</button>  //need to work on remove item from list
-                    :   <button onClick={() => addToList(ingredient, index)} className="btn_addToList">+</button>
-                }
-                </>
-            :   <button onClick={() => addToList(ingredient, index)} className="btn_addToList">+</button>
-            }
+<       button onClick={() => addToList(ingredient, index)} className="btn_addToList">+</button>
+
+
+
+        // <>
+        //     {list
+        //     ?
+        //         <>
+        //         {shoppingList.map((item, index) => {
+        //             return item;
+        //         }).includes(ingredient) 
+        //             ?   <button onClick={() => addToList(ingredient, index)} className="btn_addToList">-</button>  //need to work on remove item from list
+        //             :   <button onClick={() => addToList(ingredient, index)} className="btn_addToList">+</button>
+        //         }
+        //         </>
+        //     :   <button onClick={() => addToList(ingredient, index)} className="btn_addToList">+</button>
+        //     }
         
-        </>
+        // </>
     );
 };
 

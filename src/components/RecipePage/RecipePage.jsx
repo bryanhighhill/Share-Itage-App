@@ -42,7 +42,7 @@ const RecipePage = () => {
     }, [user.id]);
     
     // const addToList = (ingredient, index) => {
-    //     const newShoppingList = [ ...shoppingList, ingredient];
+    //     const newShoppingList = [ ...list, ingredient];
     //     setShoppingList(newShoppingList);
     //     setAddedToList(true);
     //     setIngredientAdded(ingredient);
@@ -134,8 +134,7 @@ const RecipePage = () => {
                                             <i>{ingredient.amount}</i>
                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                             {ingredient.ingredient}
-                                        
-                                            <AddToListButton ingredient={ingredient.ingredient} index={index}/>
+                                            <AddToListButton ingredient={ingredient.ingredient} index={index} list={list}/>
                                         </li>
                                     ))} 
                                 </ul>
