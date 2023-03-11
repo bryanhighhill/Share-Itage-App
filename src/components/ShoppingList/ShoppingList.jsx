@@ -1,12 +1,37 @@
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 
 const ShoppingList = () => {
     const dispatch = useDispatch();
     const user = useSelector(store => store.user);
-    const shoppingList = user.shopping_list;
-    console.log('user', user)
+    const shoppingList = useSelector(store => store.shoppingList);
+    console.log('shopping list: ',shoppingList);
+    // const dragItem = useRef();
+    // const dragOverItem = useRef();
+    // const [list, setList] = useState(['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']);
+    
+    // const dragStart = (event, position) => {
+    //     dragItem.current = position;
+    // };
+
+    // const dragEnter = (event, position) => {
+    //     dragOverItem.current = position;
+    // };
+
+    // const drop = (event) => {
+    //     const copyListItems = [ ...list ];
+    //     const dragItemContent = copyListItems[dragItem.current];
+    //     copyListItems.splice(dragItem.current, 1);
+    //     copyListItems.splice(dragOverItem.current, 0, dragItemContent);
+    //     dragItem.current = null;
+    //     dragOverItem.current = null;
+    //     setList(copyListItems);
+    // };
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_SHOPPING_LIST', payload: user.id });
+    }, [user.id]);
 
     
 
@@ -14,12 +39,16 @@ const ShoppingList = () => {
         <>
             <h2>shopping list</h2>
             
-            {user.shoppingList.length > 0 &&
-                <ul>
+            {shoppingList &&
+                <>
                     {shoppingList.map((item, index) => (
-                        <li>{item}</li>
+                        <div 
+                            key={index}
+                        >
+                            {item}
+                        </div>
                     ))}
-                </ul>
+                </>
             }
         </>
     );

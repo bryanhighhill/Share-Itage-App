@@ -81,6 +81,7 @@ router.get('/invites/:id', (req, res) => {
       console.log('ERROR with getting favorites data: ', err);
       res.sendStatus(500);
     });
-})
+});
+
 
 module.exports = router;

@@ -15,6 +15,7 @@ const RecipePage = () => {
     const dispatch = useDispatch();
     const selectedRecipe = useSelector(store => store.selectedRecipe);
     const user = useSelector(store => store.user);
+    const list = useSelector(store => store.shoppingList);
     const { id } = useParams();
     const [title, setTitle] = useState('');
     const [ingredients, setIngredients] = useState([{ingredient:'', amount:''}]);
@@ -27,14 +28,23 @@ const RecipePage = () => {
     const [ingredientAdded, setIngredientAdded] = useState('');
     const [shoppingList, setShoppingList] = useState([]);
 
-    const addToList = (ingredient) => {
-        setShoppingList([ ...shoppingList, ingredient ]);
+    useEffect(() => {
+        dispatch({ type: 'FETCH_SHOPPING_LIST', payload: user.id });
+    }, [user.id]);
+   
+    const addToList = (ingredient, index) => {
+        // setShoppingList(list);
+        const newShoppingList = [ ...shoppingList, ingredient];
+        // newShoppingList[index] = ingredient;
+        setShoppingList(newShoppingList);
+
         setAddedToList(true);
         setIngredientAdded(ingredient);
         setTimeout(() => {
             setAddedToList(false)
-        }, 5000);
-    }
+        }, 3000);
+        dispatch({ type: 'POST_SHOPPING_LIST', payload: {newShoppingList, id: user.id} });
+    };
     
     useEffect(() => {
         dispatch({ type: 'FETCH_RECIPE_DATA', payload: id });
@@ -104,13 +114,16 @@ const RecipePage = () => {
                     {!commentsVisible &&
                         <>
                             <button className="btn_sizeMed" onClick={() => setCommentsVisible(true)}>View Comments</button>
-                            <br />
-                            <br />
+                            {/* <br />
+                            <br /> */}
                         </>
                     }
+                    <br />
+                    <br />
                     
                     {shoppingList.length > 0 &&
-                        <p>you have {shoppingList.length} items on your shopping list. Click to view your lise</p>}
+                        <p onClick={() => {history.push('/shoppinglist'); console.log('shopping list: ', shoppingList)}}>you have {shoppingList.length} items on your shopping list. Click to view your lise</p>
+                    }
                 <div className="recipe-page">
                     <div className="white-fill">
                         <h1><u>{title}</u></h1>
@@ -124,7 +137,7 @@ const RecipePage = () => {
                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                             {ingredient.ingredient}
                                         
-                                                <button onClick={() => addToList(ingredient.ingredient)} className="btn_addToList">+</button>
+                                                <button onClick={() => addToList(ingredient.ingredient, index)} className="btn_addToList">+</button>
                                         </li>
                                     ))} 
                                 </ul>

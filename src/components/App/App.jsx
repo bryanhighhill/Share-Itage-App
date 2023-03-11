@@ -32,6 +32,7 @@ import EditRecipePage from '../EditRecipePage/EditRecipePage';
 import RecipePage from '../RecipePage/RecipePage';
 import UserInvitation from '../UserInvitation/UserInvitation';
 import InvitationLoginPage from '../InvitationLoginPage/InvitationLoginPage';
+import ShoppingList from '../ShoppingList/ShoppingList';
 
 import './App.css';
 
@@ -164,6 +165,13 @@ function App() {
             exact
             path="/userinvite">
             <UserInvitation />
+          </ProtectedRoute>
+
+          {/* protected route for SHOPPING LIST */}
+          <ProtectedRoute
+            exact
+            path="/shoppinglist">
+            <ShoppingList />
           </ProtectedRoute>
 
           <Route

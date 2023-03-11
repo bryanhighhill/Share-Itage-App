@@ -7,19 +7,7 @@ const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
 const router = express.Router();
 
-// GET request to retrieve family's recipe data from db - family table
-router.get('/:id', (req, res) => {
-  // GET route code here
-  const queryText = 'SELECT * FROM "recipes" WHERE "family_id" = $1 ORDER BY "title" ASC;';
-  pool.query(queryText, [req.params.id])
-  .then(result => {
-    res.send(result.rows);
-  })
-  .catch(err => {
-    console.log('ERROR with getting Recipes data: ', err);
-    res.sendStatus(500);
-  });
-});
+// ------------------------------  POST ROUTES ------------------------------ //
 
 // POST route for new recipes
 router.post('/', (req, res) => {
@@ -34,6 +22,7 @@ router.post('/', (req, res) => {
       res.sendStatus(500);
   });
 });
+
 
 // POST route for favorite recipes
 router.post('/favorite', (req, res) => {
@@ -55,6 +44,23 @@ router.post('/remarks', (req, res) => {
   .then(() => res.sendStatus(201))
   .catch((err) => {
     console.log('error with posting comment', err);
+    res.sendStatus(500);
+  });
+});
+
+
+// ------------------------------  GET ROUTES ------------------------------ //
+
+// GET request to retrieve family's recipe data from db - family table
+router.get('/:id', (req, res) => {
+  // GET route code here
+  const queryText = 'SELECT * FROM "recipes" WHERE "family_id" = $1 ORDER BY "title" ASC;';
+  pool.query(queryText, [req.params.id])
+  .then(result => {
+    res.send(result.rows);
+  })
+  .catch(err => {
+    console.log('ERROR with getting Recipes data: ', err);
     res.sendStatus(500);
   });
 });
@@ -145,6 +151,61 @@ router.get('/remarks/:id', (req, res) => {
     });
 });
 
+//GET route for shopping list
+router.get('/shoppinglist/:id', (req, res) => {
+  const queryText = 'SELECT "shopping_list" FROM "user" WHERE "id" = $1;';
+  const id = req.params.id;
+
+  pool.query(queryText, [req.user.id])
+    .then( result => {
+      // console.log('result rows: ', result.rows[0].shopping_list);
+      res.send(result.rows[0].shopping_list);
+    })
+    .catch(err => {
+      console.log('error with getting shopping list: ', err);
+      res.sendStatus(500);
+    });
+});
+
+// ------------------------------  PUT ROUTES ------------------------------ //
+
+//PUT route for editing recipe
+router.put('/edit/:id', (req, res) => {
+  ingredients = JSON.stringify(req.body.ingredients);
+  instructions = JSON.stringify(req.body.instructions);
+  const id = req.params.id;
+  const queryText = 'UPDATE "recipes" SET "title" = $1, "ingredients" = $2, "instructions" = $3 WHERE "id" = $4;';
+
+  pool.query(queryText, [req.body.title, ingredients, instructions, req.body.id])
+    .then(result => {
+      res.sendStatus(201);
+    })
+    .catch(err => {
+      console.log('error with updating recipe: ', err);
+      res.sendStatus(500);
+    });
+});
+
+//PUT route for shopping list
+router.put('/shoppinglist', (req, res) => {
+  shoppingList = JSON.stringify(req.body);
+  console.log('in server put with shopping list: ', shoppingList);
+  const id = req.user.id;
+  const queryText = 'UPDATE "user" SET "shopping_list" = $1 WHERE "id" = $2;';
+
+  pool.query(queryText, [shoppingList, id])
+    .then(result => {
+      res.sendStatus(201);
+    })
+    .catch(err => {
+      console.log('error with updating shopping list: ', err);
+      res.sendStatus(500);
+    });
+});
+
+
+// ------------------------------  DELETE ROUTES ------------------------------ //
+
 //DELETE route for user's favorite recipes
 router.delete('/favorite/:id', (req, res) => {
   const id = req.params.id;
@@ -192,24 +253,5 @@ router.delete('/comments/:id', (req, res) => {
       res.sendStatus(500);
     });
 });
-    
-
-//PUT route for editing recipe
-router.put('/edit/:id', (req, res) => {
-  ingredients = JSON.stringify(req.body.ingredients);
-  instructions = JSON.stringify(req.body.instructions);
-  const id = req.params.id;
-  const queryText = 'UPDATE "recipes" SET "title"=$1, "ingredients"=$2, "instructions"=$3 WHERE "id"=$4;';
-
-  pool.query(queryText, [req.body.title, ingredients, instructions, req.body.id])
-    .then(result => {
-      res.sendStatus(201);
-    })
-    .catch(err => {
-      console.log('error with updating recipe: ', err);
-      res.sendStatus(500);
-    });
-});
-
 
 module.exports = router;

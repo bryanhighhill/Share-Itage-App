@@ -143,7 +143,32 @@ function* deleteComment(action) {
   } catch (error) {
     alert('Error with removing comment from database: ', error);
   };
-}
+};
+
+//PUT shopping list
+function* postShoppingList(action) {
+  console.log('in post shopping list saga with list: ', action.payload.shoppingList);
+  const id = action.payload.id
+  const shoppingList = action.payload.newShoppingList;
+
+  try {
+    yield axios.put(`api/recipe/shoppinglist`, shoppingList);
+    yield put({ type: 'FETCH_SHOPPING_LIST', payload: id  });
+  } catch (error) {
+    console.log('error with adding shopping list to database');
+  };
+};
+
+function* fetchShoppingList(action) {
+  const id = action.payload.id;
+  try {
+    const shoppingList = yield axios.get(`api/recipe/shoppinglist/${id}`);
+    yield put({ type: 'SET_SHOPPING_LIST', payload: shoppingList.data});
+    console.log('back in get shopping list saga with: ', shoppingList.data);
+  } catch (error) {
+    console.log('error with getting shopping list, ', error);
+  };
+};
 
 function* recipeSaga() {
   yield takeEvery('POST_NEW_RECIPE', createRecipe); //dispatched from AddRecipePage
@@ -158,6 +183,8 @@ function* recipeSaga() {
   yield takeEvery('FETCH_USER_REMARKS', fetchUserRemarks); //dispatched from UserComments component
   yield takeEvery('POST_COMMENT', postComment); //dispatched from recipe page
   yield takeEvery('DELETE_COMMENT', deleteComment); //dispatched from UserComments component
+  yield takeEvery('POST_SHOPPING_LIST', postShoppingList); //dispatched from recipe page
+  yield takeEvery('FETCH_SHOPPING_LIST', fetchShoppingList); //dispatched from recipe saga and shopping list page
 }
 
 export default recipeSaga;
