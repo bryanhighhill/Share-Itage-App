@@ -1,0 +1,46 @@
+.shopping-list-container {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    width: 80%;
+    padding-top: 7px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 40px;
+    overflow-wrap: break-word;
+    position: relative;
+    background-image: repeating-linear-gradient(rgb(255, 255, 255) 0px, rgb(255, 255, 255) 23px, teal 24px);
+    box-shadow: 1px 2px 5px;
+}
+
+.item {
+    display: inline;
+}
+
+.btn_removeFromList {
+    border: none;
+    margin-left: 15px;
+    background-color: #1d6787;
+    color: white;
+    border-radius: 4px;
+}
+
+.btn_addToList {
+    border: none;
+    margin-left: 15px;
+    background-color: #1d6787;
+    color: white;
+    border-radius: 4px;
+    display: inline;
+}
+
+.btn_addToList:hover {
+    border: none;
+    margin-left: 15px;
+    background-color: #10455c;
+}
+
+.added-to-list {
+    display: inline;
+    margin-left: 15px;
+    color: red;
+}

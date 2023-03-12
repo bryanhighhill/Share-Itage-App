@@ -9,6 +9,7 @@ import FavoritesButton from '../FavoritesButton/FavoritesButton';
 import ShoppingList from '../ShoppingList/ShoppingList';
 import './RecipePage.css';
 import UserComments from '../UserComments/UserComments';
+import AddToListButton from '../ShoppingList/AddToListButton.jsx';
 
 
 const RecipePage = () => {
@@ -29,30 +30,27 @@ const RecipePage = () => {
     const [shoppingList, setShoppingList] = useState([]);
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_SHOPPING_LIST', payload: user.id });
-    }, [user.id]);
-   
-    const addToList = (ingredient, index) => {
-        // setShoppingList(list);
-        const newShoppingList = [ ...shoppingList, ingredient];
-        // newShoppingList[index] = ingredient;
-        setShoppingList(newShoppingList);
-
-        setAddedToList(true);
-        setIngredientAdded(ingredient);
-        setTimeout(() => {
-            setAddedToList(false)
-        }, 3000);
-        dispatch({ type: 'POST_SHOPPING_LIST', payload: {newShoppingList, id: user.id} });
-    };
-    
-    useEffect(() => {
         dispatch({ type: 'FETCH_RECIPE_DATA', payload: id });
     }, [id]);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_FAVORITES', payload: user.id });
     }, [id]);
+    
+    useEffect(() => {
+        dispatch({ type: 'FETCH_SHOPPING_LIST', payload: user.id });
+    }, [user.id]);
+    
+    // const addToList = (ingredient, index) => {
+    //     const newShoppingList = [ ...list, ingredient];
+    //     setShoppingList(newShoppingList);
+    //     setAddedToList(true);
+    //     setIngredientAdded(ingredient);
+    //     setTimeout(() => {
+    //         setAddedToList(false)
+    //     }, 3000);
+    //     dispatch({ type: 'POST_SHOPPING_LIST', payload: {newShoppingList, id: user.id} });
+    // };
     
     useEffect(() => {
         setIngredients(selectedRecipe.ingredients);
@@ -121,27 +119,24 @@ const RecipePage = () => {
                     <br />
                     <br />
                     
-                    {shoppingList.length > 0 &&
-                        <p onClick={() => {history.push('/shoppinglist'); console.log('shopping list: ', shoppingList)}}>you have {shoppingList.length} items on your shopping list. Click to view your lise</p>
-                    }
                 <div className="recipe-page">
                     <div className="white-fill">
                         <h1><u>{title}</u></h1>
                         {ingredients &&
                             <div className="ingredients">
                                 <span><b>Ingredients</b></span>
+                                
                                 <ul>
                                     {ingredients.map((ingredient, index) => (
                                         <li key={`ingredient-${ingredient.ingredient}-${ingredient.amount}`}>
                                             <i>{ingredient.amount}</i>
                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                             {ingredient.ingredient}
-                                        
-                                                <button onClick={() => addToList(ingredient.ingredient, index)} className="btn_addToList">+</button>
+                                            <AddToListButton ingredient={ingredient.ingredient} index={index} list={list}/>
                                         </li>
                                     ))} 
                                 </ul>
-                                    {addedToList && <i>added {ingredientAdded} to shopping list!</i>}
+                                    
                             </div>
                         }
                         
