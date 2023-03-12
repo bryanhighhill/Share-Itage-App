@@ -30,10 +30,17 @@
     background-color: #1d6787;
     color: white;
     border-radius: 4px;
+    display: inline;
 }
 
 .btn_addToList:hover {
     border: none;
     margin-left: 15px;
     background-color: #10455c;
+}
+
+.added-to-list {
+    display: inline;
+    margin-left: 15px;
+    color: red;
 }

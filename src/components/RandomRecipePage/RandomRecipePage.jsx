@@ -21,18 +21,13 @@ const RandomRecipePage = () => {
     const [commentsVisible, setCommentsVisible] = useState(false);
     const [comment, setComment] = useState('');
     const page = 4;
-
-    console.log('random recipe id: ', randomRecipe.id);
+    const [isLoading, setIsLoading] = useState(true);
+    
     
     useEffect(() => {
+        setIsLoading(true);
         dispatch({ type: 'FETCH_RECIPES', payload: user.family_id });
-    }, [id]);
-    
-    useEffect(() => {
-        dispatch({ type: 'FETCH_RANDOM_RECIPE', payload: id })
-    }, [id]);
-
-    useEffect(() => {
+        dispatch({ type: 'FETCH_RANDOM_RECIPE', payload: id });
         dispatch({ type: 'FETCH_FAVORITES', payload: user.id });
     }, [id]);
 
@@ -41,6 +36,7 @@ const RandomRecipePage = () => {
         {setInstructions(randomRecipe.instructions)}
         {setTitle(randomRecipe.title)}
         {setRecipeId(randomRecipe.id)}
+        setIsLoading(false);
     }, [randomRecipe])
 
     const refreshPage = () => {
@@ -75,7 +71,9 @@ const RandomRecipePage = () => {
         setComment('');
     };
 
-   
+   if (isLoading) {
+    return 'loading';
+   }
     return (
         <div className="content-container">
 

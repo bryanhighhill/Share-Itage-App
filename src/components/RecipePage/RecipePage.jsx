@@ -119,15 +119,13 @@ const RecipePage = () => {
                     <br />
                     <br />
                     
-                    {shoppingList.length > 0 &&
-                        <p onClick={() => {history.push('/shoppinglist'); console.log('shopping list: ', shoppingList)}}>you have {shoppingList.length} items on your shopping list. Click to view your lise</p>
-                    }
                 <div className="recipe-page">
                     <div className="white-fill">
                         <h1><u>{title}</u></h1>
                         {ingredients &&
                             <div className="ingredients">
                                 <span><b>Ingredients</b></span>
+                                
                                 <ul>
                                     {ingredients.map((ingredient, index) => (
                                         <li key={`ingredient-${ingredient.ingredient}-${ingredient.amount}`}>
@@ -138,7 +136,7 @@ const RecipePage = () => {
                                         </li>
                                     ))} 
                                 </ul>
-                                    {addedToList && <i>added {ingredientAdded} to shopping list!</i>}
+                                    
                             </div>
                         }
                         

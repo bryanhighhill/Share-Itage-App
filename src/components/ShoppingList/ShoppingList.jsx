@@ -10,21 +10,18 @@ const ShoppingList = () => {
     const history = useHistory();
     const user = useSelector(store => store.user);
     const list = useSelector(store => store.shoppingList);
-    console.log('shopping list: ',shoppingList);
     const page = 6;
     const [shoppingList, setShoppingList] = useState([]);
   
     const removeFromList = (ingredient, index) => {
-        const listCopy = [ ...list ];
-        listCopy.splice(index, 1);
-        console.log('list coppy: ', listCopy)
-        dispatch({ type: 'POST_SHOPPING_LIST', payload: {newShoppingList: listCopy, id: user.id} });
+        const newShoppingList = [ ...list ];
+        newShoppingList.splice(index, 1);
+        dispatch({ type: 'POST_SHOPPING_LIST', payload: {newShoppingList, id: user.id} });
     };
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SHOPPING_LIST', payload: user.id });
     }, [user.id]);
-
     
 
     return(
@@ -35,20 +32,21 @@ const ShoppingList = () => {
             </div>
 
             <div className="shopping-list-container">
-                <h1>Shopping List</h1>
+                <h1><u>Shopping List</u></h1>
                 
                 {list.length > 0 
                 ?
-                    <>
+                    <ul>
                         {list.map((ingredient, index) => (
-                            <div className="list-item">
-                                <div key={index} className="item">
-                                    {ingredient}
-                                </div>
+                            <div
+                                key={index}
+                                className="list-item" 
+                            >
+                                {ingredient}
                                 <button onClick={() => removeFromList(ingredient, index)}className="btn_removeFromList">X</button>
                             </div>
                         ))}
-                    </>
+                    </ul>
                 : <h3>there's nothing on your shopping list yet!</h3>
                 }
             </div>

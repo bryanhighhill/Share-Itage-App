@@ -40,11 +40,22 @@ function App() {
   const dispatch = useDispatch();
   const user = useSelector(store => store.user);
   const id = user.id;
+  const [isLoading, setIsLoading] = useState(true);
+  console.log('user is: ', user);
   
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
 
+  useEffect(() => {
+    if (user.unauthenticated || user.id) { 
+      setIsLoading(false);
+    }
+  }, [user]);
+
+  if (isLoading) {
+    return 'loading';
+   }
   return (
     <Router>
       <div>

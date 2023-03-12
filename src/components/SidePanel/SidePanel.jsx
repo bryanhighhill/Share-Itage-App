@@ -9,6 +9,7 @@ const SidePanel = ({page}) => {
     const dispatch = useDispatch();
     const user = useSelector((store) => store.user);
     const family = useSelector((store) => store.family);
+    const shoppingList = useSelector((store) => store.shoppingList);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_FAMILY', payload: user.family_id });
@@ -37,7 +38,7 @@ const SidePanel = ({page}) => {
 
             <br />
             <br />
-            {/* STRETCH:*/} 
+
             <button
                 className={page === 3 ? "btn_selected" : "btn"}
                 onClick={() => {history.push(`/findrecipe`)}}
@@ -55,6 +56,19 @@ const SidePanel = ({page}) => {
             </button>
             <br />
             <br />
+
+            {shoppingList.length > 0 &&
+                <>
+                    <button
+                        className={page === 4 ? "btn_selected" : "btn"}
+                        onClick={() => {history.push(`/shoppinglist`)}}
+                    >
+                        Shopping List ({shoppingList.length})
+                    </button>
+                    <br />
+                    <br />
+                </>
+            }
 
             {/* if user is admin, show admin panel button */}
             {user.admin 
