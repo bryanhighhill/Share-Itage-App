@@ -112,8 +112,6 @@ const RecipePage = () => {
                     {!commentsVisible &&
                         <>
                             <button className="btn_sizeMed" onClick={() => setCommentsVisible(true)}>View Comments</button>
-                            {/* <br />
-                            <br /> */}
                         </>
                     }
                     <br />

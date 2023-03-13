@@ -24,18 +24,18 @@
 }
 
 .btn_addToList {
-    border: none;
+    border: 1px solid;
     margin-left: 15px;
-    background-color: #1d6787;
-    color: white;
+    background-color: white;
+    color: #1d6787;
     border-radius: 4px;
     display: inline;
 }
 
 .btn_addToList:hover {
-    border: none;
     margin-left: 15px;
-    background-color: #10455c;
+    background-color: #1d6787;
+    color: white;
 }
 
 .added-to-list {
