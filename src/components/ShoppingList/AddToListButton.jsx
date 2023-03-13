@@ -43,7 +43,7 @@ const AddToListButton = ({ ingredient, index, list }) => {
                 {list.map((item, index) => {
                     return item;
                 }).includes(ingredient) 
-                    ?   <button onClick={() => history.push('/shoppinglist')} className="btn_addToList">on shopping list</button>  //need to work on remove item from list
+                    ?   <button onClick={() => history.push('/shoppinglist')} className="btn_addToList">on grocery list</button>  //need to work on remove item from list
                     :   <button onClick={() => addToList(ingredient, index)} className="btn_addToList">+</button> 
                 }
                  <div className="added-to-list">{addedToList && <i>added!</i>}</div>

@@ -2,7 +2,7 @@
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     width: 50%;
-    padding-top: 7px;
+    padding-top: 5px;
     padding-right: 10px;
     padding-bottom: 10px;
     padding-left: 40px;
@@ -24,22 +24,28 @@
 }
 
 .btn_addToList {
-    border: none;
+    border: 1px solid;
     margin-left: 15px;
-    background-color: #1d6787;
-    color: white;
+    background-color: white;
+    color: #1d6787;
     border-radius: 4px;
     display: inline;
 }
 
 .btn_addToList:hover {
-    border: none;
     margin-left: 15px;
-    background-color: #10455c;
+    background-color: #1d6787;
+    color: white;
 }
 
 .added-to-list {
     display: inline;
     margin-left: 15px;
     color: red;
+}
+
+.clear-list-button {
+    text-align: right;
+    padding-top: 20px;
+    padding-right: 20px;
 }

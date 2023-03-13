@@ -63,7 +63,7 @@ const SidePanel = ({page}) => {
                         className={page === 6 ? "btn_selected" : "btn"}
                         onClick={() => {history.push(`/shoppinglist`)}}
                     >
-                        Shopping List ({shoppingList.length})
+                        Grocery List ({shoppingList.length})
                     </button>
                     <br />
                     <br />
