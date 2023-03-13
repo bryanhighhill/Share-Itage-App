@@ -2,7 +2,7 @@
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     width: 50%;
-    padding-top: 7px;
+    padding-top: 5px;
     padding-right: 10px;
     padding-bottom: 10px;
     padding-left: 40px;
@@ -42,4 +42,10 @@
     display: inline;
     margin-left: 15px;
     color: red;
+}
+
+.clear-list-button {
+    text-align: right;
+    padding-top: 20px;
+    padding-right: 20px;
 }
