@@ -42,8 +42,8 @@ const ShoppingList = () => {
                                 key={index}
                                 className="list-item" 
                             >
-                                {ingredient}
                                 <button onClick={() => removeFromList(ingredient, index)}className="btn_removeFromList">X</button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;{ingredient}
                             </div>
                         ))}
                     </ul>

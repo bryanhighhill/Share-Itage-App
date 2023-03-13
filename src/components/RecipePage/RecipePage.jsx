@@ -129,9 +129,7 @@ const RecipePage = () => {
                                 <ul>
                                     {ingredients.map((ingredient, index) => (
                                         <li key={`ingredient-${ingredient.ingredient}-${ingredient.amount}`}>
-                                            <i>{ingredient.amount}</i>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
-                                            {ingredient.ingredient}
+                                            {ingredient.amount} {ingredient.ingredient}
                                             <AddToListButton ingredient={ingredient.ingredient} index={index} list={list}/>
                                         </li>
                                     ))} 

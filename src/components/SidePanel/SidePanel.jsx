@@ -60,7 +60,7 @@ const SidePanel = ({page}) => {
             {shoppingList.length > 0 &&
                 <>
                     <button
-                        className={page === 4 ? "btn_selected" : "btn"}
+                        className={page === 6 ? "btn_selected" : "btn"}
                         onClick={() => {history.push(`/shoppinglist`)}}
                     >
                         Shopping List ({shoppingList.length})
