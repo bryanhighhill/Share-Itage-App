@@ -54,7 +54,7 @@ const FamilyDisplay = ({ family, user }) => {
                                 const date = new Date(member.registration_date);
                                 
                                 return (
-                                    <div className={member.username != user.username ? "family-member-container" : "your-container"}>
+                                    <div key={index} className={member.username != user.username ? "family-member-container" : "your-container"}>
                                         <b><u>{member.username}</u></b>
                                         <br />
                                         <br />

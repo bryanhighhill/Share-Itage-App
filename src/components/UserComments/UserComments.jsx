@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import './UserComments.css';
 
 const UserComments = ({id}) => {
     const [deleteConfVisible, setDeleteConfVisible] = useState(false);
@@ -20,7 +21,7 @@ const UserComments = ({id}) => {
     return (
         <div>
         {userRemarks.length > 0 
-        ? <>
+        ? <div className="comments-container">
             {userRemarks.map((comment, index) => {
                 return (
                     <div className="comment">
@@ -39,7 +40,7 @@ const UserComments = ({id}) => {
                     </div>
                 )
             })}
-        </>
+        </div>
         : <p>no comments yet!</p>}
         </div>
     )

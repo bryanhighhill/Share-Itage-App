@@ -1,0 +1,25 @@
+.comments-container {
+    max-height: 100px;
+    overflow-y:scroll;
+    display: flex;
+    flex-direction: column-reverse;
+    max-width: 50%;
+    
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #1d6787;
+    border-radius: 10px;
+  }

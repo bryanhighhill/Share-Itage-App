@@ -41,17 +41,6 @@ const RecipePage = () => {
         dispatch({ type: 'FETCH_SHOPPING_LIST', payload: user.id });
     }, [user.id]);
     
-    // const addToList = (ingredient, index) => {
-    //     const newShoppingList = [ ...list, ingredient];
-    //     setShoppingList(newShoppingList);
-    //     setAddedToList(true);
-    //     setIngredientAdded(ingredient);
-    //     setTimeout(() => {
-    //         setAddedToList(false)
-    //     }, 3000);
-    //     dispatch({ type: 'POST_SHOPPING_LIST', payload: {newShoppingList, id: user.id} });
-    // };
-    
     useEffect(() => {
         setIngredients(selectedRecipe.ingredients);
         setInstructions(selectedRecipe.instructions);

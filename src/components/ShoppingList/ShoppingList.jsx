@@ -86,6 +86,10 @@ const ShoppingList = () => {
                 : <h3>there's nothing on your grocery list yet!</h3>
                 }
             </div>
+            <div></div>
+            <div className="nav-button-groceries">
+                <button className="btn_sizeMed" onClick={() => {history.goBack()}}>Back</button>
+            </div>
         </div>
     );
 };

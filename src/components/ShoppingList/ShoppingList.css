@@ -49,3 +49,11 @@
     padding-top: 20px;
     padding-right: 20px;
 }
+
+.nav-button-groceries {
+    width: 50%;
+    text-align: left;
+    padding-top: 12px;
+    padding-left: 8px;
+
+}
