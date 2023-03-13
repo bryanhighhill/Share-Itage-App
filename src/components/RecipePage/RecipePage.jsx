@@ -122,12 +122,12 @@ const RecipePage = () => {
                         <h1><u>{title}</u></h1>
                         {ingredients &&
                             <div className="ingredients">
-                                <span><b>Ingredients</b></span>
+                                <span><h2>Ingredients</h2></span>
                                 
                                 <ul>
                                     {ingredients.map((ingredient, index) => (
                                         <li key={`ingredient-${ingredient.ingredient}-${ingredient.amount}`}>
-                                            {ingredient.amount} {ingredient.ingredient}
+                                            {ingredient.ingredient} - {ingredient.amount}
                                             <AddToListButton ingredient={ingredient.ingredient} index={index} list={list}/>
                                         </li>
                                     ))} 
@@ -138,7 +138,7 @@ const RecipePage = () => {
                         
                         {instructions &&
                             <div className="instructions">
-                                <span><b>Instructions</b></span>
+                                <span><h2>Instructions</h2></span>
                                 <ul>
                                     {instructions.map((instruction, index) => (
                                         <div className="instruct">
