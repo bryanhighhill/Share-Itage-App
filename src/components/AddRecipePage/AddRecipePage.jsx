@@ -60,14 +60,14 @@ const AddRecipePage = () => {
         const overlay = document.querySelector('.overlay');
         modal.classList.remove('hidden'); //removes hidden class from modal
         overlay.classList.remove('hidden'); //removes hidden class from overlay
-    }
+    };
 
     const closeModal = () => {
         const modal = document.querySelector('.modal');
         const overlay = document.querySelector('.overlay');
         modal.classList.add('hidden'); //adds hidden class to modal
         overlay.classList.add('hidden'); //adds hidden class to modal
-    }
+    };
 
     return (
         <div className="content-container">
@@ -218,7 +218,7 @@ const AddRecipePage = () => {
                             <h2>Your recipe book is getting bigger!</h2>
                         </div>
                         <div className="modal_confirm_container">
-                            <button onClick={() => history.push('/findrecipe')} className="btn_modal_confirm">Yes, I know!</button>
+                            <button onClick={() => history.push('/findrecipe')} className="btn_modal_confirm">Yes, I know</button>
                         </div>
                     </section>
 

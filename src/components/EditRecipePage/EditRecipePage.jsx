@@ -74,25 +74,31 @@ const EditRecipePage = () => {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        console.log('in on submit with: ', id, title, ingredients, instructions)
+        
         const updatedRecipe = {
             id,
             title,
             ingredients,
             instructions,
-        }
+        };
         
         dispatch({
             type: "UPDATE_RECIPE",
             payload: updatedRecipe
         });
 
+        openModal();
         setTitle('');
         setIngredients([{ingredient: '', amount: ''}]);
         setInstructions(['']);
-        alert(`Oh yeah, that looks so much better now!`);
-        history.goBack();
-    }
+    };
+
+    const openModal = () => {
+        const modal = document.querySelector('.modal');
+        const overlay = document.querySelector('.overlay');
+        modal.classList.remove('hidden'); //removes hidden class from modal
+        overlay.classList.remove('hidden'); //removes hidden class from overlay
+    };
 
 
     return(
@@ -224,6 +230,19 @@ const EditRecipePage = () => {
                     </div>
                     <br />
                     <br />
+
+                    <section className="modal hidden"> {/* modal container */}
+                        <div>
+                            <h2>Ahhh... <br />that looks so much better now!</h2>
+                        </div>
+                        <div className="modal_confirm_container">
+                            <button onClick={() => history.goBack()} className="btn_modal_confirm">Agreed</button>
+                        </div>
+                    </section>
+                    
+                    <div className="overlay hidden"> {/* overlay element - dark blurred background when modal is open */}
+                    </div>
+
                     <button type="submit" className="btn_save">Update Recipe</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <button
