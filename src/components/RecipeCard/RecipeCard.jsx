@@ -16,12 +16,10 @@ const RecipeCard = ({recipe}) => {
     }, [id]);
 
     return (
-        <>
-            <div onClick={() => history.push(`/recipe/${recipe.id}`)} className="recipe-card">
-                <h2>{recipe.title}</h2>
-            </div>
-        </>
-    )
+        <div onClick={() => history.push(`/recipe/${recipe.id}`)} className="recipe-card">
+            <h2>{recipe.title}</h2>
+        </div>
+    );
 };
 
 export default RecipeCard;

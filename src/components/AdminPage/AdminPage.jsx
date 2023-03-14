@@ -8,7 +8,7 @@ import './AdminPage.css';
 
 const AdminPage = () => {
     const user = useSelector(store => store.user);
-    const family = useSelector(store => store.family);
+    const family = useSelector(store => store.familyMember);
     const dispatch = useDispatch();
     const page = 5;
     console.log('family on admin page: ', family);

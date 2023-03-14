@@ -12,19 +12,14 @@ const CreateFamilyPage = () => {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        //TODO: add conditional to check that family name is not blank and that it is a unique family name in db <---------------------------
-        //dispatch new family name to redux saga along with user id so that user_family_id can be updated
         dispatch({
             type: 'POST_FAMILY_NAME',
             payload: {
                 name,
                 user_id: user.id,
-            },
+            }
         });
-
-        //clear name
         setName('');
-        //send user to UserPage
         history.push('/familyconfirmation');
     };
 

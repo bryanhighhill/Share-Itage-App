@@ -30,7 +30,6 @@ const AddRecipePage = () => {
         setTitle('');
         setIngredients([{ingredient:'', amount:''}]);
         setInstructions(['']);
-        // history.push('/findrecipe');
     };
 
     const addIngredientInput = () => {
@@ -58,15 +57,8 @@ const AddRecipePage = () => {
     const openModal = () => {
         const modal = document.querySelector('.modal');
         const overlay = document.querySelector('.overlay');
-        modal.classList.remove('hidden'); //removes hidden class from modal
-        overlay.classList.remove('hidden'); //removes hidden class from overlay
-    };
-
-    const closeModal = () => {
-        const modal = document.querySelector('.modal');
-        const overlay = document.querySelector('.overlay');
-        modal.classList.add('hidden'); //adds hidden class to modal
-        overlay.classList.add('hidden'); //adds hidden class to modal
+        modal.classList.remove('hidden'); //remove hidden class from modal
+        overlay.classList.remove('hidden'); //remove hidden class from overlay
     };
 
     return (
@@ -94,65 +86,65 @@ const AddRecipePage = () => {
                             className="ingredient-input"
                             onChange={(event) => setTitle(event.target.value)}
                         />
-                    </div> {/* end "recipe-title" div */}
+                    </div>
                     <br />
                     <br />
 
                     {/* INGREDIENTS */}
                     <label className="small-label" htmlFor="ingredients"><b>Ingredients</b></label>
                     <div className="ingredient-list">
-                            {ingredients.map((ingredient, index) => {
-                                return (
-                                    <>
-                                        {/* input field for INGREDIENTS */}
-                                        <input
-                                            key={`ingredient-${index}`}
-                                            className="ingredient-input"
-                                            id="ingredients"
-                                            name="ingredients"
-                                            value={ingredient.ingredient}
-                                            placeholder="ingredient"
-                                            required
-                                            onChange={(event) => setIngredients(ingredients => {
-                                                const newIngredients = [ ...ingredients ];
-                                                newIngredients[index].ingredient = event.target.value;
-                                                console.log('new ingredients: ', newIngredients);
-                                                return newIngredients;
-                                            })}
-                                        />
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        
-                                        {/* input field for INGREDIENT AMOUNTS */}
-                                        <input
-                                            key={`amount-${index}`}
-                                            className="ingredient-input"
-                                            id="ingredient-amount"
-                                            name="ingredient-amount"
-                                            value={ingredient.amount}
-                                            placeholder="amount"
-                                            required
-                                            onChange={(event) => setIngredients(ingredients => {
-                                                const newIngredients = [ ...ingredients ];
-                                                newIngredients[index].amount = event.target.value;
-                                                return newIngredients;
-                                            })}
-                                        />
+                        {ingredients.map((ingredient, index) => {
+                            return (
+                                <>
+                                    {/* input field for INGREDIENTS */}
+                                    <input
+                                        key={`ingredient-${index}`}
+                                        className="ingredient-input"
+                                        id="ingredients"
+                                        name="ingredients"
+                                        value={ingredient.ingredient}
+                                        placeholder="ingredient"
+                                        required
+                                        onChange={(event) => setIngredients(ingredients => {
+                                            const newIngredients = [ ...ingredients ];
+                                            newIngredients[index].ingredient = event.target.value;
+                                            console.log('new ingredients: ', newIngredients);
+                                            return newIngredients;
+                                        })}
+                                    />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    
+                                    {/* input field for INGREDIENT AMOUNTS */}
+                                    <input
+                                        key={`amount-${index}`}
+                                        className="ingredient-input"
+                                        id="ingredient-amount"
+                                        name="ingredient-amount"
+                                        value={ingredient.amount}
+                                        placeholder="amount"
+                                        required
+                                        onChange={(event) => setIngredients(ingredients => {
+                                            const newIngredients = [ ...ingredients ];
+                                            newIngredients[index].amount = event.target.value;
+                                            return newIngredients;
+                                        })}
+                                    />
 
-                                        {/* prevent first ingredient field from being deleted */}
-                                        {index !== 0 && (
-                                            <button
-                                                key={`remove-btn-${index}`} 
-                                                onClick={() => removeIngredientInput(index)}
-                                                type="button"
-                                                className="btn_sizeMin"
-                                            >
-                                                X
-                                            </button>
-                                        )}
-                                        <br />
-                                    </>
-                                )
-                            })}
+                                    {/* prevent first ingredient field from being deleted */}
+                                    {index !== 0 && (
+                                        <button
+                                            key={`remove-btn-${index}`} 
+                                            onClick={() => removeIngredientInput(index)}
+                                            type="button"
+                                            className="btn_sizeMin"
+                                        >
+                                            X
+                                        </button>
+                                    )}
+                                    <br />
+                                </>
+                            )
+                        })}
 
                         <button
                             onClick={addIngredientInput}
@@ -168,40 +160,40 @@ const AddRecipePage = () => {
                     {/* INSTRUCTIONS */}
                     <label className="small-label" htmlFor="instructions"><b>Instructions</b></label>
                     <div className="instructions-list">
-                            {instructions.map((instruction, index) => {
-                                return (
-                                    <>
-                                        {/* input field for INSTRUCTIONS */}
-                                        <input
-                                            key={`instruction-${index}`}
-                                            className="instruction-input"
-                                            id="instructions"
-                                            name="instructions"
-                                            value={instruction.instruction}
-                                            placeholder="instruction"
-                                            required
-                                            onChange={(event) => setInstructions(instructions => {
-                                                const newInstructions = [ ...instructions ];
-                                                newInstructions[index] = event.target.value;
-                                                return newInstructions;
-                                            })}
-                                        />
-                        
-                                        {/* prevent first instruction field from being deleted */}
-                                        {index !== 0 && (
-                                            <button
-                                                key={`remove-btn2-${index}`} 
-                                                onClick={() => removeInstructionInput(index)}
-                                                type="button"
-                                                className="btn_sizeMin"
-                                            >
-                                                X
-                                            </button>
-                                        )}
-                                        <br />
-                                    </>
-                                )
-                            })}
+                        {instructions.map((instruction, index) => {
+                            return (
+                                <>
+                                    {/* input field for INSTRUCTIONS */}
+                                    <input
+                                        key={`instruction-${index}`}
+                                        className="instruction-input"
+                                        id="instructions"
+                                        name="instructions"
+                                        value={instruction.instruction}
+                                        placeholder="instruction"
+                                        required
+                                        onChange={(event) => setInstructions(instructions => {
+                                            const newInstructions = [ ...instructions ];
+                                            newInstructions[index] = event.target.value;
+                                            return newInstructions;
+                                        })}
+                                    />
+                    
+                                    {/* prevent first instruction field from being deleted */}
+                                    {index !== 0 && (
+                                        <button
+                                            key={`remove-btn2-${index}`} 
+                                            onClick={() => removeInstructionInput(index)}
+                                            type="button"
+                                            className="btn_sizeMin"
+                                        >
+                                            X
+                                        </button>
+                                    )}
+                                    <br />
+                                </>
+                            )
+                        })}
                         <button
                             onClick={addInstructionInput}
                             type="button"
@@ -213,7 +205,7 @@ const AddRecipePage = () => {
                     <br />
                     <br />
 
-                    <section className="modal hidden"> {/* modal container */}
+                    <section className="modal hidden">
                         <div>
                             <h2>Your recipe book is getting bigger!</h2>
                         </div>
@@ -234,13 +226,14 @@ const AddRecipePage = () => {
                     <button
                         type="button"
                         className="btn_cancel"
-                        onClick={() => history.push('/user')}>
-                            Cancel
+                        onClick={() => history.push('/user')}
+                    >
+                        Cancel
                     </button>
                 </form>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default AddRecipePage;

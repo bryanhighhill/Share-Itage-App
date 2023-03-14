@@ -13,7 +13,6 @@
     padding: 10px;
     overflow-wrap: break-word;
     position: relative;
-    /* background-image: repeating-linear-gradient(rgb(255, 255, 255) 0px, rgb(255, 255, 255) 23px, teal 24px); */
     box-shadow: 1px 2px 5px;
 }
 
@@ -26,7 +25,6 @@
     padding: 10px;
     overflow-wrap: break-word;
     position: relative;
-    /* background-image: repeating-linear-gradient(rgb(255, 255, 255) 0px, rgb(255, 255, 255) 23px, teal 24px); */
     box-shadow: 1px 2px 5px;
 }
 

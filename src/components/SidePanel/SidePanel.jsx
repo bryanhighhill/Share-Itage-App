@@ -8,18 +8,19 @@ const SidePanel = ({page}) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const user = useSelector((store) => store.user);
-    const family = useSelector((store) => store.family);
     const shoppingList = useSelector((store) => store.shoppingList);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_FAMILY', payload: user.family_id });
-    }, []);
+    }, [user.id]);
 
     return (
         <div className="container">
+
            <div className="welcome-div">
                 Welcome, <h4 className="welcome-header">{user.username}</h4>!
            </div>
+
             <button
                 className={page === 1 ? "btn_selected" : "btn"}
                 onClick={() => {history.push(`/addrecipe`)}}
@@ -35,7 +36,6 @@ const SidePanel = ({page}) => {
             >
                 My Favorites
             </button>
-
             <br />
             <br />
 
@@ -57,6 +57,7 @@ const SidePanel = ({page}) => {
             <br />
             <br />
 
+            {/* if user has items in shopping cart, show shopping cart button */}
             {shoppingList.length > 0 &&
                 <>
                     <button

@@ -20,4 +20,4 @@ export default function* rootSaga() {
     familySaga(),
     recipeSaga(),
   ]);
-}
+};

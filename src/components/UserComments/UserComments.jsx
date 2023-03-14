@@ -14,36 +14,35 @@ const UserComments = ({id}) => {
 
     const deleteComment = (commentId) => {
         const comment = {recipe_id: Number(id), id: commentId}
-        console.log('in delete comment with: ', comment);
         dispatch({ type: 'DELETE_COMMENT', payload: comment});
-    }
+    };
 
     return (
         <div>
-        {userRemarks.length > 0 
-        ? <div className="comments-container">
-            {userRemarks.map((comment, index) => {
-                return (
-                    <div className="comment">
-                        <b>{comment.username}</b>: "{comment.comment}"
-                        {(!deleteConfVisible ) 
-                        ? <>
-                            {(user.admin || user.username == comment.username) &&
-                                <button className="btn_commentDelete" onClick={() => deleteComment(comment.id)}>X</button>   
-                        } </>
-                        : <>
-                        <section>are you sure you want to delete this comment?</section>
-                        <button>Delete</button>
-                        <button>Cancel</button>
-                        </>
-                        }
-                    </div>
-                )
-            })}
+            {userRemarks.length > 0 
+            ? <div className="comments-container">
+                {userRemarks.map((comment, index) => {
+                    return (
+                        <div className="comment">
+                            <b>{comment.username}</b>: "{comment.comment}"
+                            {(!deleteConfVisible ) 
+                            ? <>
+                                {(user.admin || user.username == comment.username) &&
+                                    <button className="btn_commentDelete" onClick={() => deleteComment(comment.id)}>X</button>   
+                            } </>
+                            : <>
+                                <section>are you sure you want to delete this comment?</section>
+                                <button>Delete</button>
+                                <button>Cancel</button>
+                            </>
+                            }
+                        </div>
+                    )
+                })}
+            </div>
+            : <p>no comments yet!</p>}
         </div>
-        : <p>no comments yet!</p>}
-        </div>
-    )
-}
+    );
+};
 
 export default UserComments;

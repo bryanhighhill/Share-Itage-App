@@ -27,14 +27,6 @@ const AddToListButton = ({ ingredient, index, list }) => {
         dispatch({ type: 'POST_SHOPPING_LIST', payload: {newShoppingList, id: user.id} });
     };
 
-    const removeFromList = (ingredient, index) => {
-        const newShoppingList = [ ...list ];
-        newShoppingList.splice(index, 1);
-        setListChange(newShoppingList);
-        dispatch({ type: 'POST_SHOPPING_LIST', payload: {newShoppingList, id: user.id} });
-    };
-
-
     return (
         <>
             {list

@@ -20,11 +20,10 @@ function* registerUser(action) {
     console.log('Error with user registration:', error);
     yield put({ type: 'REGISTRATION_FAILED' });
   }
-}
+};
 
 function* inviteRegister(action) {
   const id = action.payload.family_id;
-  console.log('in invite register saga with: ', action.payload);
   try {
     yield put({ type: 'CLEAR_REGISTRATION_ERROR' });
 
@@ -41,10 +40,9 @@ function* inviteRegister(action) {
     console.log('Error with user registration:', error);
     yield put({ type: 'REGISTRATION_FAILED' });
   }
-}
+};
 
 function* fetchInvitations(action) {
-  console.log('in fetch invitations saga');
   const id = action.payload;
   try {
     const invitations = yield axios.get(`api/user/invites/${id}`);
@@ -52,12 +50,12 @@ function* fetchInvitations(action) {
   } catch (error) {
     console.log('error with getting invitation data: ', error);
   }
-}
+};
 
 function* registrationSaga() {
   yield takeLatest('REGISTER', registerUser);
   yield takeLatest('INVITE_REGISTER', inviteRegister);
   yield takeEvery('FETCH_INVITATIONS', fetchInvitations); //dispatched from invitation registration form
-}
+};
 
 export default registrationSaga;

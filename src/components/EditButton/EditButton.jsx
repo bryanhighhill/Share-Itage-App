@@ -12,8 +12,7 @@ const EditButton = ({ id }) => {
         payload: id
       })
         history.push(`/edit/${id}`);
-    }
-
+    };
 
   return (
     <button
@@ -23,6 +22,6 @@ const EditButton = ({ id }) => {
         Edit
     </button>
   );
-}
+};
 
 export default EditButton;

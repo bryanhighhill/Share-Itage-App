@@ -263,10 +263,10 @@ Alert
   box-sizing: border-box;
   padding: 15px 10px;
   margin: 15px 0;
-  border: 2px solid #e01616;
-  background-color: #efefef;
-  border-radius: 3px;
-  color: #e01616;
+  border: none;
+  background-color: #1d6787;
+  border-radius: 10px;
+  color: #ffffff;
   font-size: 0.8rem;
   position: fixed;
   top: 20%;

@@ -11,8 +11,6 @@ const EditRecipePage = () => {
     const [title, setTitle] = useState('');
     const [ingredients, setIngredients] = useState([{ingredient:'', amount:''}]);
     const [instructions, setInstructions] = useState(['']);
-
-    console.log('selectedRecipe ID on edit page: ', id);
     
     useEffect(() => {
         dispatch({ type: 'FETCH_RECIPE_DATA', payload: id });
@@ -24,69 +22,58 @@ const EditRecipePage = () => {
         setTitle(selectedRecipe.title);
     }, [selectedRecipe]);
 
-    //on change handler for updated ingredients
     const ingredientOnChange = (value, index) => {
         const updatedIngredient = [...ingredients]
         updatedIngredient[index].ingredient = value;
         setIngredients(updatedIngredient);
-    }
+    };
 
-    //on change handler for updated amounts
     const amountOnChange = (value, index) => {
         const updatedAmounts = [...ingredients];
         updatedAmounts[index].amount = value;
         setIngredients(updatedAmounts);
-    }
+    };
 
-    //on change handler for updated instructions
     const instructionOnChange = (value, index) => {
         const updatedInstructions = [...instructions];
         updatedInstructions[index] = value;
-        console.log('instruction on change value: ', value, updatedInstructions)
         setInstructions(updatedInstructions);
-    }
+    };
 
-    //functino to add ingredient/amountfields
     const addIngredientInput = () => {
         const ingredientField = [...ingredients, {ingredient:'', amount:''}];
         setIngredients(ingredientField);
-    }
+    };
 
-    //function to remove previously added ingredient/amount fields
     const removeIngredientInput = (index) => {
         const ingredientFields = [...ingredients];
         ingredientFields.splice(index, 1);
         setIngredients(ingredientFields);
-    }
+    };
 
-    //function to add new fields for instructions on button click
     const addInstructionInput = () => {
         const instructionField = [...instructions, ''];
         setInstructions(instructionField);
-    }
+    };
 
-    //function to remove previously added instruction fields if unused
     const removeInstructionInput = (index) => {
         const instructionFields = [...instructions];
         instructionFields.splice(index, 1);
         setInstructions(instructionFields);
-    }
+    };
 
     const onSubmit = (event) => {
         event.preventDefault();
-        
         const updatedRecipe = {
             id,
             title,
             ingredients,
             instructions,
         };
-        
         dispatch({
             type: "UPDATE_RECIPE",
             payload: updatedRecipe
         });
-
         openModal();
         setTitle('');
         setIngredients([{ingredient: '', amount: ''}]);
@@ -96,8 +83,8 @@ const EditRecipePage = () => {
     const openModal = () => {
         const modal = document.querySelector('.modal');
         const overlay = document.querySelector('.overlay');
-        modal.classList.remove('hidden'); //removes hidden class from modal
-        overlay.classList.remove('hidden'); //removes hidden class from overlay
+        modal.classList.remove('hidden'); //remove hidden class from modal
+        overlay.classList.remove('hidden'); //remove hidden class from overlay
     };
 
 
@@ -107,20 +94,18 @@ const EditRecipePage = () => {
                 <SidePanel />
             </div>
             <div>
-                {selectedRecipe.title
-                    ?   <h1>Edit Details for <b>{selectedRecipe.title}</b></h1>
-                    : null
+                {selectedRecipe.title &&
+                    <h1>Edit Details for <b>{selectedRecipe.title}</b></h1>
                 }
                 <br />
                 <br />
                 <form onSubmit={onSubmit}>
 
-                    {/* collect recipe title update here */}
                     <div className="title">
                         <label htmlFor="title"><b>Edit Title</b></label>
                         <br />
-                        {selectedRecipe.title
-                            ? <input
+                        {selectedRecipe.title &&
+                            <input
                                 id="title" 
                                 name="title"
                                 value={title}
@@ -128,18 +113,16 @@ const EditRecipePage = () => {
                                 className="ingredient-input"
                                 onChange={(event) => setTitle(event.target.value)}
                             />
-                            : null
                         }
                     </div>
-
                     <br />
                     <br />
             
                     <div className="ingredients-container">
                         <label className="small-label" htmlFor="ingredients"><b>Edit Ingredients</b></label>
                         <div className="ingredient-list">
-                            {ingredients
-                                ? ingredients.map((ingredient, index) => {
+                            {ingredients &&
+                                ingredients.map((ingredient, index) => {
                                     return (
                                         <div className="ingredient-list">
                                             <input
@@ -174,26 +157,24 @@ const EditRecipePage = () => {
                                         </div>
                                     )
                                 })
-                                : null
                             }
-                                <button
-                                    onClick={addIngredientInput}
-                                    type="button"
-                                    className="btn_sizeMed"
-                                >
-                                    + Ingredient
-                                </button>
+                            <button
+                                onClick={addIngredientInput}
+                                type="button"
+                                className="btn_sizeMed"
+                            >
+                                + Ingredient
+                            </button>
                                 
                         </div>
                     </div>
-
                     <br /> 
                     <br />
 
                     <div className="instructions-container">
                         <label className="small-label" htmlFor="ingredients"><b>Edit Instructions</b></label>
-                        {instructions
-                            ? instructions.map((instruction, index) => {
+                        {instructions &&
+                            instructions.map((instruction, index) => {
                                 return (
                                     <div className="instruction-list">
                                         <input
@@ -218,7 +199,6 @@ const EditRecipePage = () => {
                                     </div>
                                 )
                             })
-                            : null
                         }
                         <button
                             onClick={addInstructionInput}
@@ -231,7 +211,7 @@ const EditRecipePage = () => {
                     <br />
                     <br />
 
-                    <section className="modal hidden"> {/* modal container */}
+                    <section className="modal hidden">
                         <div>
                             <h2>Ahhh... <br />that looks so much better now!</h2>
                         </div>
@@ -248,13 +228,14 @@ const EditRecipePage = () => {
                     <button
                         type="button"
                         className="btn_cancel"
-                        onClick={() => history.goBack()}>
-                            Cancel
+                        onClick={() => history.goBack()}
+                    >
+                        Cancel
                     </button>
                 </form>
             </div>
         </div>
-    )
+    );
 };
 
 export default EditRecipePage;

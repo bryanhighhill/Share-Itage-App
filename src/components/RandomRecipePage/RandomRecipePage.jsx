@@ -11,7 +11,6 @@ const RandomRecipePage = () => {
     const randomRecipe = useSelector(store => store.randomRecipe);
     const user = useSelector(store => store.user);
     const recipes = useSelector((store) => store.recipes);
-    const favorites = useSelector((store) => store.setFavorites);
     const id = user.family_id;
     const [title, setTitle] = useState('');
     const [ingredients, setIngredients] = useState([{ingredient:'', amount:''}]);
@@ -37,10 +36,9 @@ const RandomRecipePage = () => {
         {setTitle(randomRecipe.title)}
         {setRecipeId(randomRecipe.id)}
         setIsLoading(false);
-    }, [randomRecipe])
+    }, [randomRecipe]);
 
     const refreshPage = () => {
-        console.log('in refresh page');
         window.location.reload(false);
         dispatch({ type: 'FETCH_RECIPES', payload: user.family_id });
       };
@@ -51,7 +49,7 @@ const RandomRecipePage = () => {
         const updatedArray = [...checkedInstruction];
         updatedArray[index] = !checkedInstruction[index];
         setCheckedInstruction(updatedArray);
-    }
+    };
 
     const closeComments = () => {
         setCommentsVisible(false);
@@ -59,8 +57,7 @@ const RandomRecipePage = () => {
     };
 
     const submitHandler = () => {
-        const newComment = {recipe_id: Number(randomRecipe.id), comment}
-        console.log('in submit comment with', newComment);
+        const newComment = {recipe_id: Number(randomRecipe.id), comment};
         if (comment.length === 0) {
             alert('comment cannot be blank!')
         } else 
@@ -85,34 +82,36 @@ const RandomRecipePage = () => {
             ? <div className="random-recipe">
                 <h1>Random Recipe</h1>
                 {commentsVisible &&
-                        <div className="user-remarks-div">
-                            <UserComments id={randomRecipe.id}/>
-                            {commentsVisible &&
-                                <>
-                                    <input 
-                                        placeholder="add your comment here"
-                                        className="comment-input"
-                                        value={comment} 
-                                        onChange={(event) => setComment(event.target.value)}>
-                                    </input>
-                                    <button className="btn_sizeMed" onClick={submitHandler}>Submit</button>
-                                    &nbsp;&nbsp;&nbsp;
-                                    <button className="btn_edit" onClick={closeComments}>Close</button>
-                                </>
-                            }
-                        </div>
-                    }
-                    {!commentsVisible &&
-                        <>
-                            <button className="btn_sizeMed" onClick={() => setCommentsVisible(true)}>View Comments</button>
-                            <br />
-                            <br />
-                        </>
-                    }
+                    <div className="user-remarks-div">
+                        <UserComments id={randomRecipe.id}/>
+                        {commentsVisible &&
+                            <>
+                                <input 
+                                    placeholder="add your comment here"
+                                    className="comment-input"
+                                    value={comment} 
+                                    onChange={(event) => setComment(event.target.value)}>
+                                </input>
+                                <button className="btn_sizeMed" onClick={submitHandler}>Submit</button>
+                                &nbsp;&nbsp;&nbsp;
+                                <button className="btn_edit" onClick={closeComments}>Close</button>
+                            </>
+                        }
+                    </div>
+                }
+
+                {!commentsVisible &&
+                    <>
+                        <button className="btn_sizeMed" onClick={() => setCommentsVisible(true)}>View Comments</button>
+                        <br />
+                        <br />
+                    </>
+                }
+
                 <div className="random-recipe-card">
                     <h2><u>{title}</u></h2>
-                    {ingredients
-                    ?   <div className="ingredients">
+                    {ingredients &&
+                        <div className="ingredients">
                             <h2>Ingredients</h2>
                             <ul>
                                 {ingredients.map((ingredient, index) => {
@@ -122,9 +121,10 @@ const RandomRecipePage = () => {
                                 })}  
                             </ul>
                         </div>
-                    : null}
-                    {instructions
-                    ?   <div className="instructions">
+                    }
+
+                    {instructions &&
+                        <div className="instructions">
                             <h2>Instructions</h2>
                             <ul>
                                 {instructions.map((instruction, index) => {
@@ -145,22 +145,25 @@ const RandomRecipePage = () => {
                                 })}  
                             </ul>
                         </div>
-                    : null}
+                    }
+
                     <div className="fav-buttons">
                         <FavoritesButton recipeId={recipeId}/>
                     </div>
                 </div>
+                
                 <div className="btn_random_div">
                     <button className="btn_random" onClick={refreshPage}><b>? ? ?</b></button>
                 </div>
             </div>
-            : <div>
-                <h1>Random Recipe</h1>
-                <br />
-                <br />
-                <h2>You have no recipes yet!</h2>
-                <p>to add recipes, please click on "Add Recipe" in your user panel</p>
-            </div>}
+            :   <div>
+                    <h1>Random Recipe</h1>
+                    <br />
+                    <br />
+                    <h2>You have no recipes yet!</h2>
+                    <p>to add recipes, please click on "Add Recipe" in your user panel</p>
+                </div>
+            }
         </div>
     );
 };

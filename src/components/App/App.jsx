@@ -25,7 +25,6 @@ import MyFavoritesPage from '../MyFavoritesPage/MyFavoritesPage';
 import FindRecipePage from '../FindRecipePage/FindRecipePage';
 import RandomRecipePage from '../RandomRecipePage/RandomRecipePage';
 import CreateFamilyPage from '../CreateFamilyPage/CreateFamilyPage';
-import JoinFamilyPage from '../JoinFamilyPage/JoinFamilyPage';
 import FamilyConfirmationPage from '../FamilyConfirmationPage/FamilyConfirmationPage';
 import AdminPage from '../AdminPage/AdminPage';
 import EditRecipePage from '../EditRecipePage/EditRecipePage';
@@ -96,98 +95,95 @@ function App() {
           {/* protected route for CREATE FAMILY (located in sidePanel) */}
           <ProtectedRoute
             exact
-            path="/createfamily">
+            path="/createfamily"
+          >
             <CreateFamilyPage />
           </ProtectedRoute>
 
           {/* protected route for FAMILY CONFIRMATION */}
           <ProtectedRoute
             exact
-            path="/familyconfirmation">
+            path="/familyconfirmation"
+          >
             <FamilyConfirmationPage />
           </ProtectedRoute>
-
-          {/* protected route for FAMILY INVITATION */}
-          {/* <ProtectedRoute
-            exact
-            path="/familyinvitation">
-            <FamilyInvitationPage />
-          </ProtectedRoute> */}
-
-           {/* protected route for JOIN FAMILY (located in sidePanel) */}
-          <ProtectedRoute
-            exact
-            path="/joinfamily">
-            <JoinFamilyPage />
-          </ProtectedRoute>
-
 
           {/* protected route for ADD RECIPE (located in sidePanel) */}
           <ProtectedRoute
             exact
-            path="/addrecipe">
+            path="/addrecipe"
+          >
             <AddRecipePage />
           </ProtectedRoute>
 
           {/* protected route for MY FAVORITES (located in sidePanel) */}
           <ProtectedRoute
             exact
-            path="/myfavorites">
+            path="/myfavorites"
+          >
             <MyFavoritesPage />
           </ProtectedRoute>
 
            {/* protected route for FIND NEW RECIPE (located in sidePanel) */}
            <ProtectedRoute
             exact
-            path="/findrecipe">
+            path="/findrecipe"
+          >
             <FindRecipePage />
           </ProtectedRoute>
 
           {/* protected route for RANDOM RECIPE (located in sidePanel) */}
           <ProtectedRoute
-              exact
-              path="/randomrecipe">
-              <RandomRecipePage />
+            exact
+            path="/randomrecipe"
+          >
+            <RandomRecipePage />
           </ProtectedRoute>
 
           {/* protected route for ADMIN (located in sidePanel) */}
           <ProtectedRoute
             exact
-            path="/admin">
+            path="/admin"
+          >
             <AdminPage />
           </ProtectedRoute>
 
           {/* protected route for ADMIN - EDIT RECIPE (located in EditButton) */}
           <ProtectedRoute
             exact
-            path="/edit/:id">
+            path="/edit/:id"
+          >
             <EditRecipePage />
           </ProtectedRoute>
 
           {/* protected route for RECIPE PAGE */}
           <ProtectedRoute
             exact
-            path="/recipe/:id">
+            path="/recipe/:id"
+          >
             <RecipePage />
           </ProtectedRoute>
 
           {/* protected route for USER INVITATION */}
           <ProtectedRoute
             exact
-            path="/userinvite">
+            path="/userinvite"
+          >
             <UserInvitation />
           </ProtectedRoute>
 
           {/* protected route for SHOPPING LIST */}
           <ProtectedRoute
             exact
-            path="/shoppinglist">
+            path="/shoppinglist"
+          >
             <ShoppingList />
           </ProtectedRoute>
 
           <Route
             exact
-            path="/inviteduserregpage/:id">
+            path="/inviteduserregpage/:id"
+          >
             <InvitationLoginPage />
           </Route>
 
@@ -243,6 +239,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 export default App;

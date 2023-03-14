@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import SidePanel from '../SidePanel/SidePanel';
@@ -16,7 +16,6 @@ const MyFavoritesPage = () => {
         dispatch({ type: 'FETCH_FAVORITES', payload: id });
     }, [id]);
 
-
     return (
         <div className="content-container">
             <div className="user-nav">
@@ -27,8 +26,7 @@ const MyFavoritesPage = () => {
                 <br />
                 <br />
                 {favorites.length > 0
-                    ?   
-                        <div className="recipe-grid">
+                    ?   <div className="recipe-grid">
                             {favorites.map((recipe, index) => {
                                 return (
                                     <RecipeCard recipe={recipe}/>
@@ -38,10 +36,11 @@ const MyFavoritesPage = () => {
 
                     :   <div>
                             <h2>You have no favorites yet!</h2>
-                        </div>}
+                        </div>
+                }
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default MyFavoritesPage;

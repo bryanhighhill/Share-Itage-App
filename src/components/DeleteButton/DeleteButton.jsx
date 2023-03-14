@@ -10,18 +10,16 @@ const DeleteButton = ({ id }) => {
     
     const modal = document.querySelector('.modal');
     const overlay = document.querySelector('.overlay');
-    // const openModalBtn = document.querySelector('.btn_open');
-    // const closeModalBtn = document.querySelector('.btn_close');
 
     const openModal = () => {
-        modal.classList.remove('hidden'); //removes hidden class from modal
-        overlay.classList.remove('hidden'); //removes hidden class from overlay
-    }
+        modal.classList.remove('hidden'); //remove hidden class from modal
+        overlay.classList.remove('hidden'); //remove hidden class from overlay
+    };
 
     const closeModal = () => {
-        modal.classList.add('hidden'); //adds hidden class to modal
-        overlay.classList.add('hidden'); //adds hidden class to modal
-    }
+        modal.classList.add('hidden'); //add hidden class to modal
+        overlay.classList.add('hidden'); //add hidden class to modal
+    };
 
     const clickHandler = (id) => {
         const recipe = {
@@ -33,11 +31,11 @@ const DeleteButton = ({ id }) => {
         payload: recipe
         })
         history.push('/findrecipe');
-    }
+    };
 
     return (
         <>
-            <section className="modal hidden"> {/* modal container */}
+            <section className="modal hidden">
                 <div className="flex">
                     <button onClick={closeModal} className="btn_close_modal">X</button>
                 </div>

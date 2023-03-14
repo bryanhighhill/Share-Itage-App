@@ -11,16 +11,14 @@ const FindRecipePage = () => {
 
     useEffect(() => {
         dispatch({ type: 'FETCH_RECIPES', payload: user.family_id });
-    }, []);
+    }, [user.id]);
 
     if (recipes.length === 0) {
         return(
             <div className="content-container">
-
                 <div className="user-nav">
                     <SidePanel page={page}/>
                 </div>
-                
                 <div>
                     <h1>Find a Recipe</h1>
                     <br />
@@ -34,11 +32,9 @@ const FindRecipePage = () => {
     if (recipes.length > 0) {
         return(
             <div className="content-container">
-
                 <div className="user-nav">
                     <SidePanel page={page}/>
                 </div>
-
                 <div>
                     <h1>Find a Recipe</h1>
                     <br />
@@ -46,7 +42,7 @@ const FindRecipePage = () => {
                     <RecipeGrid />
                 </div>
             </div>
-        )   
+        )
     }
 };
 

@@ -11,18 +11,10 @@ const ShoppingList = () => {
     const user = useSelector(store => store.user);
     const list = useSelector(store => store.shoppingList);
     const page = 6;
-    const [shoppingList, setShoppingList] = useState([...list]);
-    const dragItem = useRef();
-    const dragOverItem = useRef();
-    const [draggableList, setDraggableList] = useState([list]);
    
     useEffect(() => {
         dispatch({ type: 'FETCH_SHOPPING_LIST', payload: user.id });
     }, [user.id]);
-
-    // useEffect(() => {
-    //     setShoppingList(list);
-    // }, [user.id]);
   
     const removeFromList = (ingredient, index) => {
         const newShoppingList = [ ...list ];
@@ -30,32 +22,10 @@ const ShoppingList = () => {
         dispatch({ type: 'POST_SHOPPING_LIST', payload: {newShoppingList, id: user.id} });
     };
 
-    const onDragStart = (evemt, position) => {
-        dragItem.current = position;
-        console.log('on drag start innerHTML: ', event.target.innerHTML);
-    };
-
-    const onDragEnter = (event, position) => {
-        dragOverItem.current = position;
-        console.log('on drag enter innerHTML: ', event.target.innerHTML);
-    };
-
-    const drop = (event) => {
-        const newShoppingList = [ ...list ];
-        const dragItemContent = newShoppingList[dragItem.current];
-        newShoppingList.splice(dragItem.current, 1);
-        newShoppingList.splice(dragOverItem.current, 0, dragItemContent); 
-        dragItem.current = null;
-        dragOverItem.current = null;
-        setDraggableList(newShoppingList);
-      };
-
-
     const clearList = () => {
         const newShoppingList = [];
         dispatch({ type: 'POST_SHOPPING_LIST', payload: {newShoppingList, id: user.id} });
     };
-    
 
     return(
         <div className="content-container">
@@ -71,22 +41,22 @@ const ShoppingList = () => {
                 <h1 className="shopping-list-header"><u>Grocery List</u></h1>
                 
                 {list.length > 0 
-                ?
-                    <ul>
-                        {list.map((ingredient, index) => (
-                            <div
-                                key={index}
-                                className="list-item"
-                            >
-                                <button onClick={() => removeFromList(ingredient, index)}className="btn_removeFromList">X</button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;{ingredient}
-                            </div>
-                        ))}
-                    </ul>
-                : <h3>there's nothing on your grocery list yet!</h3>
+                    ?   <ul>
+                            {list.map((ingredient, index) => (
+                                <div
+                                    key={index}
+                                    className="list-item"
+                                >
+                                    <button onClick={() => removeFromList(ingredient, index)}className="btn_removeFromList">X</button>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;{ingredient}
+                                </div>
+                            ))}
+                        </ul>
+                    :   <h3>there's nothing on your grocery list yet!</h3>
                 }
             </div>
-            <div></div>
+            <div></div> {/* empty div for page columns */}
+            
             <div className="nav-button-groceries">
                 <button className="btn_sizeMed" onClick={() => {history.goBack()}}>Back</button>
             </div>

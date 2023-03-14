@@ -1,20 +1,15 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import cryptoRandomString from 'crypto-random-string';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import './UserInvitation.css';
 
 const UserInvitation = () => {
-    const history = useHistory();
     const dispatch = useDispatch();
     const [registrationLink, setRegistrationLink] = useState('');
     const [linkVisible, setLinkVisible] = useState(false);
-    const [modalVisible, setModalVisible] = useState(false);
     const [isCopied, setIsCopied] = useState(false);
-    const [copyText, setCopyText] = useState('');
-
-
 
     const generateToken = () => {
         const newToken = cryptoRandomString({length: 48, type: 'url-safe'});
@@ -43,8 +38,10 @@ const UserInvitation = () => {
                 <p>
                     <b>New link:</b>
                     <br />
+
                     <input className="invitation-input" defaultValue={registrationLink} readOnly={true}></input>
                     <br />
+
                     <CopyToClipboard
                         text={registrationLink}
                         onCopy={() => {
@@ -55,12 +52,13 @@ const UserInvitation = () => {
                             }, 5000);
                         }}
                     >
-                        <button className="btn_sizeMed"> Copy link</button>
+                    <button className="btn_sizeMed"> Copy link</button>
+
                     </CopyToClipboard>
                         {isCopied &&
-                        <div className="link-copied">                            
-                            <i>link copied!</i>
-                        </div>
+                            <div className="link-copied">                            
+                                <i>link copied!</i>
+                            </div>
                         }
                 </p>
             }

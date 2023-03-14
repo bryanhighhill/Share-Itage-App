@@ -24,7 +24,7 @@ function* fetchRecipes(action) {
     const recipes = yield axios.get(`/api/recipe/${id}`);
     yield put({ type: 'SET_RECIPES', payload: recipes.data });
   } catch (error) {
-  //  alert('Fetch recipes failed with error: ', error);
+  console.log('Fetch recipes failed with error: ', error);
   };
 };
 
@@ -33,10 +33,9 @@ function* fetchRecipeData(action) {
   const id = action.payload;
   try {
     const recipe = yield axios.get(`/api/recipe/edit/${id}`);
-    console.log('recipe.data: ', recipe.data);
     yield put({ type: 'SET_SELECTED_RECIPE', payload: recipe.data });
   } catch (error) {
-    alert('Fetch recipe data failed with error: ', error);
+    console.log('Fetch recipe data failed with error: ', error);
   };
 };
 
@@ -46,7 +45,7 @@ function* updateRecipe(action) {
   try {
     const updatedRecipe = yield axios.put(`api/recipe/edit/${id}`, action.payload);
   } catch (error) {
-    alert('Error with updating recipe:', error);
+    console.log('Error with updating recipe:', error);
   };
 };
 
@@ -57,31 +56,29 @@ function* fetchRandomRecipe(action) {
     const randomRecipe = yield axios.get(`api/recipe/random/${id}`);
     yield put({ type: 'SET_RANDOM_RECIPE', payload: randomRecipe.data})
   } catch (error) {
-    // alert('Fetch random recipe failed with error: ', error);
+    console.log('Fetch random recipe failed with error: ', error);
   };
 };
 
 //POST recipe to favorites table
 function* addFavorite(action) {
-  console.log('action payload in addFavorite', action.payload);
   try {
     yield axios.post(`/api/recipe/favorite/`, action.payload); //sends to recipe.router.js
     yield put({ type: 'FETCH_FAVORITES' });
   } catch (error) {
-    alert('Error with adding recipe to favorites:', error);
+    console.log('Error with adding recipe to favorites:', error);
     yield put({ type: 'FAVORITE_FAILED' });
   };
 };
 
 //Fetch User favorites
 function* fetchFavorites(action) {
-  console.log('in fetch favorites saga with id: ', action.payload);
   const id = action.payload;
   try {
     const favoriteRecipes = yield axios.get(`api/recipe/favorite/${id}`);
     yield put({ type: 'SET_FAVORITES', payload: favoriteRecipes.data})
   } catch (error) {
-    alert('Fetch favorites failed with error: ', error);
+    console.log('Fetch favorites failed with error: ', error);
   };
 };
 
@@ -93,7 +90,7 @@ function* removeFavorite(action) {
     yield axios.delete(`api/recipe/favorite/${recipe_id}`);
     yield put({ type: 'FETCH_FAVORITES', payload: id });
   } catch (error) {
-    alert('Error with removing favorite recipe: ', error);
+    console.log('Error with removing favorite recipe: ', error);
   };
 };
 
@@ -111,12 +108,10 @@ function* removeRecipe(action) {
 
 //fetch user comments
 function* fetchUserRemarks(action) {
-  console.log('fetch remarks saga with: ', action.payload);
   const id = action.payload;
   try {
     const userComments = yield axios.get(`api/recipe/remarks/${id}`);
     yield put({ type: 'SET_USER_REMARKS', payload: userComments.data});
-    console.log('user comments after get is made in saga: ', userComments.data);
   } catch (error) {
     console.log('error with getting user comments', error);
   };
@@ -124,7 +119,6 @@ function* fetchUserRemarks(action) {
 
 //post user comment
 function* postComment(action) {
-  console.log('in post user comment saga with: ', action.payload);
   try {
     yield axios.post('api/recipe/remarks', action.payload);
     yield put({ type: 'FETCH_USER_REMARKS', payload: action.payload.recipe_id})
@@ -147,7 +141,6 @@ function* deleteComment(action) {
 
 //PUT shopping list
 function* postShoppingList(action) {
-  console.log('in post shopping list saga with list: ', action.payload.shoppingList);
   const id = action.payload.id
   const shoppingList = action.payload.newShoppingList;
 
@@ -164,7 +157,6 @@ function* fetchShoppingList(action) {
   try {
     const shoppingList = yield axios.get(`api/recipe/shoppinglist/${id}`);
     yield put({ type: 'SET_SHOPPING_LIST', payload: shoppingList.data});
-    console.log('back in get shopping list saga with: ', shoppingList.data);
   } catch (error) {
     console.log('error with getting shopping list, ', error);
   };
@@ -185,6 +177,6 @@ function* recipeSaga() {
   yield takeEvery('DELETE_COMMENT', deleteComment); //dispatched from UserComments component
   yield takeEvery('POST_SHOPPING_LIST', postShoppingList); //dispatched from recipe page
   yield takeEvery('FETCH_SHOPPING_LIST', fetchShoppingList); //dispatched from recipe saga and shopping list page
-}
+};
 
 export default recipeSaga;

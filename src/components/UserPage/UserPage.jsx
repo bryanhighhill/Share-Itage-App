@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import SidePanel from '../SidePanel/SidePanel';
-import NewUserPage from '../NewUserPage/NewUserPage';
 import CreateFamilyPage from '../CreateFamilyPage/CreateFamilyPage';
 import './UserPage.css';
 
-function UserPage({page}) {
-  const [loading, setLoading] = useState(false);
+function UserPage() {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
@@ -27,7 +24,7 @@ function UserPage({page}) {
         </div>
       
       </div>
-    );
+    )
   } else 
     if (!user.family_id) {
       return (
@@ -46,7 +43,6 @@ function UserPage({page}) {
         </div>
       )
     }
-}
+};
 
-// this allows us to use <App /> in index.js
 export default UserPage;

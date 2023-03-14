@@ -22,28 +22,28 @@ const FavoritesButton = ({recipeId}) => {
     };
 
     const removeFavorites = () => {
-            const favoriteRecipe = {
-                recipe_id: recipeId,
-            }
-            dispatch({
-                type: 'REMOVE_FAVORITE',
-                payload: favoriteRecipe,
-            });
+        const favoriteRecipe = {
+            recipe_id: recipeId,
+        }
+        dispatch({
+            type: 'REMOVE_FAVORITE',
+            payload: favoriteRecipe,
+        });
     };
 
     return(
         <>
-        {favorites.length > 0
-            ?
-                <>
-                    {favorites.map((favRecipe, index) => {
-                        return favRecipe.id;
-                    }).includes(recipeId) 
-                        ?   <button className="btn_sizeMed" onClick={removeFavorites}>Remove from favorites</button>
-                        :   <button className="btn_sizeMed" onClick={addFavorites}>Add to favorites</button>
-                    }
-                </>
-            :   <button className="btn_sizeMed" onClick={addFavorites}>Add to favorites</button>}
+            {favorites.length > 0
+                ?
+                    <>
+                        {favorites.map((favRecipe, index) => {
+                            return favRecipe.id;
+                        }).includes(recipeId) 
+                            ?   <button className="btn_sizeMed" onClick={removeFavorites}>Remove from favorites</button>
+                            :   <button className="btn_sizeMed" onClick={addFavorites}>Add to favorites</button>
+                        }
+                    </>
+                :   <button className="btn_sizeMed" onClick={addFavorites}>Add to favorites</button>}
         </>
     );
 };

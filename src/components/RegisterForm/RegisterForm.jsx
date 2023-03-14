@@ -19,7 +19,7 @@ function RegisterForm() {
         password,
       },
     });
-  }; // end registerUser
+  };
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
@@ -72,6 +72,6 @@ function RegisterForm() {
       </div>
     </form>
   );
-}
+};
 
 export default RegisterForm;

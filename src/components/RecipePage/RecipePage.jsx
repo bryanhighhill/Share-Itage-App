@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react';
 import SidePanel from '../SidePanel/SidePanel';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import EditButton from '../EditButton/EditButton';
 import DeleteButton from '../DeleteButton/DeleteButton';
 import FavoritesButton from '../FavoritesButton/FavoritesButton';
-import ShoppingList from '../ShoppingList/ShoppingList';
-import './RecipePage.css';
 import UserComments from '../UserComments/UserComments';
 import AddToListButton from '../ShoppingList/AddToListButton.jsx';
+import './RecipePage.css';
 
 
 const RecipePage = () => {
@@ -25,9 +23,6 @@ const RecipePage = () => {
     const [commentsVisible, setCommentsVisible] = useState(false);
     const [comment, setComment] = useState('');
     const history = useHistory();
-    const [addedToList, setAddedToList] = useState(false);
-    const [ingredientAdded, setIngredientAdded] = useState('');
-    const [shoppingList, setShoppingList] = useState([]);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_RECIPE_DATA', payload: id });
@@ -60,8 +55,7 @@ const RecipePage = () => {
     };
 
     const submitHandler = () => {
-        const newComment = {recipe_id: Number(id), comment}
-        console.log('in submit comment with', newComment);
+        const newComment = {recipe_id: Number(id), comment};
         if (comment.length === 0) {
             alert('comment cannot be blank!')
         } else 
@@ -80,31 +74,32 @@ const RecipePage = () => {
             </div>
 
             <div>
-                    {commentsVisible &&
-                        <div className="user-remarks-div">
-                            <UserComments id={id}/>
-                            {commentsVisible &&
-                                <>
-                                    <input 
-                                        placeholder="add your comment here"
-                                        className="comment-input"
-                                        value={comment} 
-                                        onChange={(event) => setComment(event.target.value)}>
-                                    </input>
-                                    <button className="btn_sizeMed" onClick={submitHandler}>Submit</button>
-                                    &nbsp;&nbsp;&nbsp;
-                                    <button className="btn_edit" onClick={closeComments}>Close</button>
-                                </>
-                            }
-                        </div>
-                    }
-                    {!commentsVisible &&
-                        <>
-                            <button className="btn_sizeMed" onClick={() => setCommentsVisible(true)}>View Comments</button>
-                        </>
-                    }
-                    <br />
-                    <br />
+                {commentsVisible &&
+                    <div className="user-remarks-div">
+                        <UserComments id={id}/>
+                        {commentsVisible &&
+                            <>
+                                <input 
+                                    placeholder="add your comment here"
+                                    className="comment-input"
+                                    value={comment} 
+                                    onChange={(event) => setComment(event.target.value)}>
+                                </input>
+                                <button className="btn_sizeMed" onClick={submitHandler}>Submit</button>
+                                &nbsp;&nbsp;&nbsp;
+                                <button className="btn_edit" onClick={closeComments}>Close</button>
+                            </>
+                        }
+                    </div>
+                }
+
+                {!commentsVisible &&
+                    <>
+                        <button className="btn_sizeMed" onClick={() => setCommentsVisible(true)}>View Comments</button>
+                    </>
+                }
+                <br />
+                <br />
                     
                 <div className="recipe-page">
                     <div className="white-fill">
@@ -153,8 +148,8 @@ const RecipePage = () => {
                         <FavoritesButton recipeId={Number(id)}/>
                     </div>
                 </div>
-                
                 <br />
+
                 <div className="nav-buttons">
                     <button className="btn_sizeMed" onClick={() => {history.goBack()}}>Back</button>
                     
@@ -164,6 +159,7 @@ const RecipePage = () => {
                                 <EditButton id={id}/>
                             </>
                         }
+
                         {user.admin  &&
                             <>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -171,7 +167,6 @@ const RecipePage = () => {
                             </>
                         }                        
                 </div>
-                {/* <ShoppingList /> */}
             </div>
         </div>
     );
