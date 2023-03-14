@@ -78,7 +78,7 @@ const FamilyDisplay = ({ family, user }) => {
                                                 <button className="btn_sizeMed" onClick={() => {admin(member)}}>{member.admin ? 'remove admin' : 'make admin'}</button>
                                                 <br />
                                                 <br />
-                                                {/* <button className="btn_delete" onClick={() => removeFromFamily(member.id)}>Remove</button> */}
+                                                
                                                 <section className="modal2 hidden2"> {/* modal container */}
                                                     <div className="flex2">
                                                         <button onClick={closeModal} className="btn_close_modal2">X</button>

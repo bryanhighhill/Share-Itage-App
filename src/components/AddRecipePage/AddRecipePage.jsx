@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import UserPage from '../UserPage/UserPage';
 import SidePanel from '../SidePanel/SidePanel';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -16,66 +15,72 @@ const AddRecipePage = () => {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        //TODO: add conditional to check that values are not blank and that it is a unique title in db <---------------------------
-        //include user.family_id in new recipe object so that it can be added to recipe table in db
         const newRecipe = {
             title,
             ingredients,
             instructions,
             family_id: user.family_id,
             user_id: user.id,            
-        }
+        };
         dispatch({
             type: 'POST_NEW_RECIPE', 
             payload: newRecipe,
         });
-        //TODO: fetch recipes data here recipes <--------------------------------
-        //clear values
+        openModal();
         setTitle('');
         setIngredients([{ingredient:'', amount:''}]);
         setInstructions(['']);
-        //send user to CONFIRMATION PAGE/NEW RECIPE PAGE? instead of user page <----------------------------------------
-        alert('Your recipe book is getting bigger!');
-        history.push('/findrecipe');
+        // history.push('/findrecipe');
     };
 
-    //function to add new fields for ingredient/amount on button click
     const addIngredientInput = () => {
         const ingredientField = [...ingredients, {ingredient:'', amount:''}];
         setIngredients(ingredientField);
-    }
+    };
 
-    //function to remove previously added ingredient/amount fields if unused
     const removeIngredientInput = (index) => {
         const ingredientFields = [...ingredients];
         ingredientFields.splice(index, 1);
         setIngredients(ingredientFields);
-    }
+    };
 
-    //function to add new fields for instructions on button click
     const addInstructionInput = () => {
         const instructionField = [...instructions, ''];
         setInstructions(instructionField);
-    }
+    };
 
-    //function to remove previously added instruction fields if unused
     const removeInstructionInput = (index) => {
         const instructionFields = [...instructions];
         instructionFields.splice(index, 1);
         setInstructions(instructionFields);
+    };
+
+    const openModal = () => {
+        const modal = document.querySelector('.modal');
+        const overlay = document.querySelector('.overlay');
+        modal.classList.remove('hidden'); //removes hidden class from modal
+        overlay.classList.remove('hidden'); //removes hidden class from overlay
+    }
+
+    const closeModal = () => {
+        const modal = document.querySelector('.modal');
+        const overlay = document.querySelector('.overlay');
+        modal.classList.add('hidden'); //adds hidden class to modal
+        overlay.classList.add('hidden'); //adds hidden class to modal
     }
 
     return (
         <div className="content-container">
             <div className="user-nav">
                 <SidePanel page={page}/>
-            </div> {/*end "user-nav" div */}
+            </div>
 
             <div className="form-container">
                 <h1>Add Recipe</h1>
                 <br />
                 <br />
                 <form onSubmit={onSubmit}>
+
                     {/* input for RECIPE TITLE */}
                     <div className="title">
                         <label htmlFor="title"><b>Recipe Title</b></label>
@@ -93,13 +98,13 @@ const AddRecipePage = () => {
                     <br />
                     <br />
 
-                    {/* INGREDIENTS HERE */}
+                    {/* INGREDIENTS */}
                     <label className="small-label" htmlFor="ingredients"><b>Ingredients</b></label>
                     <div className="ingredient-list">
                             {ingredients.map((ingredient, index) => {
                                 return (
                                     <>
-                                        {/* input field for ingredient */}
+                                        {/* input field for INGREDIENTS */}
                                         <input
                                             key={`ingredient-${index}`}
                                             className="ingredient-input"
@@ -132,7 +137,8 @@ const AddRecipePage = () => {
                                                 return newIngredients;
                                             })}
                                         />
-                                        {/* conditional to prevent first ingredient field from being deleted */}
+
+                                        {/* prevent first ingredient field from being deleted */}
                                         {index !== 0 && (
                                             <button
                                                 key={`remove-btn-${index}`} 
@@ -147,6 +153,7 @@ const AddRecipePage = () => {
                                     </>
                                 )
                             })}
+
                         <button
                             onClick={addIngredientInput}
                             type="button"
@@ -154,17 +161,17 @@ const AddRecipePage = () => {
                         >
                             + Ingredient
                         </button>
-                    </div> {/* end "ingredient-list" div */}
+                    </div>
                     <br />
                     <br />
 
-                    {/* INSTRUCTIONS HERE */}
+                    {/* INSTRUCTIONS */}
                     <label className="small-label" htmlFor="instructions"><b>Instructions</b></label>
                     <div className="instructions-list">
                             {instructions.map((instruction, index) => {
                                 return (
                                     <>
-                                        {/* input field for instruction */}
+                                        {/* input field for INSTRUCTIONS */}
                                         <input
                                             key={`instruction-${index}`}
                                             className="instruction-input"
@@ -180,7 +187,7 @@ const AddRecipePage = () => {
                                             })}
                                         />
                         
-                                        {/* conditional to prevent first instruction field from being deleted */}
+                                        {/* prevent first instruction field from being deleted */}
                                         {index !== 0 && (
                                             <button
                                                 key={`remove-btn2-${index}`} 
@@ -202,9 +209,21 @@ const AddRecipePage = () => {
                         >
                             + Instruction
                         </button>
-                    </div> {/* end "ingredient-list" div */}
+                    </div>
                     <br />
                     <br />
+
+                    <section className="modal hidden"> {/* modal container */}
+                        <div>
+                            <h2>Your recipe book is getting bigger!</h2>
+                        </div>
+                        <div className="modal_confirm_container">
+                            <button onClick={() => history.push('/findrecipe')} className="btn_modal_confirm">Yes, I know!</button>
+                        </div>
+                    </section>
+
+                    <div className="overlay hidden"></div> {/* overlay element - dark blurred background when modal is open */}
+                    
                     <button
                         type="submit"
                         className="btn_save"
@@ -219,7 +238,7 @@ const AddRecipePage = () => {
                             Cancel
                     </button>
                 </form>
-            </div> {/* end "page-content" div */}
+            </div>
         </div>
     )
 }

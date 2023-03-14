@@ -12,7 +12,7 @@ function* createRecipe(action) {
     // after registration or after they log out
     // yield put({ type: 'SET_TO_LOGIN_MODE' });
   } catch (error) {
-   alert('Error with creating family:', error);
+   console.log('Error with creating family:', error);
     yield put({ type: 'FAMILY_FAILED' });
   };
 };
