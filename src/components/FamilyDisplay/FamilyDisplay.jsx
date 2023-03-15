@@ -1,10 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 const FamilyDisplay = ({ family, user }) => {
     const dispatch = useDispatch();
     const [deleteId, setDeleteID] = useState(0);
-
 
     const admin = (member) => {
         console.log('admin in change status: ', member)

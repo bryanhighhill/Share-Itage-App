@@ -12,12 +12,9 @@ const AdminPage = () => {
     const dispatch = useDispatch();
     const page = 5;
     console.log('family on admin page: ', family);
-    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        setIsLoading(true);
         dispatch({ type: 'FETCH_FAMILY_MEMBERS', payload: user.family_id });
-        setIsLoading(false);
     }, [user.id]);
 
     if (user.admin) {

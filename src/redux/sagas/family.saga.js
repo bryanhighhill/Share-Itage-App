@@ -27,6 +27,7 @@ function* fetchFamilyMembers(action) {
   try {
     const familyMembers = yield axios.get(`/api/family/members/${id}`);
     yield put({ type: 'SET_FAMILY_MEMBERS', payload: familyMembers.data});
+    console.log('in fetch family members saga with: ', familyMembers.data);
   } catch (error) {
     console.log('error with fetching family members: ', error);
   };
