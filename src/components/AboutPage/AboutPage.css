@@ -1,0 +1,71 @@
+.description-container {
+    width: 80%;
+    padding: 10px;
+}
+
+.header-question {
+   font-size: 20px;
+   text-align: center;
+}
+
+.questions-container {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    width: 80%;
+    padding: 15px;
+    overflow-wrap: break-word;
+    position: relative;
+    height: auto;
+    background-image: repeating-linear-gradient(rgb(255, 255, 255) 0px, rgb(255, 255, 255) 23px, teal 24px);
+    box-shadow: 1px 2px 5px;
+    margin: auto;
+    font-size: 20px;
+    text-align: center;
+}
+
+.images-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 15px;
+}
+
+.image1 {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 70px;
+    padding-left: 100px
+}
+
+.image2 {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 90px;
+}
+
+
+.app-description {
+    margin-top: 20px;
+    background-color: #ffffff;
+    margin: auto;
+    margin-bottom: 20px;
+    width: 50%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 15px;
+    padding-left: 15px;
+    text-align: center;
+    border-radius: 24px;
+    color: rgb(0, 0, 0);
+    box-shadow: 1px 2px 5px black;
+}
+
+.app-tag {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.app-title-logged-out {
+    text-align: center;
+}

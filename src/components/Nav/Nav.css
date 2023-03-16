@@ -7,6 +7,8 @@
   margin: 0 0 30px;
   background-color: #1d6787;
   overflow: hidden;
+  padding-right: 35px;
+  padding-left: 13px;
 }
 
 .nav a {
@@ -38,5 +40,5 @@
 }
 
 .navLink:hover {
-  background-color: #008183;
+  background-color: #10455c;
 }

@@ -1,15 +1,16 @@
 import React from 'react';
-
-// This is one of our simplest components
-// It doesn't have local state
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is
+import SidePanel from '../SidePanel/SidePanel';
+import './InfoPage.css';
 
 function InfoPage() {
   return (
-    <div className="container">
-      <p>Info Page</p>
-    </div>
+    <div className="content-container">
+      <div className="user-nav">
+        <SidePanel />
+
+      </div>
+        <h1> Technologies Used</h1>
+      </div>
   );
 }
 
