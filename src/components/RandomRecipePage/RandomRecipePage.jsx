@@ -81,6 +81,9 @@ const RandomRecipePage = () => {
             {recipes.length > 0
             ? <div className="random-recipe">
                 <h1>Random Recipe</h1>
+                <div className="btn_random_div">
+                    <button className="btn_random" onClick={refreshPage}><b>? ? ?</b></button>
+                </div>
                 {commentsVisible &&
                     <div className="user-remarks-div">
                         <UserComments id={randomRecipe.id}/>
@@ -152,9 +155,9 @@ const RandomRecipePage = () => {
                     </div>
                 </div>
                 
-                <div className="btn_random_div">
+                {/* <div className="btn_random_div">
                     <button className="btn_random" onClick={refreshPage}><b>? ? ?</b></button>
-                </div>
+                </div> */}
             </div>
             :   <div>
                     <h1>Random Recipe</h1>

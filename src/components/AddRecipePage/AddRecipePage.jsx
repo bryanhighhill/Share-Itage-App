@@ -61,6 +61,7 @@ const AddRecipePage = () => {
         overlay.classList.remove('hidden'); //remove hidden class from overlay
     };
 
+
     return (
         <div className="content-container">
             <div className="user-nav">
@@ -128,7 +129,7 @@ const AddRecipePage = () => {
                                             return newIngredients;
                                         })}
                                     />
-
+                                    
                                     {/* prevent first ingredient field from being deleted */}
                                     {index !== 0 && (
                                         <button
