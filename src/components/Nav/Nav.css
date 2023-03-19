@@ -40,5 +40,8 @@
 }
 
 .navLink:hover {
-  background-color: #10455c;
+  /* font-weight: bold; */
+  transition: .3s;
+  background-color: #f9eae0;
+  color: #1d6787
 }
