@@ -37,8 +37,10 @@ Button
   display: inline-block;
   padding: 10px 20px;
   border-radius: 4px;
+  width: 164px;
   border: none;
-  background-color: #cc580b;
+  /* background-color: #cc580b; */
+  background-color: #dc500f;
   box-shadow: 1px 2px 5px black;
   color: #f8f8f8;
   font-size: 1.1rem;
@@ -50,10 +52,11 @@ Button
   display: inline-block;
   padding: 10px 20px;
   border-radius: 4px;
+  width: 164px;
   border: none;
   background-color: #f8f8f8;
   box-shadow: .5px 1px 2px black;
-  color: #ac4a09;
+  color: #843a09;
   font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
@@ -158,7 +161,7 @@ Button
 }
 
 .btn:hover {
-  background-color: #ff7b22;
+  background-color: #f26f32;
   transition: .2s;
   text-decoration: none;
   box-shadow: .5px 1px 2px black;

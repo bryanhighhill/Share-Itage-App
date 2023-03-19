@@ -25,7 +25,7 @@ const SidePanel = ({page}) => {
                 className={page === 1 ? "btn_selected" : "btn"}
                 onClick={() => {history.push(`/addrecipe`)}}
             >
-                Add Recipe
+                Add
             </button>
             <br />
             <br />
@@ -34,7 +34,7 @@ const SidePanel = ({page}) => {
                 className={page === 2 ? "btn_selected" : "btn"}
                 onClick={() => {history.push(`/myfavorites`)}}
             >
-                My Favorites
+                Favorites
             </button>
             <br />
             <br />
@@ -52,7 +52,7 @@ const SidePanel = ({page}) => {
                 className={page === 4 ? "btn_selected" : "btn"}
                 onClick={() => {history.push(`/randomrecipe`)}}
             >
-                Random Recipe
+                Random
             </button>
             <br />
             <br />
@@ -79,7 +79,7 @@ const SidePanel = ({page}) => {
                             className={page === 5 ? "btn_selected" : "btn"}
                             onClick={() => {history.push(`/admin`)}}
                         >
-                            Admin Panel
+                            Admin
                         </button>
                         <br />
                         <br />
